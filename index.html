@@ -538,6 +538,33 @@
     .cidr-table th, .cidr-table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); }
     .cidr-table th { color: var(--accent-strong); font-family: "JetBrains Mono", monospace; font-size: .72rem; text-transform: uppercase; }
     .cidr-table td { font-family: "JetBrains Mono", monospace; font-size: .84rem; }
+    /* Tools hub: one block per tool, each opening its own tool page */
+    .tools-route [hidden] { display: none !important; }
+    .tool-blocks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .tool-block { display: flex; flex-direction: column; min-width: 0; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); color: inherit; text-decoration: none; transition: transform .2s ease, border-color .2s ease; }
+    .tool-block:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .tool-block:focus-visible { outline: 3px solid color-mix(in srgb, var(--signal) 55%, transparent); outline-offset: 2px; }
+    .tool-block .tool-head { margin-bottom: 0; }
+    .tool-open { margin-top: auto; padding-top: 18px; color: var(--accent-strong); font-weight: 800; font-size: .92rem; }
+    .tool-preview { margin-top: 18px; padding: 16px; background: #061917; border: 1px solid #285f56; border-radius: 12px; font-family: "JetBrains Mono", monospace; color: #d9fff6; }
+    .pv-label { display: block; margin-bottom: 10px; color: #7fc9ba; font-size: .64rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+    .pv-input { display: inline-block; padding: 7px 11px; background: rgba(217,255,246,.07); border: 1px solid rgba(217,255,246,.22); border-radius: 8px; font-size: .86rem; overflow-wrap: anywhere; }
+    .pv-arrow { display: block; margin: 9px 0; color: var(--signal); font-size: .8rem; line-height: 1.2; }
+    .pv-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pv-chip { padding: 6px 10px; background: rgba(52,224,196,.13); border: 1px solid rgba(52,224,196,.35); border-radius: 999px; font-size: .76rem; }
+    .pv-chip b { color: #fff; font-weight: 700; }
+    .pv-meter { height: 10px; margin-top: 12px; overflow: hidden; background: rgba(217,255,246,.12); border-radius: 99px; }
+    .pv-meter i { display: block; height: 100%; border-radius: 99px; background: #35d07f; }
+    .pv-verdict { display: flex; justify-content: space-between; gap: 10px; margin-top: 9px; font-size: .78rem; }
+    .pv-verdict b { color: #35d07f; }
+    .pv-gen { font-size: 1rem; letter-spacing: .02em; overflow-wrap: anywhere; word-break: break-all; }
+    .pv-rows { display: grid; gap: 7px; font-size: .8rem; }
+    .pv-rows div { display: flex; justify-content: space-between; gap: 12px; padding: 7px 10px; background: rgba(217,255,246,.06); border-radius: 8px; }
+    .pv-rows b { color: var(--signal); }
+    .pv-small { font-size: .74rem; color: #9fd8cb; overflow-wrap: anywhere; word-break: break-all; }
+    .tool-back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-bottom: 22px; padding: 0 16px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); text-decoration: none; font-weight: 750; }
+    .tool-back:hover { border-color: var(--accent); color: var(--accent-strong); }
+    @media (max-width: 900px) { .tool-blocks { grid-template-columns: 1fr; } }
     @media (max-width: 900px) { .tools-grid { grid-template-columns: 1fr; } .tool-card.wide { grid-column: auto; } }
     @media (max-width: 640px) {
       .tool-card { padding: 22px 18px; }
@@ -1040,18 +1067,80 @@
           <p>The concepts from the Learn guides, turned into things you can use. Work out a subnet, test a password, look up a port — right here, while the idea is fresh.</p>
         </div>
 
-        <div class="tools-local reveal"><span class="pulse" aria-hidden="true"></span><p><strong>Everything runs on this page, in your browser.</strong> Your passwords and inputs are never sent anywhere — close the tab and they are gone. That is exactly how a practice tool should work.</p></div>
+        <div class="tools-local reveal" id="toolsLocal"><span class="pulse" aria-hidden="true"></span><p><strong>Everything runs on this page, in your browser.</strong> Your passwords and inputs are never sent anywhere — close the tab and they are gone. That is exactly how a practice tool should work.</p></div>
 
-        <div class="tools-nav reveal" aria-label="Jump to a tool">
-          <button type="button" data-tool-jump="toolSubnet">Subnet calculator</button>
-          <button type="button" data-tool-jump="toolPassword">Password checker</button>
-          <button type="button" data-tool-jump="toolGenerator">Password generator</button>
-          <button type="button" data-tool-jump="toolPorts">Port lookup</button>
-          <button type="button" data-tool-jump="toolIp">IP inspector</button>
-          <button type="button" data-tool-jump="toolEncoder">Base64 &amp; URL encoder</button>
+        <div class="tool-blocks" id="toolsHub">
+          <a class="tool-block reveal" href="/tools/subnet" data-route-link="tools/subnet">
+            <div class="tool-head"><span class="tool-num">01</span><div><span class="tool-tag">Networking · from the subnetting guide</span><h3>Subnet calculator</h3><p>Enter any IPv4 address and move the CIDR slider to see the network split in real time.</p></div></div>
+            <div class="tool-preview" aria-hidden="true">
+              <span class="pv-label">Visual example</span>
+              <span class="pv-input">192.168.1.10&nbsp;&nbsp;/24</span>
+              <span class="pv-arrow">↓ calculates to</span>
+              <div class="pv-chips"><span class="pv-chip">Network <b>192.168.1.0</b></span><span class="pv-chip"><b>254</b> usable hosts</span><span class="pv-chip">Broadcast <b>192.168.1.255</b></span></div>
+            </div>
+            <span class="tool-open">Open the tool →</span>
+          </a>
+
+          <a class="tool-block reveal" href="/tools/password" data-route-link="tools/password">
+            <div class="tool-head"><span class="tool-num">02</span><div><span class="tool-tag">Cyber safety · from the passwords guide</span><h3>Password strength checker</h3><p>Type a password you are thinking of using and see how long it would actually hold up.</p></div></div>
+            <div class="tool-preview" aria-hidden="true">
+              <span class="pv-label">Visual example</span>
+              <span class="pv-input">••••••••••••••</span>
+              <div class="pv-meter"><i style="width:82%"></i></div>
+              <div class="pv-verdict"><b>Strong</b><span>~78 bits of entropy</span></div>
+            </div>
+            <span class="tool-open">Open the tool →</span>
+          </a>
+
+          <a class="tool-block reveal" href="/tools/generator" data-route-link="tools/generator">
+            <div class="tool-head"><span class="tool-num">03</span><div><span class="tool-tag">Cyber safety · make a strong one</span><h3>Password &amp; passphrase generator</h3><p>Generate a password you could never guess — then store it in a password manager, not your memory.</p></div></div>
+            <div class="tool-preview" aria-hidden="true">
+              <span class="pv-label">Visual example · generated output</span>
+              <div class="pv-gen">kX9#vQ2$mLp7Rw4!</div>
+              <div class="pv-chips" style="margin-top:10px"><span class="pv-chip"><b>16</b> characters</span><span class="pv-chip">A a 1 # mixed</span><span class="pv-chip">or 4-word passphrase</span></div>
+            </div>
+            <span class="tool-open">Open the tool →</span>
+          </a>
+
+          <a class="tool-block reveal" href="/tools/ip" data-route-link="tools/ip">
+            <div class="tool-head"><span class="tool-num">04</span><div><span class="tool-tag">Networking · from the IP addresses guide</span><h3>IP inspector</h3><p>Paste any IP address to validate it and see what class it is, whether it is private, and how it looks in binary.</p></div></div>
+            <div class="tool-preview" aria-hidden="true">
+              <span class="pv-label">Visual example</span>
+              <span class="pv-input">172.16.5.77</span>
+              <span class="pv-arrow">↓ inspects to</span>
+              <div class="pv-chips"><span class="pv-chip"><b>Private</b> address</span><span class="pv-chip">Class <b>B</b></span></div>
+              <p class="pv-small" style="margin:10px 0 0">10101100.00010000.00000101.01001101</p>
+            </div>
+            <span class="tool-open">Open the tool →</span>
+          </a>
+
+          <a class="tool-block reveal" href="/tools/ports" data-route-link="tools/ports">
+            <div class="tool-head"><span class="tool-num">05</span><div><span class="tool-tag">Networking · from the common ports guide</span><h3>Port lookup</h3><p>Search by number or service name. These are the doors you will meet in every scan, log and interview.</p></div></div>
+            <div class="tool-preview" aria-hidden="true">
+              <span class="pv-label">Visual example</span>
+              <div class="pv-rows">
+                <div><b>443</b><span>HTTPS — secure web</span></div>
+                <div><b>22</b><span>SSH — remote login</span></div>
+                <div><b>53</b><span>DNS — name lookups</span></div>
+              </div>
+            </div>
+            <span class="tool-open">Open the tool →</span>
+          </a>
+
+          <a class="tool-block reveal" href="/tools/encoder" data-route-link="tools/encoder">
+            <div class="tool-head"><span class="tool-num">06</span><div><span class="tool-tag">Web &amp; tools · everyday utilities</span><h3>Base64 &amp; URL encoder</h3><p>Encode and decode the two formats you will bump into constantly — in URLs, tokens, headers and CTF challenges.</p></div></div>
+            <div class="tool-preview" aria-hidden="true">
+              <span class="pv-label">Visual example</span>
+              <span class="pv-input">Hack With K</span>
+              <span class="pv-arrow">↓ Base64 encode</span>
+              <p class="pv-small" style="margin:0">SGFjayBXaXRoIEs=</p>
+            </div>
+            <span class="tool-open">Open the tool →</span>
+          </a>
         </div>
 
-        <div class="tools-grid">
+        <section class="tool-detail" data-tool-panel="subnet" hidden>
+          <a class="tool-back" href="/tools" data-route-link="tools">← All tools</a>
           <article class="tool-card reveal" id="toolSubnet">
             <div class="tool-head"><span class="tool-num">01</span><div><span class="tool-tag">Networking · from the subnetting guide</span><h3>Subnet calculator</h3><p>Enter any IPv4 address and move the CIDR slider to see the network split in real time.</p></div></div>
             <div class="tool-body">
@@ -1065,7 +1154,10 @@
               <p class="tool-note"><strong>Reading it:</strong> the network address names the subnet itself and the broadcast address talks to everyone in it — neither can be given to a device, which is why a /24 has 254 usable hosts, not 256.</p>
             </div>
           </article>
+        </section>
 
+        <section class="tool-detail" data-tool-panel="password" hidden>
+          <a class="tool-back" href="/tools" data-route-link="tools">← All tools</a>
           <article class="tool-card reveal" id="toolPassword">
             <div class="tool-head"><span class="tool-num">02</span><div><span class="tool-tag">Cyber safety · from the passwords guide</span><h3>Password strength checker</h3><p>Type a password you are thinking of using and see how long it would actually hold up.</p></div></div>
             <div class="tool-body">
@@ -1085,7 +1177,10 @@
               <p class="tool-note">Estimates assume an offline attack on a leaked fast hash at ~10 billion guesses per second. Length beats clever symbols every time — four random words outperform most “complex” 8-character passwords.</p>
             </div>
           </article>
+        </section>
 
+        <section class="tool-detail" data-tool-panel="generator" hidden>
+          <a class="tool-back" href="/tools" data-route-link="tools">← All tools</a>
           <article class="tool-card reveal" id="toolGenerator">
             <div class="tool-head"><span class="tool-num">03</span><div><span class="tool-tag">Cyber safety · make a strong one</span><h3>Password &amp; passphrase generator</h3><p>Generate a password you could never guess — then store it in a password manager, not your memory.</p></div></div>
             <div class="tool-body">
@@ -1111,7 +1206,10 @@
               <p class="tool-note">Built with your browser’s cryptographic random generator (<strong>crypto.getRandomValues</strong>) — the same source real password managers use.</p>
             </div>
           </article>
+        </section>
 
+        <section class="tool-detail" data-tool-panel="ip" hidden>
+          <a class="tool-back" href="/tools" data-route-link="tools">← All tools</a>
           <article class="tool-card reveal" id="toolIp">
             <div class="tool-head"><span class="tool-num">04</span><div><span class="tool-tag">Networking · from the IP addresses guide</span><h3>IP inspector</h3><p>Paste any IP address to validate it and see what class it is, whether it is private, and how it looks in binary.</p></div></div>
             <div class="tool-body">
@@ -1122,7 +1220,10 @@
               <p class="tool-note"><strong>Quick test:</strong> try <strong>127.0.0.1</strong> (loopback — your own machine), <strong>169.254.1.5</strong> (link-local — the “DHCP failed” address) and <strong>8.8.8.8</strong> (public DNS).</p>
             </div>
           </article>
+        </section>
 
+        <section class="tool-detail" data-tool-panel="ports" hidden>
+          <a class="tool-back" href="/tools" data-route-link="tools">← All tools</a>
           <article class="tool-card wide reveal" id="toolPorts">
             <div class="tool-head"><span class="tool-num">05</span><div><span class="tool-tag">Networking · from the common ports guide</span><h3>Port lookup</h3><p>Search by number or service name. These are the doors you will meet in every scan, log and interview.</p></div></div>
             <div class="tool-body">
@@ -1133,7 +1234,10 @@
               <p class="tool-note">A port being open is not automatically a vulnerability — what matters is which service answers, whether it is needed, and whether it is patched. Telnet (23), FTP (21) and SMB (445) exposed to the internet are the classic red flags.</p>
             </div>
           </article>
+        </section>
 
+        <section class="tool-detail" data-tool-panel="encoder" hidden>
+          <a class="tool-back" href="/tools" data-route-link="tools">← All tools</a>
           <article class="tool-card wide reveal" id="toolEncoder">
             <div class="tool-head"><span class="tool-num">06</span><div><span class="tool-tag">Web &amp; tools · everyday utilities</span><h3>Base64 &amp; URL encoder</h3><p>Encode and decode the two formats you will bump into constantly — in URLs, tokens, headers and CTF challenges.</p></div></div>
             <div class="tool-body">
@@ -1153,9 +1257,9 @@
               <p class="tool-note"><strong>Remember:</strong> Base64 is <em>encoding</em>, not encryption — anyone can decode it. It exists to carry binary data safely through text-only channels, never to keep secrets.</p>
             </div>
           </article>
-        </div>
+        </section>
 
-        <div class="cidr-wrap reveal" style="margin-top:34px">
+        <div class="cidr-wrap reveal" data-cidr-ref hidden style="margin-top:34px">
           <h3 style="margin:0 0 6px;font-size:1.3rem">CIDR quick reference</h3>
           <p style="margin:0;color:var(--muted)">The prefixes you will actually meet. Every step right halves the hosts and doubles the subnets.</p>
           <table class="cidr-table">
@@ -1399,34 +1503,58 @@
   <script>
     (function () {
       var routeNames = ['home', 'learn', 'tutorials', 'quizzes', 'tools', 'path', 'latest', 'about', 'contact'];
+      var toolSlugs = ['subnet', 'password', 'generator', 'ip', 'ports', 'encoder'];
+      function isToolRoute(route) { return typeof route === 'string' && route.indexOf('tools/') === 0 && toolSlugs.indexOf(route.slice(6)) !== -1; }
       function basePath() {
         var trimmed = window.location.pathname.replace(/\/+$/, '');
-        var seg = trimmed.split('/').pop();
+        var segs = trimmed.split('/');
+        var seg = segs[segs.length - 1];
+        var prev = segs[segs.length - 2] || '';
+        if (prev === 'tools' && toolSlugs.indexOf(seg) !== -1) return trimmed.slice(0, trimmed.length - seg.length - 6);
         if (routeNames.indexOf(seg) !== -1 || seg.indexOf('.') !== -1) return trimmed.slice(0, trimmed.length - seg.length);
         return trimmed + '/';
       }
       var base = basePath();
       function routeUrl(route) { return base + route; }
       function getRoute() {
-        var route = window.location.pathname.replace(/\/+$/, '').split('/').pop();
-        if (routeNames.indexOf(route) !== -1) return route;
-        var legacy = window.location.hash.replace(/^#\/?/, '').split('/')[0];
-        return routeNames.indexOf(legacy) !== -1 ? legacy : 'home';
+        var parts = window.location.pathname.replace(/\/+$/, '').split('/').filter(function (s) { return s !== ''; });
+        var last = parts[parts.length - 1] || '';
+        var prev = parts[parts.length - 2] || '';
+        if (prev === 'tools' && toolSlugs.indexOf(last) !== -1) return 'tools/' + last;
+        if (routeNames.indexOf(last) !== -1) return last;
+        var legacy = window.location.hash.replace(/^#\/?/, '').split('/').filter(function (s) { return s !== ''; });
+        if (legacy[0] === 'tools' && toolSlugs.indexOf(legacy[1] || '') !== -1) return 'tools/' + legacy[1];
+        return routeNames.indexOf(legacy[0]) !== -1 ? legacy[0] : 'home';
+      }
+      function renderToolPanels(route) {
+        var tool = isToolRoute(route) ? route.slice(6) : null;
+        var hub = document.getElementById('toolsHub');
+        var local = document.getElementById('toolsLocal');
+        if (hub) hub.hidden = !!tool;
+        if (local) local.hidden = !!tool;
+        document.querySelectorAll('[data-tool-panel]').forEach(function (panel) {
+          panel.hidden = panel.getAttribute('data-tool-panel') !== tool;
+        });
+        var cidr = document.querySelector('[data-cidr-ref]');
+        if (cidr) cidr.hidden = tool !== 'subnet';
       }
       function renderRoute(shouldScroll) {
         var route = getRoute();
+        var baseRoute = route.split('/')[0];
         document.querySelectorAll('[data-route-view]').forEach(function (view) {
-          var active = view.getAttribute('data-route-view') === route;
+          var active = view.getAttribute('data-route-view') === baseRoute;
           view.hidden = !active;
           view.classList.remove('route-enter');
           if (active) { void view.offsetWidth; view.classList.add('route-enter'); }
         });
         document.querySelectorAll('[data-route-link]').forEach(function (link) {
-          if (link.getAttribute('data-route-link') === route) link.setAttribute('aria-current', 'page');
+          var linkRoute = link.getAttribute('data-route-link');
+          if (linkRoute === route || linkRoute === baseRoute) link.setAttribute('aria-current', 'page');
           else link.removeAttribute('aria-current');
         });
-        var labels = {home: 'Ethical Hacking From Zero', learn: 'Cybersecurity Lessons', tutorials: 'Cybersecurity Tutorials', quizzes: 'Cybersecurity Quizzes', tools: 'Interactive Tools', path: 'Learning Roadmap', latest: 'Latest Posts', about: 'About', contact: 'Contact'};
-        document.title = labels[route] + ' — Hack With K';
+        var labels = {home: 'Ethical Hacking From Zero', learn: 'Cybersecurity Lessons', tutorials: 'Cybersecurity Tutorials', quizzes: 'Cybersecurity Quizzes', tools: 'Interactive Tools', 'tools/subnet': 'Subnet Calculator', 'tools/password': 'Password Strength Checker', 'tools/generator': 'Password & Passphrase Generator', 'tools/ip': 'IP Inspector', 'tools/ports': 'Port Lookup', 'tools/encoder': 'Base64 & URL Encoder', path: 'Learning Roadmap', latest: 'Latest Posts', about: 'About', contact: 'Contact'};
+        document.title = (labels[route] || labels[baseRoute]) + ' — Hack With K';
+        renderToolPanels(route);
         if (shouldScroll) window.scrollTo({top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
       }
       document.querySelectorAll('a[data-route-link]').forEach(function (link) {
@@ -1439,7 +1567,7 @@
         var link = event.target && event.target.closest ? event.target.closest('a[data-route-link]') : null;
         if (!link) return;
         var target = link.getAttribute('data-route-link');
-        if (routeNames.indexOf(target) === -1) return;
+        if (routeNames.indexOf(target) === -1 && !isToolRoute(target)) return;
         event.preventDefault();
         var url = routeUrl(target);
         if (window.location.pathname !== url) history.pushState(null, '', url);
