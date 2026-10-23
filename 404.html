@@ -824,7 +824,8 @@
       .brand-lockup { width: 160px; }
       .nav-links { gap: 13px; margin-left: 22px; margin-right: auto; }
       .nav-links a { font-size: .88rem; white-space: nowrap; }
-      .nav-cta { white-space: nowrap; }
+      /* Search pill pulled a little closer to the YouTube button */
+      .nav-cta { white-space: nowrap; margin-left: -8px; }
     }
     @media (min-width: 821px) and (max-width: 1240px) {
       .nav-search-btn .nav-search-label, .nav-search-btn kbd { display: none; }
@@ -2702,9 +2703,7 @@
           summary.innerHTML = 'One search across <strong>' + totalGuides + ' guides</strong>, <strong>' + totalTutorials + ' tutorials</strong>, <strong>' + totalQuizzes + ' quiz sets</strong> and <strong>6 tools</strong>.' + (doneTotal ? ' You have completed <strong>' + doneTotal + ' of ' + totalItems + '</strong> items so far.' : '');
           searchResults.appendChild(summary);
           appendGroupHeading('Pages');
-          index.filter(function (e) { return e.type === 'Page'; }).forEach(appendResultRow);
-          appendGroupHeading('Tools');
-          index.filter(function (e) { return e.type === 'Tool'; }).forEach(appendResultRow);
+          index.filter(function (e) { return e.type === 'Page'; }).slice(0, 4).forEach(appendResultRow);
           return;
         }
         var tokens = q.split(/\s+/);
