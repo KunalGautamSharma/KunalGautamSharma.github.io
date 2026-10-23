@@ -819,9 +819,10 @@
     }
     /* Ten nav links since Breach News: keep the desktop bar on one line */
     @media (min-width: 821px) {
-      .nav { gap: 14px; }
+      /* Group the bar: menus sit close after the logo, search + YouTube cluster at the right edge */
+      .nav { gap: 14px; justify-content: flex-start; }
       .brand-lockup { width: 160px; }
-      .nav-links { gap: 13px; }
+      .nav-links { gap: 13px; margin-left: 22px; margin-right: auto; }
       .nav-links a { font-size: .88rem; white-space: nowrap; }
       .nav-cta { white-space: nowrap; }
     }
