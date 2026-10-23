@@ -1985,7 +1985,7 @@
           </article>
         </div>
 
-        <div class="tools-local shop-how reveal"><span class="pulse" aria-hidden="true"></span><p><strong>How ordering works:</strong> 1 · Tap Buy now and fill in your name, email and region. 2 · Pay the exact amount with the QR code or UPI ID. 3 · Add your UPI transaction ID and send the order — it opens ready-made in your email app, addressed to KUNAL. 4 · Once the payment checks out, the ebook is emailed to you.</p></div>
+        <div class="tools-local shop-how reveal"><span class="pulse" aria-hidden="true"></span><p><strong>How ordering works:</strong> 1 · Tap Buy now and fill in your name, email and region. 2 · Pay the exact amount with the QR code or UPI ID. 3 · Add your UPI transaction ID and place the order — this website emails it to KUNAL directly, no email app needed. 4 · Once the payment checks out, the ebook is emailed to you.</p></div>
       </div>
     </section>
 
@@ -2070,7 +2070,7 @@
       <div class="co-steps" aria-hidden="true">
         <span class="co-step" data-co-step="1"><b>1</b> Your details</span>
         <span class="co-step" data-co-step="2"><b>2</b> Pay with UPI</span>
-        <span class="co-step" data-co-step="3"><b>3</b> Send order</span>
+        <span class="co-step" data-co-step="3"><b>3</b> Order placed</span>
       </div>
 
       <div class="checkout-panel" id="coStep1">
@@ -2142,15 +2142,16 @@
         <div class="co-actions">
           <button class="tool-btn secondary" id="coBack" type="button">← Back</button>
           <span class="spacer"></span>
-          <button class="tool-btn" id="coPlace" type="button">Place order — send by email</button>
+          <button class="tool-btn" id="coPlace" type="button">Place order</button>
         </div>
+        <p class="field-error" id="coSendError" hidden>The order could not be sent — check your connection, then press “Try sending again”. This page never charges you; your UPI payment stays exactly as it is.</p>
       </div>
 
       <div class="checkout-panel" id="coStep3" hidden>
         <div class="co-success">
           <div class="ok-ring" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5" /></svg></div>
-          <h3>Almost done — press Send in your email app</h3>
-          <p>Your order just opened as a ready-to-send email to KUNAL. Send it, and once the payment checks out, your ebook will be emailed to <strong id="coSuccessEmail">your email</strong>.</p>
+          <h3>Order placed — thank you!</h3>
+          <p>Your order has been emailed straight to KUNAL by this website — no email app needed. Once he verifies your UPI payment, your ebook will be emailed to <strong id="coSuccessEmail">your email</strong>.</p>
         </div>
         <div class="co-summary co-recap" id="coRecap"></div>
         <div class="co-actions">
@@ -2158,7 +2159,7 @@
           <span class="spacer"></span>
           <button class="tool-btn" id="coDone" type="button">Done</button>
         </div>
-        <p class="copy-feedback" id="orderCopied" hidden>Copied — if your email app did not open, paste this into an email to kunalsharmaopus@gmail.com.</p>
+        <p class="copy-feedback" id="orderCopied" hidden>Copied — keep these details as your own order record. Your order itself was already emailed to KUNAL by the website.</p>
       </div>
     </div>
   </div>
@@ -2997,7 +2998,7 @@
     }());
   </script>
   <script>
-    /* Shop checkout: details -> UPI payment -> order sent by email, delivery checked by hand */
+    /* Shop checkout: details -> UPI payment -> order emailed to KUNAL directly by the website (FormSubmit), delivery checked by hand */
     (function () {
       'use strict';
       var UPI_ID = 'kunal1332006-1@okicici';
@@ -3050,6 +3051,10 @@
         $('coAmount2').textContent = money(product.price);
         fields.txn.value = '';
         setError('txn', false);
+        var placeBtn = $('coPlace');
+        placeBtn.disabled = false;
+        placeBtn.textContent = 'Place order';
+        $('coSendError').hidden = true;
         showStep(1);
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -3143,9 +3148,12 @@
         row.appendChild(s); row.appendChild(v);
         return row;
       }
+      var sending = false;
       function placeOrder() {
         var b = buyer();
         if (!setError('txn', b.txn.replace(/\s/g, '').length < 6)) { fields.txn.focus(); return; }
+        if (sending) return;
+        var subject = 'New order ' + orderRef + ' — ' + current.title + ' — ' + money(current.price);
         var lines = [
           'New ebook order from hackwithk.me/shop',
           '',
@@ -3165,17 +3173,54 @@
           'Please verify the payment against the transaction ID, then email the ebook to the buyer.'
         ];
         lastOrderText = lines.join('\n');
-        var subject = 'New order ' + orderRef + ' — ' + current.title + ' — ' + money(current.price);
-        var recap = $('coRecap');
-        recap.innerHTML = '';
-        recap.appendChild(summaryRow('Order ref', orderRef));
-        recap.appendChild(summaryRow('Product', current.title));
-        recap.appendChild(summaryRow('Amount', money(current.price) + ' · UPI'));
-        recap.appendChild(summaryRow('Transaction ID', b.txn));
-        recap.appendChild(summaryRow('Deliver to', b.email));
-        $('coSuccessEmail').textContent = b.email;
-        showStep(3);
-        window.location.href = 'mailto:' + ORDER_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lastOrderText);
+        var btn = $('coPlace');
+        var errBox = $('coSendError');
+        sending = true;
+        btn.disabled = true;
+        btn.textContent = 'Sending order…';
+        errBox.hidden = true;
+        var payload = {
+          '_subject': subject,
+          '_template': 'table',
+          '_captcha': 'false',
+          '_replyto': b.email,
+          'Order ref': orderRef,
+          'Product': current.title,
+          'Amount paid': money(current.price) + ' (UPI)',
+          'UPI transaction / UTR ID': b.txn,
+          'Buyer name': b.name,
+          'Buyer email (deliver the ebook here)': b.email,
+          'Phone': b.phone || '—',
+          'Country': b.country,
+          'State': b.state,
+          'City': b.city
+        };
+        fetch('https://formsubmit.co/ajax/' + ORDER_EMAIL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function (res) {
+          if (!res.ok) throw new Error('Order send failed: ' + res.status);
+          return res.json().catch(function () { return {}; });
+        }).then(function () {
+          sending = false;
+          btn.disabled = false;
+          btn.textContent = 'Place order';
+          var recap = $('coRecap');
+          recap.innerHTML = '';
+          recap.appendChild(summaryRow('Order ref', orderRef));
+          recap.appendChild(summaryRow('Product', current.title));
+          recap.appendChild(summaryRow('Amount', money(current.price) + ' · UPI'));
+          recap.appendChild(summaryRow('Transaction ID', b.txn));
+          recap.appendChild(summaryRow('Deliver to', b.email));
+          $('coSuccessEmail').textContent = b.email;
+          if (modal.classList.contains('open')) showStep(3);
+        }).catch(function () {
+          sending = false;
+          btn.disabled = false;
+          btn.textContent = 'Try sending again';
+          errBox.hidden = false;
+        });
       }
 
       document.querySelectorAll('[data-buy]').forEach(function (btn) {
