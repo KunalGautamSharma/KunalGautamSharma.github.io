@@ -466,6 +466,93 @@
       .tutorial-content td { padding: 3px 0; border: 0; }
       .tutorial-content td:first-child { color: var(--accent-strong); font-weight: 800; }
     }
+    /* Interactive Tools page */
+    .tools-route { min-height: 72vh; }
+    .tools-nav { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 30px; }
+    .tools-nav button { min-height: 42px; padding: 0 15px; border: 1px solid var(--line); border-radius: 999px; background: transparent; cursor: pointer; font-weight: 700; }
+    .tools-nav button:hover { border-color: var(--accent); color: var(--accent-strong); }
+    .tools-local { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 34px; padding: 16px 18px; background: var(--surface-2); border-radius: 12px; color: var(--muted); font-size: .92rem; }
+    .tools-local strong { color: var(--ink); }
+    .tools-local .pulse { flex: 0 0 auto; margin-top: 7px; }
+    .tools-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+    .tool-card { min-width: 0; padding: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); }
+    .tool-card.wide { grid-column: 1 / -1; }
+    .tool-head { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 8px; }
+    .tool-num { flex: 0 0 auto; width: 46px; height: 46px; display: grid; place-items: center; color: #071b1a; background: var(--signal); border-radius: 50%; font: 600 .9rem/1 "JetBrains Mono", monospace; }
+    .tool-head h3 { margin: 2px 0 6px; font-size: 1.42rem; line-height: 1.15; letter-spacing: -.02em; }
+    .tool-head p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .tool-tag { display: block; color: var(--accent-strong); font: 600 .68rem/1.4 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .05em; }
+    .tool-body { margin-top: 20px; }
+    .tool-label { display: block; margin: 0 0 8px; color: var(--muted); font: 600 .72rem/1.4 "JetBrains Mono", monospace; text-transform: uppercase; }
+    .tool-input, .tool-textarea, .tool-select { width: 100%; min-height: 48px; padding: 0 14px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; }
+    .tool-textarea { min-height: 92px; padding: 12px 14px; resize: vertical; font-family: "JetBrains Mono", monospace; font-size: .88rem; line-height: 1.55; }
+    .tool-input:focus, .tool-textarea:focus, .tool-select:focus { border-color: var(--accent); outline: 3px solid color-mix(in srgb, var(--signal) 55%, transparent); outline-offset: 1px; }
+    .tool-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .tool-row .tool-input { flex: 1 1 180px; }
+    .tool-row .tool-select { flex: 0 1 150px; }
+    .tool-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 11px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg); font-weight: 750; cursor: pointer; transition: transform .2s ease; }
+    .tool-btn:hover { transform: translateY(-2px); }
+    .tool-btn.secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+    .tool-btn.secondary:hover { border-color: var(--accent); color: var(--accent-strong); }
+    .tool-btn.small { min-height: 40px; padding: 0 14px; font-size: .88rem; }
+    .tool-range { width: 100%; accent-color: var(--accent); }
+    .tool-range-row { display: flex; align-items: center; gap: 14px; }
+    .tool-range-row output { min-width: 74px; text-align: center; padding: 7px 10px; background: var(--surface-2); border-radius: 8px; font: 600 .85rem/1 "JetBrains Mono", monospace; }
+    .tool-error { margin: 14px 0 0; padding: 12px 14px; border-radius: 10px; color: #a02c2c; background: color-mix(in srgb, #d34c4c 10%, var(--surface)); font-size: .9rem; }
+    .tool-error[hidden] { display: none; }
+    .tool-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 22px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .tool-results[hidden] { display: none; }
+    .tool-stat { padding: 14px 16px; background: var(--surface); min-width: 0; }
+    .tool-stat span { display: block; color: var(--muted); font: 600 .66rem/1.4 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .04em; }
+    .tool-stat strong { display: block; margin-top: 5px; font: 600 1.02rem/1.35 "JetBrains Mono", monospace; color: var(--ink); overflow-wrap: anywhere; }
+    .tool-stat strong.hl { color: var(--accent-strong); }
+    .meter-track { height: 12px; margin-top: 18px; overflow: hidden; background: var(--surface-2); border-radius: 99px; }
+    .meter-fill { height: 100%; width: 0; border-radius: 99px; background: #d34c4c; transition: width .3s ease, background .3s ease; }
+    .meter-label { display: flex; justify-content: space-between; gap: 14px; margin-top: 10px; font-size: .9rem; }
+    .meter-label strong { color: var(--accent-strong); }
+    .meter-label span { color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: .8rem; }
+    .check-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 18px; margin-top: 18px; list-style: none; padding: 0; }
+    .check-grid li { display: flex; gap: 9px; align-items: baseline; color: var(--muted); font-size: .9rem; }
+    .check-grid li::before { content: "○"; color: var(--muted); font-size: .78rem; }
+    .check-grid li.ok { color: var(--ink); }
+    .check-grid li.ok::before { content: "●"; color: var(--accent); }
+    .tool-note { margin: 16px 0 0; color: var(--muted); font-size: .88rem; }
+    .tool-note strong { color: var(--ink); }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .pill-toggle { min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: transparent; cursor: pointer; font-weight: 700; font-size: .88rem; }
+    .pill-toggle[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+    .gen-output { display: flex; gap: 10px; align-items: stretch; margin-top: 18px; }
+    .gen-output code { flex: 1; min-width: 0; display: flex; align-items: center; padding: 13px 15px; background: #061917; color: #d9fff6; border: 1px solid #285f56; border-radius: 11px; font-family: "JetBrains Mono", monospace; font-size: .95rem; overflow-wrap: anywhere; word-break: break-all; }
+    .copy-feedback { margin: 10px 0 0; color: var(--accent-strong); font-size: .86rem; font-weight: 700; }
+    .copy-feedback[hidden] { display: none; }
+    .port-count { margin: 0 0 14px; color: var(--muted); font-size: .86rem; }
+    .port-list { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .port-row { display: grid; grid-template-columns: 86px 86px 150px 1fr; gap: 6px 16px; padding: 14px 16px; background: var(--surface); align-items: baseline; }
+    .port-row.head { background: var(--surface-2); color: var(--muted); font: 600 .68rem/1.4 "JetBrains Mono", monospace; text-transform: uppercase; }
+    .port-num { font: 600 1rem/1.3 "JetBrains Mono", monospace; color: var(--accent-strong); }
+    .port-proto { font: 600 .78rem/1.3 "JetBrains Mono", monospace; color: var(--muted); }
+    .port-name { font-weight: 800; }
+    .port-desc { color: var(--muted); font-size: .9rem; }
+    .port-desc em { display: block; font-style: normal; color: var(--ink); font-size: .84rem; margin-top: 3px; }
+    .cidr-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: .88rem; }
+    .cidr-table th, .cidr-table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); }
+    .cidr-table th { color: var(--accent-strong); font-family: "JetBrains Mono", monospace; font-size: .72rem; text-transform: uppercase; }
+    .cidr-table td { font-family: "JetBrains Mono", monospace; font-size: .84rem; }
+    @media (max-width: 900px) { .tools-grid { grid-template-columns: 1fr; } .tool-card.wide { grid-column: auto; } }
+    @media (max-width: 640px) {
+      .tool-card { padding: 22px 18px; }
+      .tool-results, .check-grid { grid-template-columns: 1fr; }
+      .port-row { grid-template-columns: 70px 1fr; }
+      .port-row.head { display: none; }
+      .port-name { grid-column: 2; }
+      .port-desc { grid-column: 1 / -1; }
+      .gen-output { flex-direction: column; }
+      .cidr-wrap { overflow: visible; }
+      .cidr-table, .cidr-table thead, .cidr-table tbody, .cidr-table tr, .cidr-table th, .cidr-table td { display: block; }
+      .cidr-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+      .cidr-table tr { padding: 8px 0; border-bottom: 1px solid var(--line); }
+      .cidr-table td { padding: 2px 10px; border: 0; }
+    }
   </style>
 </head>
 <body>
@@ -483,6 +570,7 @@
         <a href="/learn" data-route-link="learn">Learn</a>
         <a href="/tutorials" data-route-link="tutorials">Tutorials</a>
         <a href="/quizzes" data-route-link="quizzes">Quizzes</a>
+        <a href="/tools" data-route-link="tools">Tools</a>
         <a href="/path" data-route-link="path">Roadmap</a>
         <a href="/latest" data-route-link="latest">Latest posts</a>
         <a href="/about" data-route-link="about">About</a>
@@ -493,7 +581,7 @@
       <div class="mobile-links" id="mobileLinks">
         <a href="/home" data-route-link="home">Home</a><a href="/learn" data-route-link="learn">Learn</a>
         <a href="/tutorials" data-route-link="tutorials">Tutorials</a><a href="/quizzes" data-route-link="quizzes">Quizzes</a>
-        <a href="/path" data-route-link="path">Roadmap</a><a href="/latest" data-route-link="latest">Latest posts</a>
+        <a href="/tools" data-route-link="tools">Tools</a><a href="/path" data-route-link="path">Roadmap</a><a href="/latest" data-route-link="latest">Latest posts</a>
         <a href="/about" data-route-link="about">About</a><a href="/contact" data-route-link="contact">Contact</a>
       </div>
     </nav>
@@ -945,6 +1033,149 @@
       </div>
     </section>
 
+    <section class="route-view tools-route" data-route-view="tools" hidden>
+      <div class="shell">
+        <div class="section-head resource-intro reveal">
+          <div><span class="eyebrow">Interactive toolkit</span><h2>Six tools. Zero installs. Just type and learn.</h2><div class="resource-stat"><strong>6</strong><span>hands-on tools · subnetting · passwords · ports · IPs · encoding</span></div></div>
+          <p>The concepts from the Learn guides, turned into things you can use. Work out a subnet, test a password, look up a port — right here, while the idea is fresh.</p>
+        </div>
+
+        <div class="tools-local reveal"><span class="pulse" aria-hidden="true"></span><p><strong>Everything runs on this page, in your browser.</strong> Your passwords and inputs are never sent anywhere — close the tab and they are gone. That is exactly how a practice tool should work.</p></div>
+
+        <div class="tools-nav reveal" aria-label="Jump to a tool">
+          <button type="button" data-tool-jump="toolSubnet">Subnet calculator</button>
+          <button type="button" data-tool-jump="toolPassword">Password checker</button>
+          <button type="button" data-tool-jump="toolGenerator">Password generator</button>
+          <button type="button" data-tool-jump="toolPorts">Port lookup</button>
+          <button type="button" data-tool-jump="toolIp">IP inspector</button>
+          <button type="button" data-tool-jump="toolEncoder">Base64 &amp; URL encoder</button>
+        </div>
+
+        <div class="tools-grid">
+          <article class="tool-card reveal" id="toolSubnet">
+            <div class="tool-head"><span class="tool-num">01</span><div><span class="tool-tag">Networking · from the subnetting guide</span><h3>Subnet calculator</h3><p>Enter any IPv4 address and move the CIDR slider to see the network split in real time.</p></div></div>
+            <div class="tool-body">
+              <label class="tool-label" for="subnetIp">IP address</label>
+              <div class="tool-row"><input class="tool-input" id="subnetIp" type="text" inputmode="decimal" value="192.168.1.10" placeholder="e.g. 192.168.1.10" autocomplete="off" spellcheck="false" /></div>
+              <div style="margin-top:18px"><label class="tool-label" for="subnetCidr">CIDR prefix</label>
+                <div class="tool-range-row"><input class="tool-range" id="subnetCidr" type="range" min="0" max="32" step="1" value="24" /><output id="subnetCidrOut" for="subnetCidr">/24</output></div>
+              </div>
+              <p class="tool-error" id="subnetError" hidden></p>
+              <div class="tool-results" id="subnetResults"></div>
+              <p class="tool-note"><strong>Reading it:</strong> the network address names the subnet itself and the broadcast address talks to everyone in it — neither can be given to a device, which is why a /24 has 254 usable hosts, not 256.</p>
+            </div>
+          </article>
+
+          <article class="tool-card reveal" id="toolPassword">
+            <div class="tool-head"><span class="tool-num">02</span><div><span class="tool-tag">Cyber safety · from the passwords guide</span><h3>Password strength checker</h3><p>Type a password you are thinking of using and see how long it would actually hold up.</p></div></div>
+            <div class="tool-body">
+              <label class="tool-label" for="pwInput">Password to test</label>
+              <div class="tool-row"><input class="tool-input" id="pwInput" type="password" placeholder="Try one here — it never leaves this page" autocomplete="off" /><button class="tool-btn secondary" id="pwToggle" type="button">Show</button></div>
+              <div class="meter-track" aria-hidden="true"><div class="meter-fill" id="pwMeter"></div></div>
+              <div class="meter-label"><strong id="pwVerdict">Start typing…</strong><span id="pwEntropy"></span></div>
+              <ul class="check-grid" id="pwChecks">
+                <li data-check="len">12+ characters</li>
+                <li data-check="lower">Lowercase letters</li>
+                <li data-check="upper">Uppercase letters</li>
+                <li data-check="digit">Numbers</li>
+                <li data-check="symbol">Symbols</li>
+                <li data-check="common">Not a common password</li>
+              </ul>
+              <div class="tool-results" id="pwTimes" hidden></div>
+              <p class="tool-note">Estimates assume an offline attack on a leaked fast hash at ~10 billion guesses per second. Length beats clever symbols every time — four random words outperform most “complex” 8-character passwords.</p>
+            </div>
+          </article>
+
+          <article class="tool-card reveal" id="toolGenerator">
+            <div class="tool-head"><span class="tool-num">03</span><div><span class="tool-tag">Cyber safety · make a strong one</span><h3>Password &amp; passphrase generator</h3><p>Generate a password you could never guess — then store it in a password manager, not your memory.</p></div></div>
+            <div class="tool-body">
+              <span class="tool-label">Style</span>
+              <div class="pill-row" role="group" aria-label="Generator style">
+                <button class="pill-toggle" type="button" id="genModePw" aria-pressed="true">Password</button>
+                <button class="pill-toggle" type="button" id="genModePhrase" aria-pressed="false">Passphrase</button>
+              </div>
+              <div id="genPwOptions">
+                <div style="margin-top:18px"><label class="tool-label" for="genLength">Length</label>
+                  <div class="tool-range-row"><input class="tool-range" id="genLength" type="range" min="8" max="40" step="1" value="16" /><output id="genLengthOut" for="genLength">16</output></div>
+                </div>
+                <span class="tool-label" style="margin-top:18px">Include</span>
+                <div class="pill-row" role="group" aria-label="Character sets">
+                  <button class="pill-toggle" type="button" id="genUpper" aria-pressed="true">ABC</button>
+                  <button class="pill-toggle" type="button" id="genDigits" aria-pressed="true">123</button>
+                  <button class="pill-toggle" type="button" id="genSymbols" aria-pressed="true">#$&amp;</button>
+                </div>
+              </div>
+              <div class="gen-output"><code id="genOutput">Press generate…</code><button class="tool-btn small secondary" id="genCopy" type="button">Copy</button></div>
+              <p class="copy-feedback" id="genCopied" hidden>Copied — now save it somewhere safe.</p>
+              <div style="margin-top:16px"><button class="tool-btn" id="genButton" type="button">Generate new</button></div>
+              <p class="tool-note">Built with your browser’s cryptographic random generator (<strong>crypto.getRandomValues</strong>) — the same source real password managers use.</p>
+            </div>
+          </article>
+
+          <article class="tool-card reveal" id="toolIp">
+            <div class="tool-head"><span class="tool-num">04</span><div><span class="tool-tag">Networking · from the IP addresses guide</span><h3>IP inspector</h3><p>Paste any IP address to validate it and see what class it is, whether it is private, and how it looks in binary.</p></div></div>
+            <div class="tool-body">
+              <label class="tool-label" for="ipInput">IP address</label>
+              <div class="tool-row"><input class="tool-input" id="ipInput" type="text" value="172.16.5.77" placeholder="e.g. 8.8.8.8 or 2001:db8::1" autocomplete="off" spellcheck="false" /><button class="tool-btn" id="ipButton" type="button">Inspect</button></div>
+              <p class="tool-error" id="ipError" hidden></p>
+              <div class="tool-results" id="ipResults" hidden></div>
+              <p class="tool-note"><strong>Quick test:</strong> try <strong>127.0.0.1</strong> (loopback — your own machine), <strong>169.254.1.5</strong> (link-local — the “DHCP failed” address) and <strong>8.8.8.8</strong> (public DNS).</p>
+            </div>
+          </article>
+
+          <article class="tool-card wide reveal" id="toolPorts">
+            <div class="tool-head"><span class="tool-num">05</span><div><span class="tool-tag">Networking · from the common ports guide</span><h3>Port lookup</h3><p>Search by number or service name. These are the doors you will meet in every scan, log and interview.</p></div></div>
+            <div class="tool-body">
+              <label class="tool-label" for="portSearch">Search ports</label>
+              <input class="tool-input" id="portSearch" type="search" placeholder="Try 443, ssh, dns, database…" autocomplete="off" />
+              <p class="port-count" id="portCount" style="margin-top:16px"></p>
+              <div class="port-list" id="portList" role="table" aria-label="Common ports"></div>
+              <p class="tool-note">A port being open is not automatically a vulnerability — what matters is which service answers, whether it is needed, and whether it is patched. Telnet (23), FTP (21) and SMB (445) exposed to the internet are the classic red flags.</p>
+            </div>
+          </article>
+
+          <article class="tool-card wide reveal" id="toolEncoder">
+            <div class="tool-head"><span class="tool-num">06</span><div><span class="tool-tag">Web &amp; tools · everyday utilities</span><h3>Base64 &amp; URL encoder</h3><p>Encode and decode the two formats you will bump into constantly — in URLs, tokens, headers and CTF challenges.</p></div></div>
+            <div class="tool-body">
+              <label class="tool-label" for="encInput">Your text</label>
+              <textarea class="tool-textarea" id="encInput" placeholder="Type or paste text here…">Hack With K</textarea>
+              <div class="tool-row" style="margin-top:14px">
+                <button class="tool-btn small" type="button" data-enc="b64e">Base64 encode</button>
+                <button class="tool-btn small secondary" type="button" data-enc="b64d">Base64 decode</button>
+                <button class="tool-btn small" type="button" data-enc="urle">URL encode</button>
+                <button class="tool-btn small secondary" type="button" data-enc="urld">URL decode</button>
+              </div>
+              <p class="tool-error" id="encError" hidden></p>
+              <label class="tool-label" for="encOutput" style="margin-top:20px">Result</label>
+              <textarea class="tool-textarea" id="encOutput" readonly placeholder="Your result appears here…"></textarea>
+              <div style="margin-top:12px"><button class="tool-btn small secondary" id="encCopy" type="button">Copy result</button></div>
+              <p class="copy-feedback" id="encCopied" hidden>Copied.</p>
+              <p class="tool-note"><strong>Remember:</strong> Base64 is <em>encoding</em>, not encryption — anyone can decode it. It exists to carry binary data safely through text-only channels, never to keep secrets.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="cidr-wrap reveal" style="margin-top:34px">
+          <h3 style="margin:0 0 6px;font-size:1.3rem">CIDR quick reference</h3>
+          <p style="margin:0;color:var(--muted)">The prefixes you will actually meet. Every step right halves the hosts and doubles the subnets.</p>
+          <table class="cidr-table">
+            <thead><tr><th>CIDR</th><th>Subnet mask</th><th>Total addresses</th><th>Usable hosts</th><th>Typical use</th></tr></thead>
+            <tbody>
+              <tr><td>/8</td><td>255.0.0.0</td><td>16,777,216</td><td>16,777,214</td><td>Huge private ranges (10.0.0.0/8)</td></tr>
+              <tr><td>/16</td><td>255.255.0.0</td><td>65,536</td><td>65,534</td><td>Large office or campus network</td></tr>
+              <tr><td>/24</td><td>255.255.255.0</td><td>256</td><td>254</td><td>Home and small-office LAN</td></tr>
+              <tr><td>/25</td><td>255.255.255.128</td><td>128</td><td>126</td><td>Splitting a /24 in two</td></tr>
+              <tr><td>/26</td><td>255.255.255.192</td><td>64</td><td>62</td><td>One department or device group</td></tr>
+              <tr><td>/27</td><td>255.255.255.224</td><td>32</td><td>30</td><td>Small segment — cameras, printers</td></tr>
+              <tr><td>/28</td><td>255.255.255.240</td><td>16</td><td>14</td><td>Tiny segment</td></tr>
+              <tr><td>/30</td><td>255.255.255.252</td><td>4</td><td>2</td><td>Point-to-point router link</td></tr>
+              <tr><td>/32</td><td>255.255.255.255</td><td>1</td><td>1</td><td>A single host route</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <section class="path-section route-view" id="path" data-route-view="path" hidden>
       <div class="shell">
         <div class="section-head reveal">
@@ -1143,7 +1374,7 @@
         <span>© 2026 Hack With K. Learn. Test. Secure.</span>
         <div class="footer-founder"><span>Founder</span><strong>KUNAL GAUTAM</strong></div>
       </div>
-      <div class="footer-links"><a href="/learn" data-route-link="learn">Lessons</a><a href="/tutorials" data-route-link="tutorials">Tutorials</a><a href="/quizzes" data-route-link="quizzes">Quizzes</a><a href="/path" data-route-link="path">Roadmap</a><a href="/contact" data-route-link="contact">Contact</a><a href="https://www.instagram.com/hack_withk/" target="_blank" rel="noopener">Instagram</a><a href="https://www.youtube.com/@hack_withk" target="_blank" rel="noopener">YouTube</a></div>
+      <div class="footer-links"><a href="/learn" data-route-link="learn">Lessons</a><a href="/tutorials" data-route-link="tutorials">Tutorials</a><a href="/quizzes" data-route-link="quizzes">Quizzes</a><a href="/tools" data-route-link="tools">Tools</a><a href="/path" data-route-link="path">Roadmap</a><a href="/contact" data-route-link="contact">Contact</a><a href="https://www.instagram.com/hack_withk/" target="_blank" rel="noopener">Instagram</a><a href="https://www.youtube.com/@hack_withk" target="_blank" rel="noopener">YouTube</a></div>
     </div>
   </footer>
 
@@ -1167,7 +1398,7 @@
 
   <script>
     (function () {
-      var routeNames = ['home', 'learn', 'tutorials', 'quizzes', 'path', 'latest', 'about', 'contact'];
+      var routeNames = ['home', 'learn', 'tutorials', 'quizzes', 'tools', 'path', 'latest', 'about', 'contact'];
       function basePath() {
         var trimmed = window.location.pathname.replace(/\/+$/, '');
         var seg = trimmed.split('/').pop();
@@ -1194,7 +1425,7 @@
           if (link.getAttribute('data-route-link') === route) link.setAttribute('aria-current', 'page');
           else link.removeAttribute('aria-current');
         });
-        var labels = {home: 'Ethical Hacking From Zero', learn: 'Cybersecurity Lessons', tutorials: 'Cybersecurity Tutorials', quizzes: 'Cybersecurity Quizzes', path: 'Learning Roadmap', latest: 'Latest Posts', about: 'About'};
+        var labels = {home: 'Ethical Hacking From Zero', learn: 'Cybersecurity Lessons', tutorials: 'Cybersecurity Tutorials', quizzes: 'Cybersecurity Quizzes', tools: 'Interactive Tools', path: 'Learning Roadmap', latest: 'Latest Posts', about: 'About', contact: 'Contact'};
         document.title = labels[route] + ' — Hack With K';
         if (shouldScroll) window.scrollTo({top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
       }
@@ -1465,6 +1696,296 @@
       var mobileMenu=document.getElementById('mobileMenu'); var mobileLinks=document.getElementById('mobileLinks');
       mobileMenu.addEventListener('click', function(){ var open=!mobileLinks.classList.contains('open'); mobileLinks.classList.toggle('open',open); mobileMenu.setAttribute('aria-expanded',String(open)); });
       mobileLinks.addEventListener('click', function(event){ if(event.target.closest('a')){ mobileLinks.classList.remove('open'); mobileMenu.setAttribute('aria-expanded','false'); } });
+    }());
+  </script>
+  <script>
+    (function () {
+      'use strict';
+      function $(id) { return document.getElementById(id); }
+      function fmt(n) { return n.toLocaleString('en-US'); }
+      function copyText(text, feedbackEl) {
+        function done() { if (feedbackEl) { feedbackEl.hidden = false; setTimeout(function () { feedbackEl.hidden = true; }, 2600); } }
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () { fallback(); }); } else { fallback(); }
+        function fallback() { var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta); done(); }
+      }
+      function stat(label, value, hl) { return '<div class="tool-stat"><span>' + label + '</span><strong' + (hl ? ' class="hl"' : '') + '>' + value + '</strong></div>'; }
+
+      /* Jump-to-tool pills */
+      document.querySelectorAll('[data-tool-jump]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var target = $(btn.getAttribute('data-tool-jump'));
+          if (target) target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+        });
+      });
+
+      /* ---------- 01 · Subnet calculator ---------- */
+      function parseIpv4(str) {
+        var parts = String(str).trim().split('.');
+        if (parts.length !== 4) return null;
+        var nums = [];
+        for (var i = 0; i < 4; i++) {
+          if (!/^\d{1,3}$/.test(parts[i])) return null;
+          var n = parseInt(parts[i], 10);
+          if (n > 255) return null;
+          nums.push(n);
+        }
+        return nums;
+      }
+      function ipToInt(a) { return ((a[0] * 256 + a[1]) * 256 + a[2]) * 256 + a[3]; }
+      function intToIp(n) { return [Math.floor(n / 16777216) % 256, Math.floor(n / 65536) % 256, Math.floor(n / 256) % 256, n % 256].join('.'); }
+      function isPrivate4(a) { return a[0] === 10 || (a[0] === 172 && a[1] >= 16 && a[1] <= 31) || (a[0] === 192 && a[1] === 168); }
+      var subnetIp = $('subnetIp'), subnetCidr = $('subnetCidr'), subnetCidrOut = $('subnetCidrOut'), subnetError = $('subnetError'), subnetResults = $('subnetResults');
+      function runSubnet() {
+        if (!subnetIp) return;
+        var cidr = parseInt(subnetCidr.value, 10);
+        subnetCidrOut.textContent = '/' + cidr;
+        var octets = parseIpv4(subnetIp.value);
+        if (!octets) { subnetError.textContent = 'That does not look like a valid IPv4 address — four numbers from 0 to 255, separated by dots.'; subnetError.hidden = false; subnetResults.hidden = true; return; }
+        subnetError.hidden = true;
+        var ip = ipToInt(octets);
+        var hostBits = 32 - cidr;
+        var block = Math.pow(2, hostBits);
+        var network = Math.floor(ip / block) * block;
+        var broadcast = network + block - 1;
+        var mask = cidr === 0 ? 0 : 4294967296 - block;
+        var wildcard = 4294967295 - mask;
+        var total = block;
+        var usable, first, last;
+        if (cidr === 32) { usable = 1; first = network; last = network; }
+        else if (cidr === 31) { usable = 2; first = network; last = broadcast; }
+        else { usable = total - 2; first = network + 1; last = broadcast - 1; }
+        var type = isPrivate4(octets) ? 'Private (RFC 1918)' : (octets[0] === 127 ? 'Loopback' : 'Public');
+        subnetResults.innerHTML =
+          stat('Network address', intToIp(network) + '/' + cidr, true) +
+          stat('Broadcast address', intToIp(broadcast)) +
+          stat('Subnet mask', intToIp(mask)) +
+          stat('Wildcard mask', intToIp(wildcard)) +
+          stat('First usable host', intToIp(first)) +
+          stat('Last usable host', intToIp(last)) +
+          stat('Total addresses', fmt(total)) +
+          stat('Usable hosts', fmt(usable), true) +
+          stat('Address type', type) +
+          stat('Your IP sits at', 'host #' + fmt(ip - network + 1) + ' of ' + fmt(total));
+        subnetResults.hidden = false;
+      }
+      if (subnetIp) { subnetIp.addEventListener('input', runSubnet); subnetCidr.addEventListener('input', runSubnet); runSubnet(); }
+
+      /* ---------- 02 · Password strength ---------- */
+      var COMMON = ['password','123456','123456789','12345678','qwerty','abc123','password1','111111','123123','admin','letmein','welcome','monkey','dragon','football','iloveyou','sunshine','master','shadow','superman','michael','ninja','mustang','charlie','aa123456','donald','login','princess','solo','starwars','freedom','whatever','trustno1','kunal','india','hackwithk'];
+      var pwInput = $('pwInput'), pwToggle = $('pwToggle'), pwMeter = $('pwMeter'), pwVerdict = $('pwVerdict'), pwEntropy = $('pwEntropy'), pwTimes = $('pwTimes'), pwChecks = $('pwChecks');
+      function crackTime(seconds) {
+        if (!isFinite(seconds) || seconds > 3.15e18) return 'effectively forever';
+        if (seconds < 1) return 'instantly';
+        if (seconds < 60) return Math.round(seconds) + ' seconds';
+        if (seconds < 3600) return Math.round(seconds / 60) + ' minutes';
+        if (seconds < 86400) return Math.round(seconds / 3600) + ' hours';
+        if (seconds < 31557600) return Math.round(seconds / 86400) + ' days';
+        if (seconds < 31557600 * 100) return Math.round(seconds / 31557600) + ' years';
+        if (seconds < 31557600 * 1000) return fmt(Math.round(seconds / 31557600)) + ' years';
+        if (seconds < 31557600 * 1e6) return (seconds / 31557600 / 1000).toFixed(1) + ' thousand years';
+        if (seconds < 31557600 * 1e9) return (seconds / 31557600 / 1e6).toFixed(1) + ' million years';
+        return (seconds / 31557600 / 1e9).toFixed(1) + ' billion years';
+      }
+      function runPassword() {
+        if (!pwInput) return;
+        var pw = pwInput.value;
+        var checks = { len: pw.length >= 12, lower: /[a-z]/.test(pw), upper: /[A-Z]/.test(pw), digit: /\d/.test(pw), symbol: /[^A-Za-z0-9]/.test(pw), common: pw.length > 0 && COMMON.indexOf(pw.toLowerCase()) === -1 };
+        pwChecks.querySelectorAll('li').forEach(function (li) { li.classList.toggle('ok', !!checks[li.getAttribute('data-check')]); });
+        if (!pw) { pwMeter.style.width = '0'; pwVerdict.textContent = 'Start typing…'; pwEntropy.textContent = ''; pwTimes.hidden = true; return; }
+        var pool = 0;
+        if (/[a-z]/.test(pw)) pool += 26;
+        if (/[A-Z]/.test(pw)) pool += 26;
+        if (/\d/.test(pw)) pool += 10;
+        if (/[^A-Za-z0-9]/.test(pw)) pool += 33;
+        if (/\s/.test(pw)) pool += 1;
+        var entropy = pool > 0 ? pw.length * (Math.log(pool) / Math.log(2)) : 0;
+        if (!checks.common) entropy = Math.min(entropy, 8);
+        if (/(.)\1{2,}/.test(pw) || /0123|1234|2345|3456|4567|5678|6789|abcd|qwerty/i.test(pw)) entropy *= 0.65;
+        entropy = Math.round(entropy);
+        var verdict, color, pct;
+        if (entropy < 28) { verdict = 'Very weak'; color = '#d34c4c'; pct = 14; }
+        else if (entropy < 40) { verdict = 'Weak'; color = '#e07b39'; pct = 32; }
+        else if (entropy < 60) { verdict = 'Fair — lengthen it'; color = '#d9b23a'; pct = 52; }
+        else if (entropy < 80) { verdict = 'Strong'; color = '#4caf7d'; pct = 74; }
+        else { verdict = 'Excellent'; color = '#2fbf71'; pct = 100; }
+        pwMeter.style.width = pct + '%'; pwMeter.style.background = color;
+        pwVerdict.textContent = verdict;
+        pwEntropy.textContent = '~' + entropy + ' bits of entropy';
+        var guesses = Math.pow(2, entropy) / 2;
+        pwTimes.innerHTML =
+          stat('Offline attack (leaked hash)', crackTime(guesses / 1e10)) +
+          stat('Online attack (throttled login)', crackTime(guesses / 100)) +
+          stat('If it is reused and breached', checks.common ? 'Unique here — keep it that way' : 'On the common list — change it now', !checks.common) +
+          stat('Best upgrade', pw.length < 12 ? 'Add more characters' : (entropy < 60 ? 'Add a random word or two' : 'Pair it with 2FA'));
+        pwTimes.hidden = false;
+      }
+      if (pwInput) {
+        pwInput.addEventListener('input', runPassword);
+        pwToggle.addEventListener('click', function () { var show = pwInput.type === 'password'; pwInput.type = show ? 'text' : 'password'; pwToggle.textContent = show ? 'Hide' : 'Show'; pwInput.focus(); });
+        runPassword();
+      }
+
+      /* ---------- 03 · Generator ---------- */
+      var WORDS = ['orbit','copper','meadow','falcon','breeze','cinder','harbor','velvet','quartz','meadowlark','timber','saffron','cobalt','willow','ember','garnet','meadow2','zephyr','topaz','indigo','marble','cactus','pepper','saddle','beacon','lantern','mosaic','tundra','walnut','onyx','prairie','sierra','cobble','fable','harvest','juniper','lagoon','magnet','nectar','opal','pioneer','ridge','summit','tulip','umber','voyage','walrus','yonder','zenith'];
+      WORDS = WORDS.filter(function (w, i) { return WORDS.indexOf(w) === i && !/\d/.test(w); });
+      var genMode = 'pw';
+      var genOutput = $('genOutput'), genCopied = $('genCopied');
+      function randInt(max) { var arr = new Uint32Array(1); var limit = Math.floor(4294967296 / max) * max; do { window.crypto.getRandomValues(arr); } while (arr[0] >= limit); return arr[0] % max; }
+      function pick(str) { return str.charAt(randInt(str.length)); }
+      function generate() {
+        if (!genOutput) return;
+        var out = '';
+        if (genMode === 'phrase') {
+          var words = [];
+          for (var i = 0; i < 4; i++) words.push(WORDS[randInt(WORDS.length)]);
+          out = words.join('-') + '-' + (10 + randInt(90));
+        } else {
+          var lower = 'abcdefghijkmnopqrstuvwxyz', upper = 'ABCDEFGHJKLMNPQRSTUVWXYZ', digits = '23456789', symbols = '!@#$%^&*()-_=+';
+          var sets = [lower];
+          if ($('genUpper').getAttribute('aria-pressed') === 'true') sets.push(upper);
+          if ($('genDigits').getAttribute('aria-pressed') === 'true') sets.push(digits);
+          if ($('genSymbols').getAttribute('aria-pressed') === 'true') sets.push(symbols);
+          var all = sets.join('');
+          var len = parseInt($('genLength').value, 10);
+          var chars = sets.map(function (s) { return pick(s); });
+          while (chars.length < len) chars.push(pick(all));
+          for (var j = chars.length - 1; j > 0; j--) { var k = randInt(j + 1); var t = chars[j]; chars[j] = chars[k]; chars[k] = t; }
+          out = chars.join('');
+        }
+        genOutput.textContent = out;
+        genCopied.hidden = true;
+      }
+      if (genOutput) {
+        $('genModePw').addEventListener('click', function () { genMode = 'pw'; $('genModePw').setAttribute('aria-pressed', 'true'); $('genModePhrase').setAttribute('aria-pressed', 'false'); $('genPwOptions').style.display = ''; generate(); });
+        $('genModePhrase').addEventListener('click', function () { genMode = 'phrase'; $('genModePhrase').setAttribute('aria-pressed', 'true'); $('genModePw').setAttribute('aria-pressed', 'false'); $('genPwOptions').style.display = 'none'; generate(); });
+        ['genUpper', 'genDigits', 'genSymbols'].forEach(function (id) { $(id).addEventListener('click', function () { var el = $(id); el.setAttribute('aria-pressed', String(el.getAttribute('aria-pressed') !== 'true')); generate(); }); });
+        $('genLength').addEventListener('input', function () { $('genLengthOut').textContent = $('genLength').value; generate(); });
+        $('genButton').addEventListener('click', generate);
+        $('genCopy').addEventListener('click', function () { if (genOutput.textContent && genOutput.textContent !== 'Press generate…') copyText(genOutput.textContent, genCopied); });
+        generate();
+      }
+
+      /* ---------- 04 · IP inspector ---------- */
+      var ipInput = $('ipInput'), ipButton = $('ipButton'), ipError = $('ipError'), ipResults = $('ipResults');
+      function classify4(a) {
+        if (a[0] === 127) return ['Loopback', 'This machine itself — traffic never leaves the device.'];
+        if (a[0] === 10 || (a[0] === 172 && a[1] >= 16 && a[1] <= 31) || (a[0] === 192 && a[1] === 168)) return ['Private (RFC 1918)', 'Only valid inside a local network; NAT translates it for the internet.'];
+        if (a[0] === 169 && a[1] === 254) return ['Link-local (APIPA)', 'Self-assigned when DHCP does not answer — a classic fault sign.'];
+        if (a[0] >= 224 && a[0] <= 239) return ['Multicast', 'One stream delivered to many subscribed receivers.'];
+        if (a[0] === 0) return ['Reserved — “this network”', 'Used to mean the local network itself, not a device.'];
+        if (a[0] >= 240) return ['Reserved', 'Set aside for future use (and the old Class E experiment).'];
+        if (a[0] === 192 && a[1] === 0 && a[2] === 2 || a[0] === 198 && a[1] === 51 && a[2] === 100 || a[0] === 203 && a[1] === 0 && a[2] === 113) return ['Documentation (TEST-NET)', 'Reserved for examples in books and guides — like this page.'];
+        return ['Public', 'Routable on the open internet.'];
+      }
+      function ipClass(a) { if (a[0] < 128) return 'A'; if (a[0] < 192) return 'B'; if (a[0] < 224) return 'C'; if (a[0] < 240) return 'D (multicast)'; return 'E (experimental)'; }
+      function runIp() {
+        if (!ipInput) return;
+        var raw = ipInput.value.trim();
+        ipError.hidden = true;
+        if (raw.indexOf(':') !== -1) {
+          var groups = raw.split(':');
+          var valid6 = /^[0-9a-fA-F:]+$/.test(raw) && groups.length <= 8 && raw.length >= 2;
+          if (!valid6) { ipError.textContent = 'That does not look like a valid IPv6 address.'; ipError.hidden = false; ipResults.hidden = true; return; }
+          var type6 = raw === '::1' ? 'Loopback' : /^fe[89ab]/i.test(raw) ? 'Link-local' : /^f[cd]/i.test(raw) ? 'Unique local (private)' : 'Global (public)';
+          ipResults.innerHTML = stat('Version', 'IPv6 — 128-bit', true) + stat('Type', type6) + stat('Written as', raw) + stat('One-line summary', type6 === 'Loopback' ? 'Your own machine.' : 'IPv6 needs no NAT — firewalls do the guarding.');
+          ipResults.hidden = false;
+          return;
+        }
+        var octets = parseIpv4(raw);
+        if (!octets) { ipError.textContent = 'That does not look like a valid IP address — IPv4 needs four numbers from 0 to 255 separated by dots.'; ipError.hidden = false; ipResults.hidden = true; return; }
+        var cls = classify4(octets);
+        var bin = octets.map(function (n) { var s = n.toString(2); while (s.length < 8) s = '0' + s; return s; }).join('.');
+        ipResults.innerHTML =
+          stat('Version', 'IPv4 — 32-bit', true) +
+          stat('Class (historical)', 'Class ' + ipClass(octets)) +
+          stat('Type', cls[0], true) +
+          stat('What that means', cls[1]) +
+          stat('In binary', bin) +
+          stat('As one number', fmt(ipToInt(octets))) +
+          stat('Reverse lookup name', octets.slice().reverse().join('.') + '.in-addr.arpa') +
+          stat('Default mask for its class', ipClass(octets) === 'A' ? '255.0.0.0 (/8)' : ipClass(octets) === 'B' ? '255.255.0.0 (/16)' : ipClass(octets) === 'C' ? '255.255.255.0 (/24)' : '—');
+        ipResults.hidden = false;
+      }
+      if (ipInput) { ipButton.addEventListener('click', runIp); ipInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') runIp(); }); ipInput.addEventListener('input', runIp); runIp(); }
+
+      /* ---------- 05 · Port lookup ---------- */
+      var PORTS = [
+        [20, 'TCP', 'FTP (data)', 'File Transfer Protocol data channel.', 'Plain-text and rarely used today — prefer SFTP.'],
+        [21, 'TCP', 'FTP (control)', 'Old-school file transfer logins and commands.', 'Sends passwords in clear text. A classic scan finding.'],
+        [22, 'TCP', 'SSH', 'Secure remote shell, file transfer and tunnelling.', 'Use key login and keep it patched — it is brute-forced constantly.'],
+        [23, 'TCP', 'Telnet', 'Ancient remote terminal access.', 'Everything is clear text. Exposed Telnet is a red flag.'],
+        [25, 'TCP', 'SMTP', 'Relaying email between mail servers.', 'Open relays get abused for spam — lock it down.'],
+        [53, 'UDP/TCP', 'DNS', 'Translates domain names to IP addresses.', 'Open resolvers can be abused for amplification attacks.'],
+        [67, 'UDP', 'DHCP (server)', 'Hands out IP addresses to devices joining a network.', 'Rogue DHCP servers can hijack a whole LAN.'],
+        [68, 'UDP', 'DHCP (client)', 'The side of DHCP that runs on your device.', 'Pairs with port 67 in the DORA handshake.'],
+        [80, 'TCP', 'HTTP', 'Unencrypted web traffic.', 'Fine as a redirect to HTTPS — risky as the real site.'],
+        [88, 'TCP/UDP', 'Kerberos', 'Authentication inside Windows domains.', 'Core to Active Directory logons.'],
+        [110, 'TCP', 'POP3', 'Downloads email to one device.', 'Legacy — clear text without TLS. Prefer IMAP over TLS.'],
+        [123, 'UDP', 'NTP', 'Synchronises clocks across the internet.', 'Wrong clocks break logins, logs and certificates.'],
+        [143, 'TCP', 'IMAP', 'Reads email stored on the server, synced everywhere.', 'Use the TLS version (993) wherever possible.'],
+        [161, 'UDP', 'SNMP', 'Monitoring and managing network devices.', 'Old versions leak device info with guessable community strings.'],
+        [389, 'TCP/UDP', 'LDAP', 'Directory lookups — users, groups, devices.', 'Bind it down; exposed LDAP has leaked whole directories.'],
+        [443, 'TCP', 'HTTPS', 'Encrypted web traffic — the modern default.', 'The one web port that should be open to the world.'],
+        [445, 'TCP', 'SMB', 'Windows file and printer sharing.', 'Never expose to the internet — worm history (WannaCry used it).'],
+        [465, 'TCP', 'SMTPS', 'SMTP wrapped in TLS for sending email.', 'The secure sibling of port 587.'],
+        [587, 'TCP', 'SMTP submission', 'How your mail app sends outgoing email.', 'Requires login — that is the point.'],
+        [636, 'TCP', 'LDAPS', 'LDAP wrapped in TLS.', 'The directory port you actually want open.'],
+        [993, 'TCP', 'IMAPS', 'IMAP wrapped in TLS.', 'Standard secure email reading.'],
+        [995, 'TCP', 'POP3S', 'POP3 wrapped in TLS.', 'Standard secure email download.'],
+        [1080, 'TCP', 'SOCKS proxy', 'Generic proxy for almost any traffic.', 'Open proxies are abused — never run one publicly by accident.'],
+        [1194, 'UDP/TCP', 'OpenVPN', 'Popular open-source VPN protocol.', 'A door you open on purpose — keep it patched.'],
+        [1433, 'TCP', 'Microsoft SQL Server', 'Microsoft database traffic.', 'Databases should never face the internet directly.'],
+        [1723, 'TCP', 'PPTP', 'A very old VPN protocol.', 'Considered broken — use WireGuard or OpenVPN instead.'],
+        [2049, 'TCP/UDP', 'NFS', 'Network file sharing, mostly Linux/Unix.', 'Misconfigured exports share files with the whole network.'],
+        [2375, 'TCP', 'Docker (unencrypted)', 'Remote control of Docker — without TLS.', 'Full host takeover if exposed. One of the worst ports to leak.'],
+        [3306, 'TCP', 'MySQL / MariaDB', 'The world’s most common open-source database.', 'Belongs behind an app server, never open to the internet.'],
+        [3389, 'TCP/UDP', 'RDP', 'Windows Remote Desktop.', 'Top ransomware entry point when exposed — put it behind a VPN.'],
+        [5432, 'TCP', 'PostgreSQL', 'PostgreSQL database traffic.', 'Same rule as every database: private networks only.'],
+        [5900, 'TCP', 'VNC', 'Remote desktop screen sharing.', 'Often weakly protected — tunnel it through SSH or a VPN.'],
+        [6379, 'TCP', 'Redis', 'In-memory database and cache.', 'Ships with no password by default — a famous exposure story.'],
+        [8080, 'TCP', 'HTTP (alternate)', 'Second web port: dev servers, admin panels, proxies.', 'Forgotten admin panels love to live here. Check what answers.'],
+        [8443, 'TCP', 'HTTPS (alternate)', 'Alternate encrypted web port.', 'Often device admin interfaces — router and camera panels.'],
+        [27017, 'TCP', 'MongoDB', 'MongoDB database traffic.', 'Unsecured MongoDB instances have leaked billions of records.']
+      ];
+      var portSearch = $('portSearch'), portList = $('portList'), portCount = $('portCount');
+      function renderPorts() {
+        if (!portList) return;
+        var q = portSearch.value.trim().toLowerCase();
+        var rows = PORTS.filter(function (p) { return !q || String(p[0]).indexOf(q) !== -1 || p[2].toLowerCase().indexOf(q) !== -1 || p[3].toLowerCase().indexOf(q) !== -1; });
+        var html = '<div class="port-row head"><span>Port</span><span>Protocol</span><span>Service</span><span>What it does</span></div>';
+        if (!rows.length) html += '<div class="port-row"><span class="port-desc" style="grid-column:1/-1">No match in the common-ports list. Any port from 0 to 65535 can carry a service — check what is actually listening with a scan of your own machine.</span></div>';
+        rows.forEach(function (p) {
+          html += '<div class="port-row"><span class="port-num">' + p[0] + '</span><span class="port-proto">' + p[1] + '</span><span class="port-name">' + p[2] + '</span><span class="port-desc">' + p[3] + '<em>' + p[4] + '</em></span></div>';
+        });
+        portList.innerHTML = html;
+        portCount.textContent = 'Showing ' + rows.length + ' of ' + PORTS.length + ' common ports' + (q ? ' for “' + portSearch.value.trim() + '”' : '') + '.';
+      }
+      if (portSearch) { portSearch.addEventListener('input', renderPorts); renderPorts(); }
+
+      /* ---------- 06 · Encoder ---------- */
+      var encInput = $('encInput'), encOutput = $('encOutput'), encError = $('encError'), encCopied = $('encCopied');
+      function b64encode(str) { return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str))); }
+      function b64decode(b64) { var bin = atob(b64.replace(/\s/g, '')); var bytes = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i); return new TextDecoder().decode(bytes); }
+      document.querySelectorAll('[data-enc]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (!encInput) return;
+          encError.hidden = true;
+          var v = encInput.value, mode = btn.getAttribute('data-enc');
+          try {
+            if (mode === 'b64e') encOutput.value = b64encode(v);
+            else if (mode === 'b64d') encOutput.value = b64decode(v);
+            else if (mode === 'urle') encOutput.value = encodeURIComponent(v);
+            else if (mode === 'urld') encOutput.value = decodeURIComponent(v.replace(/\+/g, ' '));
+          } catch (e) {
+            encError.textContent = mode === 'b64d' ? 'That is not valid Base64 — check for missing characters or padding.' : 'That input could not be decoded — it may contain an incomplete % escape.';
+            encError.hidden = false;
+          }
+        });
+      });
+      if (encInput) {
+        $('encCopy').addEventListener('click', function () { if (encOutput.value) copyText(encOutput.value, encCopied); });
+        encOutput.value = b64encode(encInput.value);
+      }
     }());
   </script>
 </body>
