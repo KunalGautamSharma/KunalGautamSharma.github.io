@@ -898,6 +898,50 @@
       section { padding: 28px 0; }
       .route-view[hidden] { display: none !important; }
     }
+
+    /* Grouped dropdown navigation (Idea B): four groups replace ten flat links */
+    .nav-group { position: relative; }
+    .nav-links a.nav-direct { display: inline-flex; align-items: center; min-height: 44px; }
+    .nav-group-btn {
+      position: relative; display: inline-flex; align-items: center; gap: 7px;
+      min-height: 44px; padding: 0 2px; background: none; border: 0; cursor: pointer;
+      font-size: .92rem; font-weight: 650; color: var(--muted);
+    }
+    .nav-group-btn:hover, .nav-group-btn.has-current { color: var(--accent-strong); }
+    .nav-group-btn.has-current::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px; background: var(--signal); }
+    .nav-group-btn .chev { width: 13px; height: 13px; flex: 0 0 auto; transition: transform .2s ease; }
+    .nav-group.open .nav-group-btn .chev { transform: rotate(180deg); }
+    .nav-menu {
+      position: absolute; top: calc(100% + 8px); left: 50%; z-index: 50;
+      min-width: 238px; padding: 8px;
+      background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow);
+      opacity: 0; visibility: hidden; pointer-events: none; transform: translate(-50%, 6px);
+      transition: opacity .18s ease, transform .18s ease, visibility .18s;
+    }
+    .nav-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+    .nav-group.open .nav-menu, .nav-group:focus-within .nav-menu {
+      opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0);
+    }
+    .nav-links .nav-menu a {
+      display: flex; align-items: center; padding: 10px 12px; border-radius: 9px;
+      white-space: normal; font-size: .95rem; color: var(--ink);
+    }
+    .nav-links .nav-menu a:hover { background: var(--surface-2); color: var(--accent-strong); }
+    .nav-links .nav-menu a[aria-current="page"] { color: var(--accent-strong); background: var(--surface-2); }
+    .nav-links .nav-menu a[aria-current="page"]::after { display: none; }
+    .nav-menu .nm-main { display: block; font-weight: 750; line-height: 1.3; }
+    .nav-menu .nm-main small { display: block; margin-top: 2px; color: var(--muted); font-size: .78rem; font-weight: 550; }
+    @media (min-width: 821px) { .nav-links { gap: 26px; } }
+    .mobile-group-label {
+      grid-column: 1 / -1; padding: 14px 12px 0;
+      color: var(--accent-strong); font: 600 .66rem/1.4 "JetBrains Mono", monospace;
+      letter-spacing: .12em; text-transform: uppercase;
+    }
+    .mobile-links .mobile-home { grid-column: 1 / -1; }
+    @media (forced-colors: active) {
+      .nav-menu { border: 1px solid CanvasText; box-shadow: none; }
+      .nav-group-btn.has-current::after { background: Highlight; }
+    }
   </style>
 </head>
 <body>
@@ -911,16 +955,35 @@
         </picture>
       </a>
       <div class="nav-links">
-        <a href="/home" data-route-link="home">Home</a>
-        <a href="/learn" data-route-link="learn">Learn</a>
-        <a href="/tutorials" data-route-link="tutorials">Tutorials</a>
-        <a href="/quizzes" data-route-link="quizzes">Quizzes</a>
-        <a href="/tools" data-route-link="tools">Tools</a>
-        <a href="/path" data-route-link="path">Roadmap</a>
-        <a href="/latest" data-route-link="latest">Latest posts</a>
-        <a href="/news" data-route-link="news">Breach News</a>
-        <a href="/about" data-route-link="about">About</a>
-        <a href="/contact" data-route-link="contact">Contact</a>
+        <div class="nav-group">
+          <button class="nav-group-btn" type="button" aria-haspopup="true" aria-expanded="false">Learn <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="nav-menu">
+            <a href="/learn" data-route-link="learn"><span class="nm-main">Guides<small>All 56 step-by-step lessons</small></span></a>
+            <a href="/tutorials" data-route-link="tutorials"><span class="nm-main">Tutorials<small>Hands-on walkthroughs</small></span></a>
+            <a href="/path" data-route-link="path"><span class="nm-main">Roadmap<small>Your path, step by step</small></span></a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-group-btn" type="button" aria-haspopup="true" aria-expanded="false">Practice <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="nav-menu">
+            <a href="/quizzes" data-route-link="quizzes"><span class="nm-main">Quizzes<small>102 quiz sets to test yourself</small></span></a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-group-btn" type="button" aria-haspopup="true" aria-expanded="false">Updates <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="nav-menu">
+            <a href="/latest" data-route-link="latest"><span class="nm-main">Latest posts<small>Fresh from our channels</small></span></a>
+            <a href="/news" data-route-link="news"><span class="nm-main">Breach News<small>Big hacks, explained simply</small></span></a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-group-btn" type="button" aria-haspopup="true" aria-expanded="false">About <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="nav-menu">
+            <a href="/about" data-route-link="about"><span class="nm-main">About<small>What Hack With K is</small></span></a>
+            <a href="/contact" data-route-link="contact"><span class="nm-main">Contact<small>Get in touch</small></span></a>
+          </div>
+        </div>
+        <a class="nav-direct" href="/tools" data-route-link="tools">Tools</a>
       </div>
       <button class="nav-search-btn" id="searchOpen" type="button" aria-haspopup="dialog" aria-controls="searchModal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
@@ -929,10 +992,17 @@
       <button class="mobile-menu" id="mobileMenu" type="button" aria-expanded="false" aria-controls="mobileLinks">Explore</button>
       <a class="nav-cta" href="https://www.youtube.com/@hack_withk" target="_blank" rel="noopener">Watch on YouTube</a>
       <div class="mobile-links" id="mobileLinks">
-        <a href="/home" data-route-link="home">Home</a><a href="/learn" data-route-link="learn">Learn</a>
-        <a href="/tutorials" data-route-link="tutorials">Tutorials</a><a href="/quizzes" data-route-link="quizzes">Quizzes</a>
-        <a href="/tools" data-route-link="tools">Tools</a><a href="/path" data-route-link="path">Roadmap</a><a href="/latest" data-route-link="latest">Latest posts</a><a href="/news" data-route-link="news">Breach News</a>
+        <a class="mobile-home" href="/home" data-route-link="home">Home</a>
+        <span class="mobile-group-label" aria-hidden="true">Learn</span>
+        <a href="/learn" data-route-link="learn">Guides</a><a href="/tutorials" data-route-link="tutorials">Tutorials</a>
+        <a href="/path" data-route-link="path">Roadmap</a>
+        <span class="mobile-group-label" aria-hidden="true">Practice</span>
+        <a href="/quizzes" data-route-link="quizzes">Quizzes</a>
+        <span class="mobile-group-label" aria-hidden="true">Updates</span>
+        <a href="/latest" data-route-link="latest">Latest posts</a><a href="/news" data-route-link="news">Breach News</a>
+        <span class="mobile-group-label" aria-hidden="true">About</span>
         <a href="/about" data-route-link="about">About</a><a href="/contact" data-route-link="contact">Contact</a>
+        <a class="mobile-home" href="/tools" data-route-link="tools">Tools</a>
       </div>
     </nav>
   </header>
@@ -2688,6 +2758,47 @@
       var mobileMenu=document.getElementById('mobileMenu'); var mobileLinks=document.getElementById('mobileLinks');
       mobileMenu.addEventListener('click', function(){ var open=!mobileLinks.classList.contains('open'); mobileLinks.classList.toggle('open',open); mobileMenu.setAttribute('aria-expanded',String(open)); });
       mobileLinks.addEventListener('click', function(event){ if(event.target.closest('a')){ mobileLinks.classList.remove('open'); mobileMenu.setAttribute('aria-expanded','false'); } });
+
+      /* Grouped dropdown menus: hover, click, keyboard and current-page state */
+      var navGroups = Array.prototype.slice.call(document.querySelectorAll('.nav-group'));
+      function closeNavGroups(except) {
+        navGroups.forEach(function (group) {
+          if (group === except) return;
+          group.classList.remove('open');
+          group.querySelector('.nav-group-btn').setAttribute('aria-expanded', 'false');
+        });
+      }
+      function setNavGroup(group, open) {
+        if (open) closeNavGroups(group);
+        group.classList.toggle('open', open);
+        group.querySelector('.nav-group-btn').setAttribute('aria-expanded', String(open));
+      }
+      navGroups.forEach(function (group) {
+        var btn = group.querySelector('.nav-group-btn');
+        var menu = group.querySelector('.nav-menu');
+        btn.addEventListener('click', function () { setNavGroup(group, !group.classList.contains('open')); });
+        group.addEventListener('pointerenter', function (event) { if (event.pointerType === 'mouse') setNavGroup(group, true); });
+        group.addEventListener('pointerleave', function (event) { if (event.pointerType === 'mouse') setNavGroup(group, false); });
+        menu.addEventListener('click', function (event) { if (event.target.closest('a')) setNavGroup(group, false); });
+        group.addEventListener('keydown', function (event) {
+          if (event.key === 'Escape') { setNavGroup(group, false); btn.focus(); }
+        });
+      });
+      document.addEventListener('click', function (event) {
+        if (!event.target.closest('.nav-group')) closeNavGroups(null);
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeNavGroups(null);
+      });
+      function markCurrentGroups() {
+        navGroups.forEach(function (group) {
+          var current = !!group.querySelector('.nav-menu a[aria-current="page"]');
+          group.querySelector('.nav-group-btn').classList.toggle('has-current', current);
+        });
+      }
+      document.addEventListener('click', function () { markCurrentGroups(); });
+      window.addEventListener('popstate', function () { markCurrentGroups(); });
+      markCurrentGroups();
     }());
   </script>
   <script>
