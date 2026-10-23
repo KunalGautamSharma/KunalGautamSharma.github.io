@@ -785,6 +785,83 @@
       :focus-visible { outline-color: Highlight; }
     }
 
+    /* Site search + progress tracking */
+    .nav-search-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); cursor: pointer; font-weight: 700; font-size: .88rem; transition: border-color .2s ease, color .2s ease; }
+    .nav-search-btn:hover { border-color: var(--accent); color: var(--accent-strong); }
+    .nav-search-btn svg { width: 16px; height: 16px; flex: 0 0 auto; }
+    .nav-search-btn kbd { padding: 1px 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; background: var(--surface-2); color: var(--muted); font: 600 .66rem/1.5 "JetBrains Mono", monospace; }
+    @media (min-width: 821px) and (max-width: 1100px) {
+      .nav-search-btn .nav-search-label, .nav-search-btn kbd { display: none; }
+      .nav-search-btn { padding: 0 12px; }
+    }
+    @media (max-width: 820px) {
+      .nav-search-btn { margin-left: auto; }
+      .nav .mobile-menu { margin-left: 0; }
+      .nav-search-btn .nav-search-label, .nav-search-btn kbd { display: none; }
+      .nav-search-btn { padding: 0 12px; }
+    }
+    .search-card { width: min(680px, 100%); padding: clamp(20px, 4vw, 34px); }
+    .search-input-row { display: flex; align-items: center; gap: 10px; padding: 0 6px 0 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
+    .search-input-row:focus-within { border-color: var(--accent); }
+    .search-input-row svg { width: 19px; height: 19px; flex: 0 0 auto; color: var(--muted); }
+    .search-input { flex: 1; min-width: 0; min-height: 52px; border: 0; background: transparent; color: var(--ink); font-size: 1.02rem; }
+    .search-input:focus { outline: none; }
+    .search-results { margin-top: 18px; max-height: min(430px, calc(var(--vh, 1vh) * 52)); overflow-y: auto; overscroll-behavior: contain; }
+    .search-group { margin: 0 0 6px; padding: 10px 4px 6px; color: var(--muted); font: 600 .68rem/1.4 "JetBrains Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .search-result { width: 100%; display: flex; align-items: center; gap: 12px; padding: 11px 12px; border: 1px solid transparent; border-radius: 12px; background: transparent; color: var(--ink); text-align: left; cursor: pointer; }
+    .search-result:hover, .search-result.active { background: var(--surface-2); border-color: var(--line); }
+    .search-result .sr-main { flex: 1; min-width: 0; }
+    .search-result .sr-title { display: block; font-weight: 750; line-height: 1.3; overflow-wrap: anywhere; }
+    .search-result .sr-meta { display: block; margin-top: 2px; color: var(--muted); font-size: .8rem; overflow-wrap: anywhere; }
+    .sr-tag { flex: 0 0 auto; padding: 3px 8px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--accent-strong); font: 600 .62rem/1.5 "JetBrains Mono", monospace; letter-spacing: .06em; text-transform: uppercase; }
+    .sr-state { flex: 0 0 auto; color: var(--accent-strong); font-size: .78rem; font-weight: 800; white-space: nowrap; }
+    .search-empty { padding: 26px 12px; color: var(--muted); text-align: center; }
+    .search-summary { margin: 4px 4px 10px; color: var(--muted); font-size: .88rem; }
+    .search-summary strong { color: var(--accent-strong); }
+    .search-foot { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: .76rem; }
+    .search-foot kbd { padding: 0 5px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; background: var(--surface-2); font: 600 .68rem/1.6 "JetBrains Mono", monospace; }
+    .done-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; background: var(--signal); color: #071b1a; font: 700 .66rem/1.5 "JetBrains Mono", monospace; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+    .article-card.is-done { border-color: var(--accent); }
+    .quiz-set-card .done-badge { margin-top: 12px; }
+    .quiz-set-card .best-badge { display: inline-flex; margin-top: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font: 600 .66rem/1.5 "JetBrains Mono", monospace; text-transform: uppercase; }
+    .modal-foot { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .complete-toggle { min-height: 46px; padding: 0 18px; border: 1px solid var(--accent); border-radius: 999px; background: transparent; color: var(--accent-strong); cursor: pointer; font-weight: 800; }
+    .complete-toggle[aria-pressed="true"] { background: var(--signal); border-color: var(--signal); color: #071b1a; }
+    .complete-note { color: var(--muted); font-size: .82rem; }
+    .learn-progress { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; margin-bottom: 26px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+    .learn-progress span { font-weight: 750; font-size: .9rem; }
+    .learn-progress a { margin-left: auto; color: var(--accent-strong); font-weight: 800; font-size: .88rem; text-decoration: none; }
+    .progress-track { flex: 1; min-width: 120px; height: 10px; overflow: hidden; background: var(--surface-2); border-radius: 99px; }
+    .progress-track i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 99px; transition: width .45s ease; }
+    .progress-track.small { height: 7px; }
+    .progress-panel { margin-bottom: 44px; padding: clamp(24px, 4vw, 38px); background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-top: 3px solid var(--signal); border-radius: 4px 28px 4px 28px; box-shadow: var(--shadow); }
+    .progress-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+    .progress-top h3 { margin: 12px 0 6px; font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.1; letter-spacing: -.02em; }
+    .progress-note { margin: 0; color: var(--muted); font-size: .88rem; max-width: 520px; }
+    .progress-pct { font: 600 clamp(2.4rem, 6vw, 3.6rem)/1 "JetBrains Mono", monospace; color: var(--accent-strong); letter-spacing: -.04em; }
+    .progress-panel > .progress-track { margin: 24px 0 8px; }
+    .progress-rows { display: grid; gap: 14px; margin-top: 18px; }
+    .progress-row { display: grid; grid-template-columns: 150px 1fr 86px; align-items: center; gap: 14px; }
+    .progress-row span { font-weight: 700; font-size: .9rem; }
+    .progress-row b { text-align: right; font: 600 .86rem/1.4 "JetBrains Mono", monospace; color: var(--accent-strong); }
+    .progress-next { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+    .progress-next-item { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--ink); cursor: pointer; font-size: .86rem; font-weight: 700; text-align: left; }
+    .progress-next-item:hover { border-color: var(--accent); }
+    .progress-next-item small { display: block; color: var(--muted); font: 600 .62rem/1.4 "JetBrains Mono", monospace; letter-spacing: .06em; text-transform: uppercase; }
+    .progress-all-done { margin: 0; color: var(--accent-strong); font-weight: 800; }
+    .progress-reset { margin-top: 22px; padding: 0; background: none; border: 0; color: var(--muted); cursor: pointer; font-size: .82rem; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .progress-reset.armed { color: #b63333; }
+    @media (max-width: 640px) {
+      .progress-row { grid-template-columns: 1fr 70px; }
+      .progress-row .progress-track { grid-column: 1 / -1; order: 3; }
+      .progress-top { flex-direction: column; gap: 8px; }
+      .search-results { max-height: calc(var(--vh, 1vh) * 46); }
+    }
+    @media (forced-colors: active) {
+      .progress-track i, .done-badge { background: Highlight; forced-color-adjust: none; }
+      .search-result.active { border-color: Highlight; }
+    }
+
     /* Printing from any OS: content only, no nav chrome or pop-ups. */
     @media print {
       .topbar, .mobile-links, .modal, .skip { display: none !important; }
@@ -815,6 +892,10 @@
         <a href="/about" data-route-link="about">About</a>
         <a href="/contact" data-route-link="contact">Contact</a>
       </div>
+      <button class="nav-search-btn" id="searchOpen" type="button" aria-haspopup="dialog" aria-controls="searchModal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+        <span class="nav-search-label">Search</span><kbd aria-hidden="true">Ctrl K</kbd>
+      </button>
       <button class="mobile-menu" id="mobileMenu" type="button" aria-expanded="false" aria-controls="mobileLinks">Explore</button>
       <a class="nav-cta" href="https://www.youtube.com/@hack_withk" target="_blank" rel="noopener">Watch on YouTube</a>
       <div class="mobile-links" id="mobileLinks">
@@ -893,6 +974,11 @@
           <button class="filter" type="button" data-filter="networking" aria-pressed="false">Networking</button>
           <button class="filter" type="button" data-filter="security" aria-pressed="false">Security</button>
           <button class="filter" type="button" data-filter="web" aria-pressed="false">Web</button>
+        </div>
+        <div class="learn-progress reveal" id="learnProgress">
+          <span id="learnProgressText">0 of 56 guides completed</span>
+          <div class="progress-track small" role="progressbar" aria-label="Guides completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="learnProgressTrack"><i id="learnProgressFill"></i></div>
+          <a href="/path" data-route-link="path">See full progress →</a>
         </div>
         <div class="article-grid">
           <article class="article-card featured reveal" data-category="networking">
@@ -1501,6 +1587,24 @@
           </div>
           <p>Move in order. Each stage gives the next one context, so the tools make sense instead of becoming commands to memorize.</p>
         </div>
+        <div class="progress-panel reveal" id="progressPanel">
+          <div class="progress-top">
+            <div>
+              <span class="topic-tag">YOUR PROGRESS</span>
+              <h3 id="progressHeadline">Your learning, tracked as you go</h3>
+              <p class="progress-note">Open any guide, tutorial or quiz set from here — or use Search (Ctrl K) to jump straight to a topic. Completed items get a tick wherever they appear.</p>
+            </div>
+            <strong class="progress-pct" id="progressPct">0%</strong>
+          </div>
+          <div class="progress-track" role="progressbar" aria-label="Overall learning progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack"><i id="progressFill"></i></div>
+          <div class="progress-rows">
+            <div class="progress-row"><span>Guides completed</span><div class="progress-track small"><i id="progressGuidesFill"></i></div><b id="progressGuidesCount">0 / 56</b></div>
+            <div class="progress-row"><span>Tutorials completed</span><div class="progress-track small"><i id="progressTutorialsFill"></i></div><b id="progressTutorialsCount">0 / 52</b></div>
+            <div class="progress-row"><span>Quiz sets passed</span><div class="progress-track small"><i id="progressQuizzesFill"></i></div><b id="progressQuizzesCount">0 / 102</b></div>
+          </div>
+          <div class="progress-next" id="progressNext"></div>
+          <button class="progress-reset" id="progressReset" type="button">Reset my progress</button>
+        </div>
         <div class="path-grid">
           <div class="path-list reveal" role="tablist" aria-label="Learning roadmap">
             <button class="path-tab" id="tab-foundations" role="tab" aria-selected="true" aria-controls="panel-foundations" data-panel="foundations"><b>01</b><span>Foundations</span></button>
@@ -1699,6 +1803,10 @@
       <div class="modal-head"><span class="topic-tag" id="modalTag">QUICK GUIDE</span><button class="close" id="modalClose" type="button" aria-label="Close article">×</button></div>
       <h2 id="modalTitle"></h2>
       <div class="modal-body" id="modalBody"></div>
+      <div class="modal-foot">
+        <button class="complete-toggle" id="articleComplete" type="button" aria-pressed="false">Mark as complete</button>
+        <span class="complete-note">Ticks are saved in this browser only.</span>
+      </div>
     </div>
   </div>
 
@@ -1709,6 +1817,22 @@
       <h2 id="tutorialModalTitle"></h2>
       <div class="tutorial-byline" id="tutorialModalMeta"></div>
       <div class="tutorial-content" id="tutorialModalBody"></div>
+      <div class="modal-foot">
+        <button class="complete-toggle" id="tutorialComplete" type="button" aria-pressed="false">Mark as complete</button>
+        <span class="complete-note">Ticks are saved in this browser only.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal search-modal" id="searchModal" role="dialog" aria-modal="true" aria-label="Search Hack With K">
+    <div class="modal-card search-card">
+      <div class="search-input-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+        <input class="search-input" id="searchInput" type="search" placeholder="Search guides, tutorials, quizzes and tools…" autocomplete="off" aria-label="Search guides, tutorials, quizzes and tools" role="combobox" aria-expanded="true" aria-controls="searchResults" aria-activedescendant="" />
+        <button class="close" id="searchClose" type="button" aria-label="Close search">×</button>
+      </div>
+      <div class="search-results" id="searchResults" role="listbox" aria-label="Search results"></div>
+      <div class="search-foot" aria-hidden="true"><span><kbd>↑</kbd> <kbd>↓</kbd> move</span><span><kbd>Enter</kbd> open</span><span><kbd>Esc</kbd> close</span></div>
     </div>
   </div>
 
@@ -2032,6 +2156,403 @@
         quizPanel.appendChild(result); quizAnswered.textContent='10';
       }
       renderQuizSets();
+
+      /* ---- Progress tracking + site-wide search ----
+         Progress (guides read, tutorials finished, quiz best scores) is kept
+         in this browser's local storage only, so ticks follow the visitor on
+         this device and nothing is sent anywhere. Every storage access is
+         guarded: with storage unavailable the site simply runs untracked. */
+      var PROGRESS_KEY = 'hwk-progress-v1';
+      function emptyProgress() { return { guides: {}, tutorials: {}, quizzes: {} }; }
+      function loadProgress() {
+        try {
+          var raw = window.localStorage.getItem(PROGRESS_KEY);
+          if (raw) {
+            var parsed = JSON.parse(raw);
+            if (parsed && typeof parsed === 'object') return { guides: parsed.guides || {}, tutorials: parsed.tutorials || {}, quizzes: parsed.quizzes || {} };
+          }
+        } catch (err) {}
+        return emptyProgress();
+      }
+      var progress = loadProgress();
+      function saveProgress() { try { window.localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); } catch (err) {} }
+      var totalGuides = Object.keys(articles).length;
+      var totalTutorials = tutorialData.length;
+      var totalQuizzes = quizSets.length;
+      var totalItems = totalGuides + totalTutorials + totalQuizzes;
+      function guideDone(slug) { return !!progress.guides[slug]; }
+      function tutorialDone(id) { return !!progress.tutorials[id]; }
+      function quizBest(id) { return progress.quizzes[id] || 0; }
+      function passedQuizCount() { return quizSets.filter(function (set) { return quizBest(set.id) >= 70; }).length; }
+      function doneCounts() { return { guides: Object.keys(progress.guides).length, tutorials: Object.keys(progress.tutorials).length, quizzes: passedQuizCount() }; }
+      function pctOf(done, total) { return total ? Math.round((done / total) * 100) : 0; }
+
+      function goToRoute(route) {
+        var url = routeUrl(route);
+        if (window.location.pathname !== url) history.pushState(null, '', url);
+        renderRoute(true);
+      }
+      function openGuide(slug) {
+        goToRoute('learn');
+        var button = document.querySelector('[data-article="' + slug + '"]');
+        if (button) button.click();
+      }
+      function openTutorialById(id) {
+        goToRoute('tutorials');
+        if (tutorialSearch.value) { tutorialSearch.value = ''; tutorialSearchTerm = ''; }
+        if (activeTutorialCategory !== 'All') {
+          activeTutorialCategory = 'All';
+          tutorialFilters.querySelectorAll('button').forEach(function (b, i) { b.setAttribute('aria-pressed', String(i === 0)); });
+        }
+        renderTutorials('All');
+        var button = tutorialGrid.querySelector('[data-tutorial-id="' + id + '"]');
+        if (button) button.click();
+      }
+      function openQuizById(id) {
+        goToRoute('quizzes');
+        var set = quizSets.find(function (entry) { return entry.id === id; });
+        if (set) startQuiz(set);
+      }
+
+      function makeBadge(text) { var badge = document.createElement('span'); badge.className = 'done-badge'; badge.textContent = text; return badge; }
+      function applyGuideBadges() {
+        document.querySelectorAll('.article-card').forEach(function (card) {
+          var button = card.querySelector('[data-article]');
+          if (!button) return;
+          var done = guideDone(button.getAttribute('data-article'));
+          card.classList.toggle('is-done', done);
+          var top = card.querySelector('.card-top');
+          if (top) {
+            var badge = top.querySelector('.done-badge');
+            if (done && !badge) top.appendChild(makeBadge('✓ Completed'));
+            if (!done && badge) badge.remove();
+          }
+          var link = card.querySelector('.read-link');
+          if (link && link.childNodes.length && link.childNodes[0].nodeType === 3) link.childNodes[0].textContent = done ? 'Read again ' : 'Read the quick guide ';
+        });
+      }
+      function applyTutorialBadges() {
+        tutorialGrid.querySelectorAll('.tutorial-card').forEach(function (card) {
+          var button = card.querySelector('[data-tutorial-id]');
+          if (!button) return;
+          var done = tutorialDone(Number(button.getAttribute('data-tutorial-id')));
+          var badge = card.querySelector('.done-badge');
+          if (done && !badge) button.parentNode.insertBefore(makeBadge('✓ Completed'), button);
+          if (!done && badge) badge.remove();
+          button.textContent = done ? 'Open again →' : 'Open tutorial →';
+        });
+      }
+      function applyQuizBadges() {
+        quizSetGrid.querySelectorAll('.quiz-set-card').forEach(function (card) {
+          var kicker = card.querySelector('.quiz-set-kicker');
+          if (!kicker) return;
+          var match = /^Set (\d+)/.exec(kicker.textContent || '');
+          if (!match) return;
+          var best = quizBest(Number(match[1]));
+          card.querySelectorAll('.done-badge, .best-badge').forEach(function (old) { old.remove(); });
+          if (best >= 70) card.appendChild(makeBadge('✓ Passed · best ' + best + '%'));
+          else if (best > 0) { var bestBadge = document.createElement('span'); bestBadge.className = 'best-badge'; bestBadge.textContent = 'Best so far ' + best + '%'; card.appendChild(bestBadge); }
+        });
+      }
+      function watchGrid(grid, apply) {
+        apply();
+        if (!grid || !('MutationObserver' in window)) return;
+        var queued = false;
+        var observer = new MutationObserver(function () {
+          if (queued) return;
+          queued = true;
+          var run = function () { queued = false; apply(); };
+          if (window.requestAnimationFrame) window.requestAnimationFrame(run); else run();
+        });
+        observer.observe(grid, { childList: true });
+      }
+
+      function setBar(id, pct) { var el = document.getElementById(id); if (el) el.style.width = pct + '%'; }
+      function renderProgress() {
+        var counts = doneCounts();
+        var doneTotal = counts.guides + counts.tutorials + counts.quizzes;
+        var pct = pctOf(doneTotal, totalItems);
+        var pctEl = document.getElementById('progressPct'); if (pctEl) pctEl.textContent = pct + '%';
+        var headline = document.getElementById('progressHeadline');
+        if (headline) headline.textContent = doneTotal === 0 ? 'Your learning, tracked as you go' : (doneTotal >= totalItems ? 'Everything complete — seriously impressive' : 'You are ' + pct + '% of the way through the library');
+        setBar('progressFill', pct);
+        var track = document.getElementById('progressTrack'); if (track) track.setAttribute('aria-valuenow', String(pct));
+        setBar('progressGuidesFill', pctOf(counts.guides, totalGuides));
+        setBar('progressTutorialsFill', pctOf(counts.tutorials, totalTutorials));
+        setBar('progressQuizzesFill', pctOf(counts.quizzes, totalQuizzes));
+        var gc = document.getElementById('progressGuidesCount'); if (gc) gc.textContent = counts.guides + ' / ' + totalGuides;
+        var tc = document.getElementById('progressTutorialsCount'); if (tc) tc.textContent = counts.tutorials + ' / ' + totalTutorials;
+        var qc = document.getElementById('progressQuizzesCount'); if (qc) qc.textContent = counts.quizzes + ' / ' + totalQuizzes;
+        var learnText = document.getElementById('learnProgressText'); if (learnText) learnText.textContent = counts.guides + ' of ' + totalGuides + ' guides completed';
+        setBar('learnProgressFill', pctOf(counts.guides, totalGuides));
+        var learnTrack = document.getElementById('learnProgressTrack'); if (learnTrack) learnTrack.setAttribute('aria-valuenow', String(pctOf(counts.guides, totalGuides)));
+        var nextWrap = document.getElementById('progressNext');
+        if (nextWrap) {
+          nextWrap.innerHTML = '';
+          var next = [];
+          var guideSlug = Object.keys(articles).find(function (slug) { return !guideDone(slug); });
+          if (guideSlug) next.push({ kind: 'Next guide', title: articles[guideSlug].title, run: function () { openGuide(guideSlug); } });
+          var tut = tutorialData.find(function (item) { return !tutorialDone(item.id); });
+          if (tut) next.push({ kind: 'Next tutorial', title: tut.title, run: function () { openTutorialById(tut.id); } });
+          var set = quizSets.find(function (entry) { return quizBest(entry.id) < 70; });
+          if (set) next.push({ kind: 'Next quiz set', title: set.title, run: function () { openQuizById(set.id); } });
+          if (!next.length) {
+            var doneMsg = document.createElement('p'); doneMsg.className = 'progress-all-done';
+            doneMsg.textContent = 'All guides read, all tutorials finished, all quiz sets passed. Time to teach someone else.';
+            nextWrap.appendChild(doneMsg);
+          }
+          next.forEach(function (item) {
+            var chip = document.createElement('button'); chip.type = 'button'; chip.className = 'progress-next-item';
+            var wrap = document.createElement('span');
+            var kind = document.createElement('small'); kind.textContent = item.kind;
+            var title = document.createElement('span'); title.textContent = item.title;
+            wrap.append(kind, title);
+            var arrow = document.createElement('span'); arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '→';
+            chip.append(wrap, arrow);
+            chip.addEventListener('click', item.run);
+            nextWrap.appendChild(chip);
+          });
+        }
+        applyGuideBadges();
+        applyTutorialBadges();
+        applyQuizBadges();
+      }
+
+      var resetButton = document.getElementById('progressReset');
+      if (resetButton) {
+        var resetArmed = false, resetTimer = null;
+        resetButton.addEventListener('click', function () {
+          if (!resetArmed) {
+            resetArmed = true;
+            resetButton.textContent = 'Tap again to confirm reset';
+            resetButton.classList.add('armed');
+            resetTimer = window.setTimeout(function () { resetArmed = false; resetButton.textContent = 'Reset my progress'; resetButton.classList.remove('armed'); }, 3500);
+            return;
+          }
+          window.clearTimeout(resetTimer);
+          resetArmed = false;
+          resetButton.textContent = 'Reset my progress';
+          resetButton.classList.remove('armed');
+          progress = emptyProgress();
+          saveProgress();
+          renderProgress();
+        });
+      }
+
+      /* "Mark as complete" toggles inside the guide and tutorial readers. */
+      var currentGuide = null, currentTutorial = null;
+      var articleCompleteBtn = document.getElementById('articleComplete');
+      var tutorialCompleteBtn = document.getElementById('tutorialComplete');
+      function refreshToggle(button, done) {
+        if (!button) return;
+        button.setAttribute('aria-pressed', String(done));
+        button.textContent = done ? '✓ Completed' : 'Mark as complete';
+      }
+      document.querySelectorAll('[data-article]').forEach(function (button) {
+        button.addEventListener('click', function () { currentGuide = button.getAttribute('data-article'); refreshToggle(articleCompleteBtn, guideDone(currentGuide)); });
+      });
+      if (articleCompleteBtn) articleCompleteBtn.addEventListener('click', function () {
+        if (!currentGuide) return;
+        if (guideDone(currentGuide)) delete progress.guides[currentGuide]; else progress.guides[currentGuide] = true;
+        saveProgress(); renderProgress(); refreshToggle(articleCompleteBtn, guideDone(currentGuide));
+      });
+      tutorialGrid.addEventListener('click', function (event) {
+        var button = event.target && event.target.closest ? event.target.closest('[data-tutorial-id]') : null;
+        if (!button) return;
+        currentTutorial = Number(button.getAttribute('data-tutorial-id'));
+        refreshToggle(tutorialCompleteBtn, tutorialDone(currentTutorial));
+      });
+      if (tutorialCompleteBtn) tutorialCompleteBtn.addEventListener('click', function () {
+        if (currentTutorial === null) return;
+        if (tutorialDone(currentTutorial)) delete progress.tutorials[currentTutorial]; else progress.tutorials[currentTutorial] = true;
+        saveProgress(); renderProgress(); refreshToggle(tutorialCompleteBtn, tutorialDone(currentTutorial));
+      });
+
+      /* A finished quiz set records its best score; 70%+ counts as passed. */
+      if ('MutationObserver' in window) {
+        var quizResultObserver = new MutationObserver(function () {
+          var result = quizPanel.querySelector('.quiz-result');
+          if (!result || result.getAttribute('data-progress-recorded') || !activeSet) return;
+          result.setAttribute('data-progress-recorded', '1');
+          var pct = score * 10;
+          if (pct > quizBest(activeSet.id)) { progress.quizzes[activeSet.id] = pct; saveProgress(); }
+          renderProgress();
+        });
+        quizResultObserver.observe(quizPanel, { childList: true, subtree: true });
+      }
+
+      /* ---- Site-wide search ---- */
+      var searchModal = document.getElementById('searchModal');
+      var searchInput = document.getElementById('searchInput');
+      var searchResults = document.getElementById('searchResults');
+      var searchOpenBtn = document.getElementById('searchOpen');
+      var searchCloseBtn = document.getElementById('searchClose');
+      var searchIndex = null;
+      var currentResults = [];
+      var activeResultIndex = -1;
+      var searchLastFocus = null;
+      if (searchOpenBtn && /Mac|iPhone|iPad/.test(navigator.platform || '')) { var kbdEl = searchOpenBtn.querySelector('kbd'); if (kbdEl) kbdEl.textContent = '⌘ K'; }
+      function stripHtml(html) { var holder = document.createElement('div'); holder.innerHTML = html || ''; return (holder.textContent || '').replace(/\s+/g, ' ').trim(); }
+      function buildSearchIndex() {
+        if (searchIndex) return searchIndex;
+        var index = [];
+        [
+          { route: 'home', title: 'Home', meta: 'Start page', keys: 'home start welcome beginning' },
+          { route: 'learn', title: 'Learn — all 56 guides', meta: 'Page · quick guides hub', keys: 'learn lessons guides topics knowledge hub study' },
+          { route: 'tutorials', title: 'Tutorials', meta: 'Page · 52 hands-on tutorials', keys: 'tutorials hands-on library practice walkthrough' },
+          { route: 'quizzes', title: 'Quizzes', meta: 'Page · 102 quiz sets, 1,020 questions', keys: 'quizzes test questions certificate exam practice' },
+          { route: 'tools', title: 'Tools', meta: 'Page · 6 interactive tools', keys: 'tools toolkit utilities calculator checker generator' },
+          { route: 'path', title: 'Roadmap & my progress', meta: 'Page · learning path and your progress', keys: 'roadmap path progress stages plan track completed' },
+          { route: 'latest', title: 'Latest posts', meta: 'Page · Instagram, YouTube & Telegram', keys: 'latest posts instagram youtube shorts telegram reels' },
+          { route: 'about', title: 'About Hack With K', meta: 'Page · the community', keys: 'about community founder kunal gautam' },
+          { route: 'contact', title: 'Contact', meta: 'Page · reach out', keys: 'contact email telegram instagram youtube message' }
+        ].forEach(function (p) { index.push({ type: 'Page', title: p.title, meta: p.meta, hay: (p.title + ' ' + p.keys).toLowerCase(), route: p.route }); });
+        [
+          { slug: 'subnet', title: 'Subnet calculator', meta: 'Tool · Networking', keys: 'subnet calculator cidr ip mask network broadcast usable hosts' },
+          { slug: 'password', title: 'Password strength checker', meta: 'Tool · Cyber safety', keys: 'password strength checker meter entropy crack time weak strong' },
+          { slug: 'generator', title: 'Password & passphrase generator', meta: 'Tool · Cyber safety', keys: 'password passphrase generator random generate create strong' },
+          { slug: 'ip', title: 'IP inspector', meta: 'Tool · Networking', keys: 'ip inspector ipv4 ipv6 private public address class loopback' },
+          { slug: 'ports', title: 'Port lookup', meta: 'Tool · Networking', keys: 'port lookup service 443 22 80 53 common ports tcp udp' },
+          { slug: 'encoder', title: 'Base64 & URL encoder', meta: 'Tool · Web & tools', keys: 'base64 url encoder decoder encode decode percent' }
+        ].forEach(function (t) { index.push({ type: 'Tool', title: t.title, meta: t.meta, hay: (t.title + ' ' + t.keys).toLowerCase(), route: 'tools/' + t.slug }); });
+        Object.keys(articles).forEach(function (slug) {
+          var a = articles[slug];
+          index.push({ type: 'Guide', title: a.title, meta: a.tag, hay: (a.title + ' ' + a.tag).toLowerCase(), body: stripHtml(a.body).toLowerCase(), guideSlug: slug });
+        });
+        tutorialData.forEach(function (item) {
+          index.push({ type: 'Tutorial', title: item.title, meta: item.category + ' · ' + item.level + ' · ' + item.time, hay: (item.title + ' ' + item.category + ' ' + item.level).toLowerCase(), body: stripHtml(item.body).toLowerCase(), tutorialId: item.id });
+        });
+        quizSets.forEach(function (set) {
+          index.push({ type: 'Quiz', title: set.title, meta: 'Set ' + String(set.id).padStart(3, '0') + ' · ' + set.category + ' · 10 questions', hay: (set.title + ' ' + set.category + ' quiz set ' + set.id).toLowerCase(), quizId: set.id });
+        });
+        searchIndex = index;
+        return index;
+      }
+      function scoreEntry(entry, tokens) {
+        var total = 0;
+        var title = entry.title.toLowerCase();
+        for (var i = 0; i < tokens.length; i++) {
+          var token = tokens[i];
+          var inTitle = title.indexOf(token);
+          var inHay = entry.hay.indexOf(token);
+          var inBody = entry.body ? entry.body.indexOf(token) : -1;
+          if (inTitle === -1 && inHay === -1 && inBody === -1) return -1;
+          if (inTitle === 0) total += 14; else if (inTitle > 0) total += 10;
+          if (inHay !== -1) total += 3;
+          if (inBody !== -1) total += 1;
+        }
+        return total;
+      }
+      function entryState(entry) {
+        if (entry.type === 'Guide' && guideDone(entry.guideSlug)) return '✓ Completed';
+        if (entry.type === 'Tutorial' && tutorialDone(entry.tutorialId)) return '✓ Completed';
+        if (entry.type === 'Quiz') { var best = quizBest(entry.quizId); if (best >= 70) return '✓ Passed · ' + best + '%'; if (best > 0) return 'Best ' + best + '%'; }
+        return '';
+      }
+      function activateEntry(entry) {
+        closeSearch();
+        if (entry.type === 'Guide') openGuide(entry.guideSlug);
+        else if (entry.type === 'Tutorial') openTutorialById(entry.tutorialId);
+        else if (entry.type === 'Quiz') openQuizById(entry.quizId);
+        else if (entry.route) goToRoute(entry.route);
+      }
+      function appendResultRow(entry) {
+        var idx = currentResults.length;
+        currentResults.push(entry);
+        var row = document.createElement('button');
+        row.type = 'button'; row.className = 'search-result'; row.id = 'searchResult-' + idx; row.setAttribute('role', 'option'); row.setAttribute('aria-selected', 'false');
+        var tag = document.createElement('span'); tag.className = 'sr-tag'; tag.textContent = entry.type;
+        var main = document.createElement('span'); main.className = 'sr-main';
+        var title = document.createElement('span'); title.className = 'sr-title'; title.textContent = entry.title;
+        var meta = document.createElement('span'); meta.className = 'sr-meta'; meta.textContent = entry.meta;
+        main.append(title, meta);
+        row.append(tag, main);
+        var state = entryState(entry);
+        if (state) { var stateEl = document.createElement('span'); stateEl.className = 'sr-state'; stateEl.textContent = state; row.appendChild(stateEl); }
+        row.addEventListener('click', function () { activateEntry(entry); });
+        row.addEventListener('mousemove', function () { setActiveResult(idx, false); });
+        searchResults.appendChild(row);
+      }
+      function appendGroupHeading(text) {
+        var heading = document.createElement('p'); heading.className = 'search-group'; heading.textContent = text;
+        searchResults.appendChild(heading);
+      }
+      function setActiveResult(idx, scroll) {
+        activeResultIndex = idx;
+        var rows = searchResults.querySelectorAll('.search-result');
+        rows.forEach(function (row, i) { row.classList.toggle('active', i === idx); row.setAttribute('aria-selected', String(i === idx)); });
+        if (idx >= 0 && rows[idx]) {
+          searchInput.setAttribute('aria-activedescendant', rows[idx].id);
+          if (scroll !== false) rows[idx].scrollIntoView({ block: 'nearest' });
+        } else searchInput.removeAttribute('aria-activedescendant');
+      }
+      function renderSearch(query) {
+        var index = buildSearchIndex();
+        searchResults.innerHTML = '';
+        currentResults = [];
+        activeResultIndex = -1;
+        searchInput.removeAttribute('aria-activedescendant');
+        var q = (query || '').trim().toLowerCase();
+        if (!q) {
+          var counts = doneCounts();
+          var doneTotal = counts.guides + counts.tutorials + counts.quizzes;
+          var summary = document.createElement('p'); summary.className = 'search-summary';
+          summary.innerHTML = 'One search across <strong>' + totalGuides + ' guides</strong>, <strong>' + totalTutorials + ' tutorials</strong>, <strong>' + totalQuizzes + ' quiz sets</strong> and <strong>6 tools</strong>.' + (doneTotal ? ' You have completed <strong>' + doneTotal + ' of ' + totalItems + '</strong> items so far.' : '');
+          searchResults.appendChild(summary);
+          appendGroupHeading('Pages');
+          index.filter(function (e) { return e.type === 'Page'; }).forEach(appendResultRow);
+          appendGroupHeading('Tools');
+          index.filter(function (e) { return e.type === 'Tool'; }).forEach(appendResultRow);
+          return;
+        }
+        var tokens = q.split(/\s+/);
+        var scored = [];
+        index.forEach(function (entry) { var s = scoreEntry(entry, tokens); if (s >= 0) scored.push({ entry: entry, score: s }); });
+        var typeOrder = { Guide: 0, Tutorial: 1, Quiz: 2, Tool: 3, Page: 4 };
+        scored.sort(function (a, b) { return (b.score - a.score) || (typeOrder[a.entry.type] - typeOrder[b.entry.type]) || a.entry.title.localeCompare(b.entry.title); });
+        if (!scored.length) {
+          var empty = document.createElement('p'); empty.className = 'search-empty';
+          empty.textContent = 'No matches for “' + query.trim() + '”. Try a shorter word — like “dns”, “linux”, “ports” or “password”.';
+          searchResults.appendChild(empty);
+          return;
+        }
+        scored.slice(0, 30).forEach(function (item) { appendResultRow(item.entry); });
+      }
+      function openSearch() {
+        searchLastFocus = document.activeElement;
+        renderSearch(searchInput.value);
+        searchModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        searchInput.focus();
+        searchInput.select();
+      }
+      function closeSearch() {
+        if (!searchModal.classList.contains('open')) return;
+        searchModal.classList.remove('open');
+        document.body.style.overflow = '';
+        if (searchLastFocus && searchLastFocus.focus) searchLastFocus.focus();
+      }
+      if (searchOpenBtn) searchOpenBtn.addEventListener('click', openSearch);
+      if (searchCloseBtn) searchCloseBtn.addEventListener('click', closeSearch);
+      searchModal.addEventListener('click', function (event) { if (event.target === searchModal) closeSearch(); });
+      searchInput.addEventListener('input', function () { renderSearch(searchInput.value); });
+      searchInput.addEventListener('keydown', function (event) {
+        var rows = searchResults.querySelectorAll('.search-result');
+        if (event.key === 'ArrowDown') { event.preventDefault(); if (rows.length) setActiveResult(Math.min(activeResultIndex + 1, rows.length - 1)); }
+        else if (event.key === 'ArrowUp') { event.preventDefault(); if (rows.length) setActiveResult(Math.max(activeResultIndex - 1, 0)); }
+        else if (event.key === 'Enter') { event.preventDefault(); var target = currentResults[activeResultIndex >= 0 ? activeResultIndex : 0]; if (target) activateEntry(target); }
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && searchModal.classList.contains('open')) closeSearch();
+        if ((event.ctrlKey || event.metaKey) && (event.key === 'k' || event.key === 'K')) {
+          event.preventDefault();
+          if (searchModal.classList.contains('open')) closeSearch(); else openSearch();
+        }
+      });
+
+      renderProgress();
+      watchGrid(tutorialGrid, applyTutorialBadges);
+      watchGrid(quizSetGrid, applyQuizBadges);
 
       var mobileMenu=document.getElementById('mobileMenu'); var mobileLinks=document.getElementById('mobileLinks');
       mobileMenu.addEventListener('click', function(){ var open=!mobileLinks.classList.contains('open'); mobileLinks.classList.toggle('open',open); mobileMenu.setAttribute('aria-expanded',String(open)); });
