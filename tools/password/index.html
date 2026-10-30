@@ -28,6 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
   <title>Hack With K — Ethical Hacking From Zero</title>
   <style>
     :root {
@@ -464,13 +465,17 @@
     .certificate-form-row { display: flex; gap: 10px; }
     .certificate-name { flex: 1; min-width: 0; min-height: 46px; padding: 0 13px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 9px; }
     .certificate-error { margin: 8px 0 0 !important; color: #b63333 !important; font-size: .82rem; }
-    .certificate-preview { margin-top: 28px; padding: clamp(24px, 6vw, 54px); text-align: center; color: #e9fff9; background: #071b19; border: 2px solid #dff52b; outline: 1px solid #3d756d; outline-offset: -10px; }
-    .certificate-preview .certificate-kicker { color: #dff52b; font: 600 .72rem/1.4 "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
-    .certificate-preview h3 { margin: 18px 0 10px; font-size: clamp(1.8rem, 5vw, 3.4rem); line-height: 1; }
-    .certificate-preview .certificate-recipient { display: block; margin: 24px 0 12px; color: #dff52b; font-size: clamp(1.8rem, 5vw, 3.1rem); font-weight: 800; overflow-wrap: anywhere; }
-    .certificate-preview p { color: #b9d8d1; }
-    .certificate-details { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 22px; margin: 24px 0; font: 500 .75rem/1.5 "JetBrains Mono", monospace; }
-    .certificate-download { margin-top: 16px; }
+    .certificate-preview { margin-top: 28px; }
+    .certificate-sheet { position: relative; width: 100%; max-width: 920px; margin: 0 auto; aspect-ratio: 3/2; container-type: inline-size; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 18px 50px rgba(0,0,0,.35); }
+    .certificate-sheet img { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .cert-ov { position: absolute; transform: translate(-50%,-50%); text-align: center; white-space: nowrap; line-height: 1.15; }
+    .cert-name { left: 52.08%; top: 48.8%; font-family: "Playfair Display", Georgia, serif; font-weight: 700; font-size: 5.7cqw; color: #101010; max-width: 48cqw; overflow: hidden; }
+    .cert-pill { left: 62.4%; top: 57.1%; background: #eaf3f0; border-radius: 2cqw; padding: .85cqw 2.4cqw; min-width: 13cqw; max-width: 34cqw; overflow: hidden; }
+    .cert-pill span { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 2.6cqw; color: #03412b; }
+    .cert-date { left: 33.9%; top: 80.7%; font-family: "Montserrat", sans-serif; font-weight: 600; font-size: 1.95cqw; color: #1a1a1a; }
+    .cert-sig { left: 86.3%; top: 78.4%; font-family: "Great Vibes", cursive; font-size: 3.6cqw; color: #111; max-width: 20cqw; overflow: hidden; }
+    .certificate-actions { margin-top: 16px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
     .empty-library { grid-column: 1 / -1; padding: 34px; color: var(--muted); text-align: center; border: 1px dashed var(--line); }
     @media (max-width: 900px) { .quiz-set-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 640px) { .quiz-set-grid { grid-template-columns: 1fr; } .certificate-form-row { flex-direction: column; } .certificate-form-row .button { width: 100%; } }
@@ -810,7 +815,6 @@
       .cta-band { padding: 24px 20px; }
       .path-panel { padding: 22px 18px; }
       .contact-channel { grid-template-columns: 40px minmax(0, 1fr) auto; gap: 10px; }
-      .certificate-details { gap: 6px 12px; }
       .modal { padding: 8px; }
     }
 
@@ -2621,21 +2625,70 @@
       function xmlEscape(value){return String(value).replace(/[<>&\"']/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','\"':'&quot;',"'":'&apos;'}[c];});}
       function safeFileName(value){return value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,48)||'certificate';}
       function certificateDate(){return new Intl.DateTimeFormat(undefined,{year:'numeric',month:'long',day:'numeric'}).format(new Date());}
+      var activeCertEls = null;
+      function certRoundRect(x,rx,ry,rw,rh,r){ x.beginPath(); x.moveTo(rx+r,ry); x.arcTo(rx+rw,ry,rx+rw,ry+rh,r); x.arcTo(rx+rw,ry+rh,rx,ry+rh,r); x.arcTo(rx,ry+rh,rx,ry,r); x.arcTo(rx,ry,rx+rw,ry,r); x.closePath(); }
       function buildCertificate(name,result){
-        result.querySelector('.certificate-preview') && result.querySelector('.certificate-preview').remove(); result.querySelector('.certificate-download') && result.querySelector('.certificate-download').remove();
+        result.querySelector('.certificate-preview') && result.querySelector('.certificate-preview').remove(); result.querySelector('.certificate-actions') && result.querySelector('.certificate-actions').remove();
         var preview=document.createElement('div'); preview.className='certificate-preview';
-        var kicker=document.createElement('span'); kicker.className='certificate-kicker'; kicker.textContent='Hack With K · Certificate of Achievement';
-        var title=document.createElement('h3'); title.textContent='Cybersecurity Quiz Set Completed';
-        var line=document.createElement('p'); line.textContent='This certifies that';
-        var recipient=document.createElement('strong'); recipient.className='certificate-recipient'; recipient.textContent=name;
-        var statement=document.createElement('p'); statement.textContent='successfully completed “'+activeSet.title+'” and demonstrated 70%+ mastery.';
-        var details=document.createElement('div'); details.className='certificate-details'; var set=document.createElement('span'); set.textContent='SET '+String(activeSet.id).padStart(3,'0'); var scoreLine=document.createElement('span'); scoreLine.textContent='SCORE '+score+'/10'; var date=document.createElement('span'); date.textContent=certificateDate(); details.append(set,scoreLine,date); preview.append(kicker,title,line,recipient,statement,details);
-        var download=document.createElement('button'); download.type='button'; download.className='button certificate-download'; download.textContent='Download certificate (SVG)';
-        download.addEventListener('click',function(){
-          var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="990" viewBox="0 0 1400 990"><rect width="1400" height="990" fill="#071b19"/><rect x="38" y="38" width="1324" height="914" fill="none" stroke="#dff52b" stroke-width="5"/><rect x="58" y="58" width="1284" height="874" fill="none" stroke="#3d756d" stroke-width="2"/><text x="700" y="155" text-anchor="middle" fill="#dff52b" font-family="monospace" font-size="27" letter-spacing="5">HACK WITH K · CERTIFICATE OF ACHIEVEMENT</text><text x="700" y="270" text-anchor="middle" fill="#e9fff9" font-family="sans-serif" font-size="58" font-weight="700">Cybersecurity Quiz Set Completed</text><text x="700" y="370" text-anchor="middle" fill="#b9d8d1" font-family="sans-serif" font-size="28">This certifies that</text><text x="700" y="485" text-anchor="middle" fill="#dff52b" font-family="sans-serif" font-size="68" font-weight="800">'+xmlEscape(name)+'</text><text x="700" y="575" text-anchor="middle" fill="#b9d8d1" font-family="sans-serif" font-size="25">successfully completed</text><text x="700" y="625" text-anchor="middle" fill="#e9fff9" font-family="sans-serif" font-size="35" font-weight="700">'+xmlEscape(activeSet.title)+'</text><text x="700" y="690" text-anchor="middle" fill="#b9d8d1" font-family="sans-serif" font-size="24">and demonstrated 70%+ mastery.</text><text x="300" y="815" text-anchor="middle" fill="#e9fff9" font-family="monospace" font-size="25">SET '+String(activeSet.id).padStart(3,'0')+'</text><text x="700" y="815" text-anchor="middle" fill="#e9fff9" font-family="monospace" font-size="25">SCORE '+score+'/10</text><text x="1100" y="815" text-anchor="middle" fill="#e9fff9" font-family="monospace" font-size="25">'+xmlEscape(certificateDate())+'</text><text x="700" y="900" text-anchor="middle" fill="#75f2d5" font-family="monospace" font-size="22">LEARN · TEST · SECURE</text></svg>';
-          var url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'})); var link=document.createElement('a'); link.href=url; link.download='hack-with-k-'+safeFileName(name)+'-set-'+activeSet.id+'.svg'; document.body.appendChild(link); link.click(); link.remove(); setTimeout(function(){URL.revokeObjectURL(url);},1000);
-        });
-        result.append(preview,download); preview.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+        var sheet=document.createElement('div'); sheet.className='certificate-sheet';
+        var img=document.createElement('img'); img.src='/certificate-template.png'; img.alt='Hack With K certificate of appreciation';
+        var nameEl=document.createElement('div'); nameEl.className='cert-ov cert-name'; nameEl.textContent=name;
+        var pill=document.createElement('div'); pill.className='cert-ov cert-pill';
+        var pillText=document.createElement('span'); pillText.textContent=activeSet.title; pill.appendChild(pillText);
+        var dateEl=document.createElement('div'); dateEl.className='cert-ov cert-date'; dateEl.textContent=certificateDate();
+        var sigEl=document.createElement('div'); sigEl.className='cert-ov cert-sig'; sigEl.textContent='KUNAL GAUTAM';
+        sheet.append(img,nameEl,pill,dateEl,sigEl); preview.appendChild(sheet);
+        var actions=document.createElement('div'); actions.className='certificate-actions';
+        var download=document.createElement('button'); download.type='button'; download.className='button'; download.textContent='Download certificate (PNG)';
+        download.addEventListener('click',function(){ downloadCertificatePNG(name); });
+        actions.appendChild(download); result.append(preview,actions);
+        activeCertEls={nameEl:nameEl,pillText:pillText,dateEl:dateEl,sigEl:sigEl,sheet:sheet};
+        function fit(el,minPx){ var guard=80; function px(){ return parseFloat(getComputedStyle(el).fontSize); } while(el.scrollWidth>el.clientWidth+1 && px()>minPx && guard-->0){ el.style.fontSize=(px()-1)+'px'; } }
+        function fitAll(){ fit(nameEl,12); fit(pillText,9); fit(sigEl,12); }
+        if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fitAll); }
+        setTimeout(fitAll,1200);
+        preview.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+      }
+      function downloadCertificatePNG(name){
+        if(!activeCertEls) return;
+        var S=1536,H=1024;
+        var img=new Image(); img.src='/certificate-template.png';
+        img.onerror=function(){ alert('Could not load the certificate template. Check your connection and try again.'); };
+        img.onload=function(){
+          function done(){
+            var c=document.createElement('canvas'); c.width=S; c.height=H;
+            var x=c.getContext('2d'); x.drawImage(img,0,0,S,H);
+            x.textAlign='center'; x.textBaseline='middle';
+            var sheetW=activeCertEls.sheet.getBoundingClientRect().width||900;
+            var k=S/sheetW;
+            function fpx(el){ return parseFloat(getComputedStyle(el).fontSize)*k; }
+            x.fillStyle='#101010'; x.font='700 '+fpx(activeCertEls.nameEl)+'px "Playfair Display", Georgia, serif';
+            x.fillText(name,0.5208*S,0.488*H);
+            var tp=fpx(activeCertEls.pillText);
+            x.font='700 '+tp+'px Montserrat, sans-serif';
+            var tw=x.measureText(activeSet.title).width;
+            var pw=Math.max(tw+0.048*S,0.13*S), ph=tp*1.15+0.017*S, pr=0.02*S;
+            var pcx=0.624*S, pcy=0.571*H;
+            x.fillStyle='#eaf3f0'; certRoundRect(x,pcx-pw/2,pcy-ph/2,pw,ph,pr); x.fill();
+            x.fillStyle='#03412b'; x.fillText(activeSet.title,pcx,pcy+tp*0.03);
+            x.fillStyle='#1a1a1a'; x.font='600 '+fpx(activeCertEls.dateEl)+'px Montserrat, sans-serif';
+            x.fillText(certificateDate(),0.339*S,0.807*H);
+            x.fillStyle='#111111'; x.font=fpx(activeCertEls.sigEl)+'px "Great Vibes", cursive';
+            x.fillText('KUNAL GAUTAM',0.863*S,0.784*H);
+            var a=document.createElement('a');
+            a.href=c.toDataURL('image/png');
+            a.download='hack-with-k-'+safeFileName(name)+'-set-'+activeSet.id+'.png';
+            document.body.appendChild(a); a.click(); a.remove();
+          }
+          if(document.fonts){
+            Promise.all([
+              document.fonts.load('700 80px "Playfair Display"'),
+              document.fonts.load('700 40px "Montserrat"'),
+              document.fonts.load('600 30px "Montserrat"'),
+              document.fonts.load('400 55px "Great Vibes"')
+            ]).then(done,done);
+          } else { done(); }
+        };
       }
       function renderQuizResult(){
         var result=document.createElement('div'); result.className='quiz-result'; var pct=score*10;
