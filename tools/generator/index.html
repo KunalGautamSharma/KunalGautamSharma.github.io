@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
   <title>Hack With K — Ethical Hacking From Zero</title>
   <style>
     :root {
@@ -473,7 +473,6 @@
     .cert-pill { left: 62.4%; top: 57.1%; background: #eaf3f0; border-radius: 2cqw; padding: .85cqw 2.4cqw; min-width: 13cqw; max-width: 34cqw; overflow: hidden; }
     .cert-pill span { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 2.6cqw; color: #03412b; }
     .cert-date { left: 33.9%; top: 80.7%; font-family: "Montserrat", sans-serif; font-weight: 600; font-size: 1.95cqw; color: #1a1a1a; }
-    .cert-sig { left: 86.3%; top: 78.4%; font-family: "Great Vibes", cursive; font-size: 3.6cqw; color: #111; max-width: 20cqw; overflow: hidden; }
     .certificate-actions { margin-top: 16px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
     .empty-library { grid-column: 1 / -1; padding: 34px; color: var(--muted); text-align: center; border: 1px dashed var(--line); }
@@ -815,6 +814,7 @@
       .cta-band { padding: 24px 20px; }
       .path-panel { padding: 22px 18px; }
       .contact-channel { grid-template-columns: 40px minmax(0, 1fr) auto; gap: 10px; }
+      .certificate-details { gap: 6px 12px; }
       .modal { padding: 8px; }
     }
 
@@ -2624,7 +2624,7 @@
       }
       function xmlEscape(value){return String(value).replace(/[<>&\"']/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','\"':'&quot;',"'":'&apos;'}[c];});}
       function safeFileName(value){return value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,48)||'certificate';}
-      function certificateDate(){return new Intl.DateTimeFormat(undefined,{year:'numeric',month:'long',day:'numeric'}).format(new Date());}
+      function certificateDate(){var d=new Date();function p(n){return String(n).padStart(2,'0');}return p(d.getDate())+'/'+p(d.getMonth()+1)+'/'+d.getFullYear();}
       var activeCertEls = null;
       function certRoundRect(x,rx,ry,rw,rh,r){ x.beginPath(); x.moveTo(rx+r,ry); x.arcTo(rx+rw,ry,rx+rw,ry+rh,r); x.arcTo(rx+rw,ry+rh,rx,ry+rh,r); x.arcTo(rx,ry+rh,rx,ry,r); x.arcTo(rx,ry,rx+rw,ry,r); x.closePath(); }
       function buildCertificate(name,result){
@@ -2636,15 +2636,14 @@
         var pill=document.createElement('div'); pill.className='cert-ov cert-pill';
         var pillText=document.createElement('span'); pillText.textContent=activeSet.title; pill.appendChild(pillText);
         var dateEl=document.createElement('div'); dateEl.className='cert-ov cert-date'; dateEl.textContent=certificateDate();
-        var sigEl=document.createElement('div'); sigEl.className='cert-ov cert-sig'; sigEl.textContent='KUNAL GAUTAM';
-        sheet.append(img,nameEl,pill,dateEl,sigEl); preview.appendChild(sheet);
+        sheet.append(img,nameEl,pill,dateEl); preview.appendChild(sheet);
         var actions=document.createElement('div'); actions.className='certificate-actions';
         var download=document.createElement('button'); download.type='button'; download.className='button'; download.textContent='Download certificate (PNG)';
         download.addEventListener('click',function(){ downloadCertificatePNG(name); });
         actions.appendChild(download); result.append(preview,actions);
-        activeCertEls={nameEl:nameEl,pillText:pillText,dateEl:dateEl,sigEl:sigEl,sheet:sheet};
+        activeCertEls={nameEl:nameEl,pillText:pillText,dateEl:dateEl,sheet:sheet};
         function fit(el,minPx){ var guard=80; function px(){ return parseFloat(getComputedStyle(el).fontSize); } while(el.scrollWidth>el.clientWidth+1 && px()>minPx && guard-->0){ el.style.fontSize=(px()-1)+'px'; } }
-        function fitAll(){ fit(nameEl,12); fit(pillText,9); fit(sigEl,12); }
+        function fitAll(){ fit(nameEl,12); fit(pillText,9); }
         if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fitAll); }
         setTimeout(fitAll,1200);
         preview.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
@@ -2673,8 +2672,6 @@
             x.fillStyle='#03412b'; x.fillText(activeSet.title,pcx,pcy+tp*0.03);
             x.fillStyle='#1a1a1a'; x.font='600 '+fpx(activeCertEls.dateEl)+'px Montserrat, sans-serif';
             x.fillText(certificateDate(),0.339*S,0.807*H);
-            x.fillStyle='#111111'; x.font=fpx(activeCertEls.sigEl)+'px "Great Vibes", cursive';
-            x.fillText('KUNAL GAUTAM',0.863*S,0.784*H);
             var a=document.createElement('a');
             a.href=c.toDataURL('image/png');
             a.download='hack-with-k-'+safeFileName(name)+'-set-'+activeSet.id+'.png';
@@ -2684,8 +2681,7 @@
             Promise.all([
               document.fonts.load('700 80px "Playfair Display"'),
               document.fonts.load('700 40px "Montserrat"'),
-              document.fonts.load('600 30px "Montserrat"'),
-              document.fonts.load('400 55px "Great Vibes"')
+              document.fonts.load('600 30px "Montserrat"')
             ]).then(done,done);
           } else { done(); }
         };
