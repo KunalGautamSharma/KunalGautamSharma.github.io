@@ -1007,6 +1007,7 @@
   </style>
 </head>
 <body>
+<canvas id="bg-particles" aria-hidden="true"></canvas>
   <a class="skip" href="#content">Skip to content</a>
   <header class="topbar" id="topbar">
     <nav class="nav shell" aria-label="Primary navigation">
@@ -2034,6 +2035,8 @@
  .shop-product-h .book-preview figure{flex:0 0 82%;scroll-snap-align:start}
 }
 .shop-product-h .book-preview img{cursor:zoom-in}
+
+#bg-particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
 </style>
 <article class="product-card reveal shop-product-h">
             <div class="product-cover" style="padding:0;overflow:hidden">
@@ -3718,5 +3721,72 @@ var activeCertEls = null;
       if (standalone) root.classList.add('display-standalone');
     }());
   </script>
+
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var canvas = document.getElementById('bg-particles');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W = 0, H = 0, parts = [];
+  var COLORS = [[0,229,255],[0,255,238],[56,189,248],[45,212,191],[129,140,248]];
+  var sprites = COLORS.map(function(c){
+    var s = 64, cv = document.createElement('canvas');
+    cv.width = s; cv.height = s;
+    var x = cv.getContext('2d');
+    var g = x.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);
+    g.addColorStop(0,'rgba(255,255,255,0.95)');
+    g.addColorStop(0.22,'rgba('+c[0]+','+c[1]+','+c[2]+',0.85)');
+    g.addColorStop(0.55,'rgba('+c[0]+','+c[1]+','+c[2]+',0.28)');
+    g.addColorStop(1,'rgba('+c[0]+','+c[1]+','+c[2]+',0)');
+    x.fillStyle = g; x.fillRect(0,0,s,s);
+    return cv;
+  });
+  function spawn(anywhere){
+    var ci = Math.random() < 0.07 ? 4 : (Math.random()*4|0);
+    return {
+      x: Math.random()*W,
+      y: anywhere ? Math.random()*H : H + 20,
+      r: 2 + Math.random()*7,
+      vy: -(0.12 + Math.random()*0.4),
+      vx: (Math.random()-0.5)*0.18,
+      ci: ci,
+      a: 0.25 + Math.random()*0.5,
+      tw: Math.random()*6.283,
+      tws: 0.008 + Math.random()*0.025,
+      sw: Math.random()*6.283,
+      sws: 0.003 + Math.random()*0.009
+    };
+  }
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    var n = Math.max(28, Math.min(85, (W*H/26000)|0));
+    while (parts.length < n) parts.push(spawn(true));
+    parts.length = n;
+  }
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    for (var i=0;i<parts.length;i++){
+      var p = parts[i];
+      p.sw += p.sws; p.tw += p.tws;
+      p.x += p.vx + Math.cos(p.sw)*0.12;
+      p.y += p.vy;
+      if (p.y < -24){ parts[i] = spawn(false); continue; }
+      if (p.x < -24) p.x = W+24; else if (p.x > W+24) p.x = -24;
+      var al = p.a * (0.55 + 0.45*Math.sin(p.tw));
+      var sz = p.r*2.4;
+      ctx.globalAlpha = al < 0 ? 0 : al;
+      ctx.drawImage(sprites[p.ci], p.x-sz/2, p.y-sz/2, sz, sz);
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(tick);
+  }
+  var rt;
+  window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(resize, 200); });
+  resize();
+  requestAnimationFrame(tick);
+})();
+</script>
 </body>
 </html>
