@@ -3730,14 +3730,15 @@ var activeCertEls = null;
   var ctx = canvas.getContext('2d');
   var W = 0, H = 0, parts = [];
   var COLORS = [[0,229,255],[0,255,238],[56,189,248],[45,212,191],[129,140,248]];
+  var LINK = 140, LINK2 = LINK*LINK;
   var sprites = COLORS.map(function(c){
     var s = 64, cv = document.createElement('canvas');
     cv.width = s; cv.height = s;
     var x = cv.getContext('2d');
     var g = x.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);
     g.addColorStop(0,'rgba(255,255,255,0.95)');
-    g.addColorStop(0.22,'rgba('+c[0]+','+c[1]+','+c[2]+',0.85)');
-    g.addColorStop(0.55,'rgba('+c[0]+','+c[1]+','+c[2]+',0.28)');
+    g.addColorStop(0.22,'rgba('+c[0]+','+c[1]+','+c[2]+',0.9)');
+    g.addColorStop(0.55,'rgba('+c[0]+','+c[1]+','+c[2]+',0.3)');
     g.addColorStop(1,'rgba('+c[0]+','+c[1]+','+c[2]+',0)');
     x.fillStyle = g; x.fillRect(0,0,s,s);
     return cv;
@@ -3747,11 +3748,11 @@ var activeCertEls = null;
     return {
       x: Math.random()*W,
       y: anywhere ? Math.random()*H : H + 20,
-      r: 2 + Math.random()*7,
-      vy: -(0.12 + Math.random()*0.4),
-      vx: (Math.random()-0.5)*0.18,
+      r: 2 + Math.random()*6,
+      vy: -(0.1 + Math.random()*0.32),
+      vx: (Math.random()-0.5)*0.16,
       ci: ci,
-      a: 0.25 + Math.random()*0.5,
+      a: 0.3 + Math.random()*0.5,
       tw: Math.random()*6.283,
       tws: 0.008 + Math.random()*0.025,
       sw: Math.random()*6.283,
@@ -3761,13 +3762,27 @@ var activeCertEls = null;
   function resize(){
     W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
-    var n = Math.max(28, Math.min(85, (W*H/26000)|0));
+    var n = Math.max(24, Math.min(60, (W*H/34000)|0));
     while (parts.length < n) parts.push(spawn(true));
     parts.length = n;
   }
   function tick(){
     ctx.clearRect(0,0,W,H);
-    for (var i=0;i<parts.length;i++){
+    var i, j, a, b, dx, dy, d2, op;
+    ctx.lineWidth = 1;
+    for (i=0;i<parts.length;i++){
+      a = parts[i];
+      for (j=i+1;j<parts.length;j++){
+        b = parts[j];
+        dx = a.x-b.x; dy = a.y-b.y; d2 = dx*dx+dy*dy;
+        if (d2 < LINK2){
+          op = (1-Math.sqrt(d2)/LINK)*0.32;
+          ctx.strokeStyle = 'rgba(0,229,255,'+op.toFixed(3)+')';
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+    for (i=0;i<parts.length;i++){
       var p = parts[i];
       p.sw += p.sws; p.tw += p.tws;
       p.x += p.vx + Math.cos(p.sw)*0.12;
