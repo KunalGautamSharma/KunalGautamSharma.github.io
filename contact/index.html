@@ -1004,7 +1004,91 @@
       .nav-menu { border: 1px solid CanvasText; box-shadow: none; }
       .nav-group-btn.has-current::after { background: Highlight; }
     }
-  </style>
+  
+.flow{
+    --bg:#081c17; --teal:#4fd1b5; --teal-d:#6fa89a; --lime:#e2ff2e; --amber:#ffb454;
+    --ink:#04100d; --text:#cfeee6; --hot:#ffb454;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    position:relative;width:100%;max-width:980px;border-radius:24px;overflow:hidden;color:var(--text);
+    background:
+      radial-gradient(ellipse 70% 60% at 18% 18%,rgba(40,150,120,.26),transparent 60%),
+      radial-gradient(ellipse 50% 50% at 86% 84%,rgba(226,255,46,.09),transparent 60%),
+      var(--bg);
+    border:1px solid rgba(94,234,200,.18);
+    box-shadow:0 40px 90px -40px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05);
+    font-family:inherit;
+  }
+  .flow *{box-sizing:border-box}
+
+  /* top bar: stages + status */
+  .flow .fl-top{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(94,234,200,.1)}
+  .flow .fl-steps{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .flow .chip{position:relative;overflow:hidden;display:flex;align-items:center;gap:8px;padding:7px 13px 7px 8px;border-radius:999px;border:1px solid rgba(94,234,200,.2);background:rgba(8,28,23,.6);color:var(--teal-d);font:500 12.5px/1 var(--mono);cursor:pointer;transition:color .25s,border-color .25s,background .25s}
+  .flow .chip b{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(94,234,200,.12);font-weight:600;font-size:11px;transition:background .25s,color .25s}
+  .flow .chip::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:calc(var(--p,0)*100%);background:var(--lime)}
+  .flow .chip:hover{border-color:rgba(226,255,46,.5);color:var(--text)}
+  .flow .chip.active{color:var(--lime);border-color:rgba(226,255,46,.55);background:rgba(226,255,46,.07)}
+  .flow .chip.active b{background:var(--lime);color:var(--ink)}
+  .flow .chip.done{color:var(--teal)}
+  .flow .chip.done b{background:rgba(79,209,181,.22);font-size:0}
+  .flow .chip.done b::before{content:"\2713";font-size:11px}
+  .flow .fl-right{display:flex;align-items:center;gap:10px}
+  .flow .fl-badge{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;font:500 12px/1 var(--mono);color:var(--amber);background:rgba(255,180,84,.08);border:1px solid rgba(255,180,84,.3);transition:all .5s}
+  .flow .fl-badge i{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
+  .flow.secure .fl-badge{color:var(--lime);background:rgba(226,255,46,.08);border-color:rgba(226,255,46,.4)}
+  .flow .fl-pause{padding:7px 12px;border-radius:999px;border:1px solid rgba(94,234,200,.25);background:transparent;color:var(--teal-d);font:500 12px/1 var(--mono);cursor:pointer}
+  .flow .fl-pause:hover{color:var(--text);border-color:rgba(94,234,200,.5)}
+  .flow button:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+
+  /* diagram */
+  .flow .fl-stage{overflow-x:auto;scrollbar-width:thin}
+  .flow .fl-canvas{position:relative;min-width:720px}
+  .flow svg{display:block;width:100%;height:auto;text-rendering:geometricPrecision}
+  .flow .fl-tag{position:absolute;display:flex;align-items:center;gap:8px;font:400 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal-d)}
+  .flow .fl-tag i{width:7px;height:7px;border-radius:50%;background:#2fe0b8;box-shadow:0 0 8px #2fe0b8}
+  .flow .fl-tag.tl{left:18px;top:16px}
+  .flow .fl-tag.br{right:18px;bottom:14px}
+
+  .flow .edge{fill:none;stroke:rgba(79,209,181,.5);stroke-width:1.4;stroke-dasharray:2 7;stroke-linecap:round;transition:stroke .5s}
+  .flow .edge.sec{stroke:rgba(226,255,46,.38);stroke-dasharray:none;stroke-width:1.2}
+  .flow .edge.hot{stroke:var(--hot);stroke-width:2.2;stroke-dasharray:3 7;filter:url(#fl-glow);animation:fl-flow .55s linear infinite}
+  .flow .edge.hot.rev{animation-direction:reverse}
+  @keyframes fl-flow{to{stroke-dashoffset:-20}}
+
+  .flow .ring{fill:#0b241e;stroke:var(--teal);stroke-width:1.6;transition:stroke .4s}
+  .flow .dest .ring{stroke:rgba(226,255,46,.7)}
+  .flow .icon{fill:none;stroke:var(--teal);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .flow .dest .icon{stroke:var(--lime)}
+  .flow .halo{fill:none;stroke:var(--lime);stroke-width:1.6;opacity:0;transform-box:fill-box;transform-origin:center}
+  .flow .nm{fill:#d8f5ec;font-size:13px;font-weight:600}
+  .flow .sb{fill:var(--teal-d);font-size:11px;font-family:var(--mono)}
+  .flow .lockb{opacity:0;transition:opacity .6s}
+  .flow.secure .lockb{opacity:1}
+  .flow .note{fill:var(--lime);font:500 11px var(--mono);opacity:0;text-anchor:middle}
+  .flow .done-b{opacity:0;transition:opacity .5s}
+  .flow .done-b.on{opacity:1}
+
+  /* bottom: explanation + packet inspector */
+  .flow .fl-info{display:grid;grid-template-columns:1fr 1.15fr;gap:20px 28px;padding:18px 20px 22px;border-top:1px solid rgba(94,234,200,.1);background:rgba(4,16,13,.35)}
+  .flow .fl-desc h3{margin:0;font-size:17px;font-weight:600;color:#f1fff9;letter-spacing:-.01em}
+  .flow .fl-desc p{margin:8px 0 0;font-size:14px;line-height:1.6;color:var(--text);opacity:.85;max-width:46ch}
+  .flow .fl-pkt{margin:0;display:grid;grid-template-columns:auto 1fr;gap:7px 16px;font:400 12.5px/1.45 var(--mono);align-content:start}
+  .flow .fl-pkt dt{color:var(--teal-d)}
+  .flow .fl-pkt dd{margin:0;color:var(--text);min-width:0;word-break:break-word}
+  .flow .fl-pkt dd.pay{color:var(--amber);min-height:2.9em}
+  .flow .fl-pkt dd.pay.enc{color:var(--lime)}
+  @media (max-width:720px){.flow .fl-info{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){.flow .edge.hot{animation:none}}
+
+/* How Data Travels widget on homepage */
+.route-view[data-route-view="home"] .hero-grid { grid-template-columns: 1fr; max-width: 1080px; }
+.route-view[data-route-view="home"] .hero-copy { text-align: center; margin: 0 auto; max-width: 760px; }
+.route-view[data-route-view="home"] .hero-actions { justify-content: center; }
+.route-view[data-route-view="home"] .hero-note { justify-content: center; }
+.hero-widget { margin-top: 36px; }
+.hero-widget .flow { margin: 0 auto; }
+
+</style>
 </head>
 <body>
 <canvas id="bg-particles" aria-hidden="true"></canvas>
@@ -1086,32 +1170,47 @@
           </div>
           <div class="hero-note"><span class="pulse" aria-hidden="true"></span><span>Linux • Networking • Pentesting</span></div>
         </div>
-        <div class="hero-art reveal">
-          <div class="data-flow" role="img" aria-label="Animated network showing encrypted data packets travelling between connected devices">
-            <svg class="network-map" viewBox="0 0 600 530" preserveAspectRatio="none" aria-hidden="true">
-              <path class="network-line active" d="M55 90 C160 20 250 170 390 105 C460 72 505 120 560 205" />
-              <path class="network-line active" d="M90 390 C200 330 260 450 360 340 C420 275 480 300 545 235" />
-              <path class="network-line active" d="M85 245 C180 280 265 205 345 245 C430 288 475 215 550 155" />
-              <path class="network-line" d="M55 90 L85 245 L90 390 M390 105 L345 245 L360 340 M560 205 L550 155 M345 245 L545 235" />
-              <circle class="network-halo" cx="345" cy="245" r="22" />
-              <circle class="network-node" cx="55" cy="90" r="9" /><circle class="network-node" cx="85" cy="245" r="8" /><circle class="network-node" cx="90" cy="390" r="9" />
-              <circle class="network-node" cx="390" cy="105" r="8" /><circle class="network-node core" cx="345" cy="245" r="11" /><circle class="network-node" cx="360" cy="340" r="8" />
-              <circle class="network-node" cx="560" cy="205" r="9" /><circle class="network-node" cx="550" cy="155" r="7" /><circle class="network-node" cx="545" cy="235" r="7" />
-              <rect class="data-packet" x="-5" y="-5" width="10" height="10" rx="2"><animateMotion dur="4.8s" repeatCount="indefinite" path="M55 90 C160 20 250 170 390 105 C460 72 505 120 560 205" /></rect>
-              <rect class="data-packet" x="-5" y="-5" width="10" height="10" rx="2"><animateMotion dur="5.4s" begin="-1.1s" repeatCount="indefinite" path="M90 390 C200 330 260 450 360 340 C420 275 480 300 545 235" /></rect>
-              <rect class="data-packet" x="-5" y="-5" width="10" height="10" rx="2"><animateMotion dur="4.2s" begin="-2s" repeatCount="indefinite" path="M85 245 C180 280 265 205 345 245 C430 288 475 215 550 155" /></rect>
-            </svg>
-            <span class="flow-label label-source">Client packets</span>
-            <span class="flow-status">TLS 1.3 · ENCRYPTED</span>
-            <span class="flow-label label-secure">Secure destination</span>
-          </div>
-          <div class="terminal-card" aria-hidden="true">
-            <div class="terminal-dots"><span></span><span></span><span></span></div>
-            <span class="code-line">$ understand <strong>the system</strong></span>
-            <span class="code-line">$ test <strong>with permission</strong></span>
-            <span class="code-line">$ secure <strong>what matters</strong></span>
-          </div>
-        </div>
+        <div class="hero-widget">
+<!-- Change data-site to your real domain -->
+<section class="flow" id="flow" data-site="hackwithk.me" aria-label="Animated walkthrough of how a web request travels across the internet">
+  <header class="fl-top">
+    <ol class="fl-steps">
+      <li><button type="button" class="chip" data-stage="0"><b>1</b>Look up</button></li>
+      <li><button type="button" class="chip" data-stage="1"><b>2</b>Connect</button></li>
+      <li><button type="button" class="chip" data-stage="2"><b>3</b>Encrypt</button></li>
+      <li><button type="button" class="chip" data-stage="3"><b>4</b>Request</button></li>
+      <li><button type="button" class="chip" data-stage="4"><b>5</b>Response</button></li>
+    </ol>
+    <div class="fl-right">
+      <div class="fl-badge" role="status" aria-live="polite"><i></i><span id="fl-badge-t">Readable on the wire</span></div>
+      <button type="button" class="fl-pause" id="fl-pause" aria-label="Pause animation">Pause</button>
+    </div>
+  </header>
+
+  <div class="fl-stage">
+    <div class="fl-canvas">
+      <svg viewBox="0 0 960 470" role="img" aria-label="Diagram: your device, router, ISP, DNS, backbone routers, load balancer, web server and database, with packets moving between them"></svg>
+      <span class="fl-tag tl"><i></i>Client packets</span>
+      <span class="fl-tag br"><i></i>Secure destination</span>
+    </div>
+  </div>
+
+  <footer class="fl-info">
+    <div class="fl-desc" aria-live="polite">
+      <h3 id="fl-title"></h3>
+      <p id="fl-text"></p>
+    </div>
+    <dl class="fl-pkt">
+      <dt>Packet</dt><dd id="fl-pkt">-</dd>
+      <dt>Now at</dt><dd id="fl-hop">-</dd>
+      <dt>Protocol</dt><dd id="fl-proto">-</dd>
+      <dt>TTL</dt><dd id="fl-ttl">-</dd>
+      <dt>Payload</dt><dd id="fl-pay" class="pay">-</dd>
+    </dl>
+  </footer>
+</section>
+<noscript><p style="max-width:980px;margin:16px auto;color:#cfeee6;font:14px/1.6 system-ui,sans-serif">This interactive walkthrough needs JavaScript enabled. The five stages explain DNS lookup, TCP connection setup, TLS encryption, the web request, and the response.</p></noscript>
+</div>
       </div>
     </section>
 
@@ -3856,6 +3955,392 @@ var activeCertEls = null;
   window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(resize, 200); });
   resize();
   requestAnimationFrame(tick);
+})();
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.getElementById('flow');
+  if (!root) return;
+
+  var SITE = root.getAttribute('data-site') || 'example.com';
+  var IP = '203.0.113.10';                      // example IP (documentation range)
+  var NS = 'http://www.w3.org/2000/svg';
+  var AMBER = '#ffb454', LIME = '#e2ff2e', INK = '#04100d';
+  var SPEED = 300;                              // svg units per second
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function S(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function $(id) { return document.getElementById(id); }
+
+  /* ---------- map data ---------- */
+  var NODES = {
+    dev: { x: 85,  y: 270, icon: 'laptop', name: 'Your device',   sub: 'Browser',            short: 'Your device' },
+    rtr: { x: 230, y: 270, icon: 'router', name: 'Wi-Fi router', sub: '192.168.1.1',        short: 'Router',          hop: 1 },
+    isp: { x: 375, y: 270, icon: 'cloud',  name: 'ISP',           sub: 'Your provider',      short: 'ISP',             hop: 1 },
+    dns: { x: 375, y: 95,  icon: 'globe',  name: 'DNS resolver',  sub: 'Name to IP',         short: 'DNS resolver',    pos: 'right' },
+    b1:  { x: 520, y: 175, icon: 'hop',    name: 'Backbone',      sub: 'Internet routers',   short: 'Backbone router', hop: 1, pos: 'above' },
+    b2:  { x: 520, y: 365, icon: 'hop',    name: 'Backbone',      sub: 'Internet routers',   short: 'Backbone router', hop: 1 },
+    lb:  { x: 665, y: 270, icon: 'shield', name: 'Load balancer', sub: 'Firewall, ends TLS', short: 'Load balancer',   hop: 1, dest: 1 },
+    web: { x: 835, y: 175, icon: 'server', name: 'Web server',    sub: 'Runs the site',      short: 'Web server',      dest: 1, pos: 'above' },
+    db:  { x: 835, y: 365, icon: 'db',     name: 'Database',      sub: 'Stores lessons',     short: 'Database',        dest: 1 }
+  };
+  var EDGES = [
+    ['dev','rtr',0], ['rtr','isp',0], ['isp','dns',0],
+    ['isp','b1',-14], ['isp','b2',14], ['b1','lb',-14], ['b2','lb',14],
+    ['lb','web',-14], ['web','db',0]
+  ];
+  var SECURE_EDGES = ['dev|rtr','rtr|isp','isp|b1','isp|b2','b1|lb','b2|lb'];
+
+  var ICONS = {
+    laptop: '<rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/>',
+    router: '<rect x="3" y="13" width="18" height="6" rx="1.5"/><path d="M7 16h.01M11 16h.01M8 13V8M16 13V8"/>',
+    cloud:  '<path d="M6.5 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.2A4.6 4.6 0 0 1 17.5 18z"/>',
+    globe:  '<circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c3 3 3 13 0 16M12 4c-3 3-3 13 0 16"/>',
+    hop:    '<circle cx="6" cy="12" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="18" cy="17" r="2"/><path d="M8 11l8-3M8 13l8 3"/>',
+    shield: '<path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',
+    server: '<rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M8 7h.01M8 17h.01"/>',
+    db:     '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/>'
+  };
+
+  /* ---------- the journey: every leg is one packet trip ---------- */
+  var LEGS = [
+    /* 1 look up */
+    { stage:0, route:['dev','rtr','isp','dns'], label:'DNS query', enc:false, proto:'UDP, port 53', pay:'A? ' + SITE },
+    { stage:0, route:['dns','isp','rtr','dev'], label:'DNS reply', enc:false, proto:'UDP, port 53', pay:SITE + ' = ' + IP },
+    /* 2 connect (TCP three-way handshake) */
+    { stage:1, route:['dev','rtr','isp','b1','lb'], label:'SYN',     enc:false, proto:'TCP, port 443', pay:'SYN, seq 0. Can we talk?' },
+    { stage:1, route:['lb','b2','isp','rtr','dev'], label:'SYN-ACK', enc:false, proto:'TCP, port 443', pay:'SYN + ACK, ack 1. Yes, ready.' },
+    { stage:1, route:['dev','rtr','isp','b1','lb'], label:'ACK',     enc:false, proto:'TCP, port 443', pay:'ACK, ack 1. Connection open.' },
+    /* 3 encrypt (TLS 1.3 handshake) */
+    { stage:2, route:['dev','rtr','isp','b2','lb'], label:'ClientHello', enc:false, proto:'TLS 1.3, port 443', pay:'ClientHello. SNI: ' + SITE + ', key share' },
+    { stage:2, route:['lb','b1','isp','rtr','dev'], label:'ServerHello', enc:false, proto:'TLS 1.3, port 443', pay:'ServerHello. key share (certificate follows, encrypted)' },
+    { stage:2, route:['dev','rtr','isp','b2','lb'], label:'Finished',    enc:true,  proto:'TLS 1.3, port 443', after:'secure' },
+    /* 4 request */
+    { stage:3, route:['dev','rtr','isp','b1','lb'], label:'GET /lessons', enc:true,  proto:'TLS 1.3, port 443' },
+    { stage:3, route:['lb','web'], join:1, label:'GET /lessons', enc:false, proto:'HTTP, private network', pay:'GET /lessons HTTP/1.1', note:'decrypted here' },
+    { stage:3, route:['web','db'], join:1, label:'SQL query',    enc:false, proto:'SQL, private network',  pay:'SELECT title FROM lessons' },
+    /* 5 response */
+    { stage:4, route:['db','web'], label:'Rows', enc:false, proto:'SQL, private network', pay:'42 rows returned' },
+    { stage:4, route:['web','lb'], join:1, label:'200 OK', enc:false, proto:'HTTP, private network', pay:'200 OK. <html> page </html>' },
+    { stage:4, route:['lb','b2','isp','rtr','dev'], join:1, label:'200 OK', enc:true, proto:'TLS 1.3, port 443', note:'encrypted again', after:'done' }
+  ];
+
+  var STAGES = [
+    ['Look up the address', 'Your browser asks a DNS server which IP address ' + SITE + ' lives at. This question is not encrypted, so anyone on the path can read it.'],
+    ['Open a connection', 'TCP three-way handshake: SYN, SYN-ACK, ACK. Both sides agree to start talking. Packets can take different routes each time.'],
+    ['Encrypt the channel', 'TLS 1.3 handshake: both sides swap key shares and agree on a secret key. The server proves who it is with a certificate.'],
+    ['Send the request', 'Your request is now encrypted all the way to the load balancer. It decrypts the request and passes it to the web server and the database.'],
+    ['Get the response', 'The page travels back the same way, encrypted again for the trip across the internet. Your browser then draws it on screen.']
+  ];
+
+  /* ---------- build the SVG ---------- */
+  var svg = root.querySelector('svg');
+  var defs = S('defs', {}, svg);
+  defs.innerHTML =
+    '<filter id="fl-glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+    '<pattern id="fl-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="rgba(94,234,200,.07)" stroke-width="1"/></pattern>' +
+    '<radialGradient id="fl-vig" cx="50%" cy="50%" r="72%"><stop offset="55%" stop-color="#081c17" stop-opacity="0"/><stop offset="100%" stop-color="#081c17" stop-opacity=".9"/></radialGradient>';
+  S('rect', { width: 960, height: 470, fill: 'url(#fl-grid)' }, svg);
+  S('rect', { width: 960, height: 470, fill: 'url(#fl-vig)' }, svg);
+
+  /* glow behind the load balancer (the hub) */
+  S('circle', { cx: NODES.lb.x, cy: NODES.lb.y, r: 70, fill: 'rgba(226,255,46,.10)', filter: 'url(#fl-glow)' }, svg);
+
+  var EDGE = {};
+  var gEdges = S('g', {}, svg);
+  EDGES.forEach(function (e) {
+    var a = NODES[e[0]], b = NODES[e[1]], bend = e[2];
+    var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    var dx = b.x - a.x, dy = b.y - a.y, len = Math.sqrt(dx * dx + dy * dy);
+    var cx = mx + (-dy / len) * bend, cy = my + (dx / len) * bend;
+    var el = S('path', { class: 'edge', d: 'M' + a.x + ' ' + a.y + ' Q' + cx + ' ' + cy + ' ' + b.x + ' ' + b.y }, gEdges);
+    EDGE[e[0] + '|' + e[1]] = { el: el, len: el.getTotalLength() };
+  });
+  function edgeBetween(x, y) {
+    if (EDGE[x + '|' + y]) return { e: EDGE[x + '|' + y], rev: false };
+    return { e: EDGE[y + '|' + x], rev: true };
+  }
+
+  var gNodes = S('g', {}, svg);
+  Object.keys(NODES).forEach(function (k) {
+    var n = NODES[k];
+    var g = S('g', { transform: 'translate(' + n.x + ' ' + n.y + ')', class: n.dest ? 'dest' : '' }, gNodes);
+    n.halo = S('circle', { class: 'halo', r: 27 }, g);
+    S('circle', { class: 'ring', r: 27 }, g);
+    var ic = S('g', { class: 'icon', transform: 'translate(-12 -12)' }, g);
+    ic.innerHTML = ICONS[n.icon];
+    var pos = n.pos || 'below', t1, t2;
+    if (pos === 'right') {
+      t1 = S('text', { class: 'nm', x: 40, y: -2 }, g);
+      t2 = S('text', { class: 'sb', x: 40, y: 15 }, g);
+    } else {
+      var up = pos === 'above';
+      t1 = S('text', { class: 'nm', x: 0, y: up ? -48 : 48, 'text-anchor': 'middle' }, g);
+      t2 = S('text', { class: 'sb', x: 0, y: up ? -33 : 64, 'text-anchor': 'middle' }, g);
+    }
+    t1.textContent = n.name; t2.textContent = n.sub;
+  });
+
+  /* lock badges on both ends of the encrypted tunnel */
+  ['dev', 'lb'].forEach(function (k) {
+    var n = NODES[k];
+    var g = S('g', { class: 'lockb', transform: 'translate(' + (n.x + 22) + ' ' + (n.y - 24) + ')' }, svg);
+    S('circle', { r: 10, fill: INK, stroke: LIME, 'stroke-width': 1.4 }, g);
+    S('rect', { x: -4, y: -1, width: 8, height: 6, rx: 1.2, fill: LIME }, g);
+    S('path', { d: 'M-2.4 -1V-2.8a2.4 2.4 0 0 1 4.8 0V-1', fill: 'none', stroke: LIME, 'stroke-width': 1.4 }, g);
+  });
+
+  /* short caption above the load balancer ("decrypted here") */
+  var noteEl = S('text', { class: 'note', x: NODES.lb.x, y: NODES.lb.y - 44 }, svg);
+
+  /* "page rendered" badge above the device */
+  var doneB = S('g', { class: 'done-b', transform: 'translate(' + NODES.dev.x + ' ' + (NODES.dev.y - 58) + ')' }, svg);
+  S('rect', { x: -66, y: -12, width: 132, height: 24, rx: 12, fill: 'rgba(226,255,46,.12)', stroke: LIME, 'stroke-width': 1.2 }, doneB);
+  var dt = S('text', { x: 0, y: 0.5, 'text-anchor': 'middle', 'dominant-baseline': 'central', fill: LIME, 'font-size': 11.5, 'font-weight': 600, 'font-family': 'JetBrains Mono, monospace' }, doneB);
+  dt.textContent = 'Page rendered';
+
+  /* the packet: tail + pill */
+  var pkAll = S('g', { opacity: 0 }, svg);
+  var tail = [];
+  for (var i = 0; i < 5; i++) tail.push(S('line', { 'stroke-linecap': 'round', 'stroke-width': [3.4, 2.8, 2.2, 1.6, 1.1][i], opacity: [.55, .42, .28, .17, .08][i] }, pkAll));
+  var pk = S('g', { filter: 'url(#fl-glow)' }, pkAll);
+  var pill = S('g', {}, pk);
+  var pRect = S('rect', { y: -11, height: 22, rx: 7 }, pill);
+  var pLock = S('g', {}, pill);
+  S('rect', { x: -4, y: -1, width: 8, height: 6, rx: 1.2, fill: INK }, pLock);
+  S('path', { d: 'M-2.4 -1V-2.8a2.4 2.4 0 0 1 4.8 0V-1', fill: 'none', stroke: INK, 'stroke-width': 1.4 }, pLock);
+  var pText = S('text', { y: 0.5, 'text-anchor': 'middle', 'dominant-baseline': 'central', fill: INK, 'font-size': 12, 'font-weight': 600, 'font-family': 'JetBrains Mono, monospace' }, pill);
+
+  /* ---------- prepare legs ---------- */
+  var stageCount = [0, 0, 0, 0, 0];
+  LEGS.forEach(function (l) {
+    l.hops = []; l.total = 0;
+    for (var j = 0; j < l.route.length - 1; j++) {
+      var b = edgeBetween(l.route[j], l.route[j + 1]);
+      l.hops.push({ e: b.e, rev: b.rev, len: b.e.len, start: l.total });
+      l.total += b.e.len;
+    }
+    l.k = stageCount[l.stage]++;
+  });
+
+  /* ---------- UI helpers ---------- */
+  var chips = [].slice.call(root.querySelectorAll('.chip'));
+  var elTitle = $('fl-title'), elText = $('fl-text');
+  var iPkt = $('fl-pkt'), iHop = $('fl-hop'), iProto = $('fl-proto'), iTtl = $('fl-ttl'), iPay = $('fl-pay');
+  var badgeT = $('fl-badge-t'), pauseBtn = $('fl-pause');
+
+  function setStage(k) {
+    curStage = k;
+    chips.forEach(function (c, i) {
+      c.classList.toggle('done', i < k);
+      c.classList.toggle('active', i === k);
+      if (i === k) c.setAttribute('aria-current', 'step'); else c.removeAttribute('aria-current');
+      c.style.setProperty('--p', i < k ? 1 : 0);
+    });
+    elTitle.textContent = STAGES[k][0];
+    elText.textContent = STAGES[k][1];
+  }
+
+  function setSecure(on) {
+    secure = on;
+    root.classList.toggle('secure', on);
+    badgeT.textContent = on ? 'TLS 1.3 \u00b7 encrypted' : 'Readable on the wire';
+    SECURE_EDGES.forEach(function (key) { EDGE[key].el.classList.toggle('sec', on); });
+  }
+
+  var hotHop = null;
+  function setHot(hp) {
+    if (hotHop) { hotHop.e.el.classList.remove('hot', 'rev'); }
+    hotHop = hp;
+    if (hp) { hp.e.el.classList.add('hot'); hp.e.el.classList.toggle('rev', hp.rev); }
+  }
+
+  function pulse(key) {
+    var h = NODES[key].halo;
+    if (h.animate) h.animate([{ opacity: .85, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(1.9)' }], { duration: 700, easing: 'ease-out' });
+  }
+
+  function showNote(txt) {
+    noteEl.textContent = txt;
+    if (noteEl.animate) noteEl.animate([{ opacity: 0 }, { opacity: 1, offset: .15 }, { opacity: 1, offset: .8 }, { opacity: 0 }], { duration: 1600 });
+  }
+
+  function hex() {
+    var o = '';
+    for (var i = 0; i < 14; i++) o += ('0' + (Math.random() * 256 | 0).toString(16)).slice(-2) + ' ';
+    return o + '...';
+  }
+
+  /* ---------- engine ---------- */
+  var li = 0, s = 0, h = 0, ttl = 64;
+  var phase = 'gap', timer = .5, alpha = 0, target = 0, clock = 0, hexT = 0;
+  var curStage = -1, secure = false, paused = false, visible = true, hist = [], raf = 0, last = 0;
+
+  function styleLeg(l) {
+    var col = l.enc ? LIME : AMBER;
+    var w = l.label.length * 7.3 + 18 + (l.enc ? 20 : 0);
+    pRect.setAttribute('x', -w / 2); pRect.setAttribute('width', w); pRect.setAttribute('fill', col);
+    pText.textContent = l.label; pText.setAttribute('x', l.enc ? 10 : 0);
+    pLock.setAttribute('transform', 'translate(' + (-w / 2 + 14) + ' 0)');
+    pLock.style.display = l.enc ? '' : 'none';
+    tail.forEach(function (t) { t.setAttribute('stroke', col); });
+    root.style.setProperty('--hot', col);
+  }
+
+  function fillInfo(l) {
+    iPkt.textContent = l.label;
+    iProto.textContent = l.proto;
+    iPay.classList.toggle('enc', !!l.enc);
+    iPay.textContent = l.enc ? hex() : l.pay;
+  }
+
+  function hopText(l) {
+    iHop.textContent = NODES[l.route[h]].short + ' \u2192 ' + NODES[l.route[h + 1]].short;
+  }
+
+  function place(l) {
+    var hp = l.hops[h], d = Math.max(0, Math.min(hp.len, s - hp.start));
+    var pt = hp.e.el.getPointAtLength(hp.rev ? hp.len - d : d);
+    pk.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ')');
+    hist.push({ x: pt.x, y: pt.y, t: clock });
+    while (hist.length > 2 && clock - hist[0].t > 0.8) hist.shift();
+    var offs = [.1, .17, .24, .31, .38, .45], pts = offs.map(at);
+    for (var i = 0; i < 5; i++) {
+      tail[i].setAttribute('x1', pts[i].x.toFixed(1)); tail[i].setAttribute('y1', pts[i].y.toFixed(1));
+      tail[i].setAttribute('x2', pts[i + 1].x.toFixed(1)); tail[i].setAttribute('y2', pts[i + 1].y.toFixed(1));
+    }
+  }
+  function at(off) {
+    var tt = clock - off;
+    for (var i = hist.length - 1; i >= 0; i--) if (hist[i].t <= tt) return hist[i];
+    return hist[0];
+  }
+
+  function startLeg() {
+    var l = LEGS[li];
+    s = 0; h = 0; ttl = 64;
+    if (l.stage !== curStage) setStage(l.stage);
+    styleLeg(l); fillInfo(l);
+    if (!l.join) hist = [];
+    else if (pill.animate) pill.animate([{ transform: 'scale(1.3)' }, { transform: 'scale(1)' }], { duration: 280, easing: 'ease-out' });
+    if (l.note) showNote(l.note);
+    iTtl.textContent = ttl;
+    phase = 'run'; target = 1;
+    setHot(l.hops[0]); hopText(l); place(l);
+  }
+
+  function arrive(key) {
+    pulse(key);
+    if (NODES[key].hop) { ttl--; iTtl.textContent = ttl; }
+  }
+
+  function endLeg(l) {
+    if (l.after === 'secure') setSecure(true);
+    var next = LEGS[li + 1];
+    if (l.after === 'done') { finish(); return; }
+    li++;
+    if (next && next.join) { startLeg(); }
+    else { phase = 'gap'; timer = .5; target = 0; setHot(null); }
+  }
+
+  function finish() {
+    phase = 'hold'; timer = 3.6; target = 0; setHot(null);
+    chips.forEach(function (c) { c.classList.remove('active'); c.classList.add('done'); c.style.setProperty('--p', 1); });
+    elTitle.textContent = 'Page loaded';
+    elText.textContent = 'That whole round trip usually takes a few milliseconds, and every page, image and API call you make repeats it. Click a step above to replay it.';
+    iPkt.textContent = '200 OK'; iHop.textContent = 'Your device'; iProto.textContent = 'HTTPS'; iPay.classList.remove('enc'); iPay.textContent = 'Page rendered in browser';
+    doneB.classList.add('on');
+  }
+
+  function restart() {
+    doneB.classList.remove('on');
+    setSecure(false);
+    li = 0; curStage = -1; phase = 'gap'; timer = .6; target = 0; hist = [];
+  }
+
+  function jump(k) {
+    var idx = 0;
+    for (var i = 0; i < LEGS.length; i++) if (LEGS[i].stage === k) { idx = i; break; }
+    doneB.classList.remove('on');
+    setSecure(k >= 3);
+    li = idx; curStage = -1; phase = 'gap'; timer = .15; target = 0; hist = []; setHot(null);
+    kick();
+  }
+
+  function step(dt) {
+    clock += dt;
+    alpha += (target - alpha) * Math.min(1, dt * 12);
+    pkAll.setAttribute('opacity', alpha.toFixed(3));
+
+    if (phase === 'gap' || phase === 'hold') {
+      timer -= dt;
+      if (timer <= 0) { phase === 'gap' ? startLeg() : restart(); }
+      return;
+    }
+    var l = LEGS[li];
+    s = Math.min(l.total, s + SPEED * dt);
+    while (h < l.hops.length - 1 && s >= l.hops[h + 1].start) {
+      h++; arrive(l.route[h]); setHot(l.hops[h]); hopText(l);
+    }
+    place(l);
+
+    var p = (l.k + s / l.total) / stageCount[l.stage];
+    chips[l.stage].style.setProperty('--p', p.toFixed(3));
+
+    if (l.enc) {
+      hexT += dt;
+      if (hexT > .09) { hexT = 0; iPay.textContent = hex(); }
+    }
+    if (s >= l.total) { arrive(l.route[l.route.length - 1]); endLeg(l); }
+  }
+
+  function shouldRun() { return !reduce && !paused && visible && !document.hidden; }
+  function loop(t) {
+    raf = 0;
+    if (!shouldRun()) return;
+    var dt = Math.min(.05, (t - last) / 1000); last = t;
+    step(dt);
+    raf = requestAnimationFrame(loop);
+  }
+  function kick() {
+    if (raf || !shouldRun()) return;
+    last = performance.now();
+    raf = requestAnimationFrame(loop);
+  }
+
+  /* ---------- controls ---------- */
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () { jump(+c.getAttribute('data-stage')); });
+  });
+  pauseBtn.addEventListener('click', function () {
+    paused = !paused;
+    pauseBtn.textContent = paused ? 'Play' : 'Pause';
+    pauseBtn.setAttribute('aria-label', paused ? 'Play animation' : 'Pause animation');
+    kick();
+  });
+  document.addEventListener('visibilitychange', kick);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (e) { visible = e[0].isIntersecting; kick(); }, { threshold: .15 }).observe(root);
+  }
+
+  /* ---------- start ---------- */
+  setStage(0);
+  if (reduce) {
+    /* static view for people who prefer reduced motion */
+    pauseBtn.style.display = 'none';
+    setSecure(true); setStage(3);
+    iPkt.textContent = 'GET /lessons'; iHop.textContent = 'Your device \u2192 Load balancer';
+    iProto.textContent = 'TLS 1.3, port 443'; iTtl.textContent = '64'; iPay.classList.add('enc'); iPay.textContent = 'Unreadable ciphertext';
+  } else {
+    kick();
+  }
 })();
 </script>
 </body>
