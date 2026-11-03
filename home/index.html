@@ -189,6 +189,39 @@
 /* Ensure lesson-grid overrides article-grid when both present */
 .article-grid.lesson-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .article-grid.lesson-grid .lesson-card { grid-column: auto; }
+
+/* Severity badges for news cards */
+.lc-diff.critical {
+  background: rgba(255, 90, 90, .12); color: #ff5a5a;
+  border: 1px solid rgba(255, 90, 90, .3);
+}
+.lc-diff.high {
+  background: rgba(255, 180, 84, .12); color: #ffb454;
+  border: 1px solid rgba(255, 180, 84, .3);
+}
+.lc-diff.medium {
+  background: rgba(255, 228, 90, .12); color: #ffe45a;
+  border: 1px solid rgba(255, 228, 90, .3);
+}
+/* Media embed for latest post cards */
+.lc-media {
+  margin: 0 0 16px; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--line); background: #000;
+  aspect-ratio: 1 / 1; max-height: 320px;
+}
+.lc-media iframe {
+  width: 100%; height: 100%; border: 0; display: block;
+}
+/* Grid containers for news, latest, tutorials, quizzes */
+.news-grid, .post-grid, .tutorial-grid, .quiz-set-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+@media (max-width: 1024px) {
+  .news-grid, .post-grid, .tutorial-grid, .quiz-set-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .news-grid, .post-grid, .tutorial-grid, .quiz-set-grid { grid-template-columns: 1fr; }
+}
 .lesson-card {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -2633,62 +2666,244 @@ html, body { overflow-x: hidden; }
             <a href="https://www.instagram.com/hack_withk/" target="_blank" rel="noopener">View @hack_withk ↗</a>
           </div>
           <div class="post-grid">
-                        <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/p/DfChM45guen/embed/" title="Instagram preview: VPN vs Proxy vs Tor — which one actually hides you?" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">CAROUSEL</span><time datetime="2026-10-28">Oct 28 2026</time></div><h3>VPN vs Proxy vs Tor — which one actually hides you?</h3><a class="post-link" href="https://www.instagram.com/hack_withk/p/DfChM45guen/" target="_blank" rel="noopener">View on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/p/De-fnAFGV2_/embed/" title="Instagram preview: Firewall, IDS and IPS are not the same thing" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">CAROUSEL</span><time datetime="2026-10-26">Oct 26 2026</time></div><h3>Firewall, IDS and IPS are not the same thing</h3><a class="post-link" href="https://www.instagram.com/hack_withk/p/De-fnAFGV2_/" target="_blank" rel="noopener">View on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/p/De94HQsCV2R/embed/" title="Instagram preview: How Instagram accounts get hacked — and how to stop it" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">CAROUSEL</span><time datetime="2026-10-26">Oct 26 2026</time></div><h3>How Instagram accounts get hacked — and how to stop it</h3><a class="post-link" href="https://www.instagram.com/hack_withk/p/De94HQsCV2R/" target="_blank" rel="noopener">View on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/reel/De2xLP4zkVb/embed/" title="Instagram preview: Day 7 — SSID (Service Set Identifier)" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">REEL</span><time datetime="2026-10-23">Oct 23 2026</time></div><h3>Day 7 — SSID (Service Set Identifier)</h3><a class="post-link" href="https://www.instagram.com/hack_withk/reel/De2xLP4zkVb/" target="_blank" rel="noopener">Watch on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/reel/DeseDHaTdPc/embed/" title="Instagram preview: Day 6 — WAN (Wide Area Network)" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">REEL</span><time datetime="2026-10-19">Oct 19 2026</time></div><h3>Day 6 — WAN (Wide Area Network)</h3><a class="post-link" href="https://www.instagram.com/hack_withk/reel/DeseDHaTdPc/" target="_blank" rel="noopener">Watch on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/reel/Dep5MRkz64p/embed/" title="Instagram preview: Day 5 — LAN (Local Area Network)" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">REEL</span><time datetime="2026-10-18">Oct 18 2026</time></div><h3>Day 5 — LAN (Local Area Network)</h3><a class="post-link" href="https://www.instagram.com/hack_withk/reel/Dep5MRkz64p/" target="_blank" rel="noopener">Watch on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/p/Dej9gxNGYdf/embed/" title="Instagram preview: 20 Linux commands. 4 questions. One skill: reading any system." sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">CAROUSEL</span><time datetime="2026-10-16">Oct 16 2026</time></div><h3>20 Linux commands. 4 questions. One skill: reading any system.</h3><a class="post-link" href="https://www.instagram.com/hack_withk/p/Dej9gxNGYdf/" target="_blank" rel="noopener">View on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/reel/DekvpSCzOe1/embed/" title="Instagram preview: MAC Address Explained!" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">REEL</span><time datetime="2026-10-16">Oct 16 2026</time></div><h3>MAC Address Explained!</h3><a class="post-link" href="https://www.instagram.com/hack_withk/reel/DekvpSCzOe1/" target="_blank" rel="noopener">Watch on Instagram ↗</a></div>
-            </article>
-<article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/reel/DegdpiYTprL/embed/" title="Instagram preview: Day 3 — DHCP" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">REEL</span><time datetime="2026-10-15">Oct 15 2026</time></div><h3>Day 3 — DHCP: how your phone instantly gets an IP address when you join Wi-Fi</h3><a class="post-link" href="https://www.instagram.com/hack_withk/reel/DegdpiYTprL/" target="_blank" rel="noopener">Watch on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/reel/DeSv17cTq08/embed/" title="Instagram preview: Day 2 — DNS" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">REEL</span><time datetime="2026-10-09">Oct 9 2026</time></div><h3>Day 2 — DNS (Domain Name System): the internet's phonebook</h3><a class="post-link" href="https://www.instagram.com/hack_withk/reel/DeSv17cTq08/" target="_blank" rel="noopener">Watch on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/reel/DeLBdPJzkg8/embed/" title="Instagram preview: What is an IP Address" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">REEL</span><time datetime="2026-10-06">Oct 6 2026</time></div><h3>What is an IP Address — and how does it actually work?</h3><a class="post-link" href="https://www.instagram.com/hack_withk/reel/DeLBdPJzkg8/" target="_blank" rel="noopener">Watch on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/reel/DeAuR54TSgP/embed/" title="Instagram preview: Common ports" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">REEL</span><time datetime="2026-10-02">Oct 2 2026</time></div><h3>COMMON PORTS YOU SHOULD KNOW! (80/443, 22, 53, 3389, 3306)</h3><a class="post-link" href="https://www.instagram.com/hack_withk/reel/DeAuR54TSgP/" target="_blank" rel="noopener">Watch on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/p/DduB3KXGSMv/embed/" title="Instagram preview: HTTPS and the TLS handshake" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">CAROUSEL</span><time datetime="2026-09-25">Sep 25 2026</time></div><h3>How does HTTPS actually keep your data safe? (TLS handshake)</h3><a class="post-link" href="https://www.instagram.com/hack_withk/p/DduB3KXGSMv/" target="_blank" rel="noopener">View on Instagram ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.instagram.com/p/DdUNBh6Gf41/embed/" title="Instagram preview: Cookies vs Sessions vs Tokens" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">CAROUSEL</span><time datetime="2026-09-15">Sep 15 2026</time></div><h3>Cookies vs Sessions vs Tokens — most developers get this wrong in interviews</h3><a class="post-link" href="https://www.instagram.com/hack_withk/p/DdUNBh6Gf41/" target="_blank" rel="noopener">View on Instagram ↗</a></div>
-            </article>
+                        <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff intermediate">CAROUSEL</span>
+              <span class="lc-avail">Oct 28 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/p/DfChM45guen/embed/" title="Instagram preview: VPN vs Proxy vs Tor — which one actually hides you?" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>VPN vs Proxy vs Tor — which one actually hides you?</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">CAROUSEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/p/DfChM45guen/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff intermediate">CAROUSEL</span>
+              <span class="lc-avail">Oct 26 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/p/De-fnAFGV2_/embed/" title="Instagram preview: Firewall, IDS and IPS are not the same thing" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>Firewall, IDS and IPS are not the same thing</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">CAROUSEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/p/De-fnAFGV2_/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff intermediate">CAROUSEL</span>
+              <span class="lc-avail">Oct 26 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/p/De94HQsCV2R/embed/" title="Instagram preview: How Instagram accounts get hacked — and how to stop it" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>How Instagram accounts get hacked — and how to stop it</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">CAROUSEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/p/De94HQsCV2R/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff beginner">REEL</span>
+              <span class="lc-avail">Oct 23 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/reel/De2xLP4zkVb/embed/" title="Instagram preview: Day 7 — SSID (Service Set Identifier)" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>Day 7 — SSID (Service Set Identifier)</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">REEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/reel/De2xLP4zkVb/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff beginner">REEL</span>
+              <span class="lc-avail">Oct 19 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/reel/DeseDHaTdPc/embed/" title="Instagram preview: Day 6 — WAN (Wide Area Network)" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>Day 6 — WAN (Wide Area Network)</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">REEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/reel/DeseDHaTdPc/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff beginner">REEL</span>
+              <span class="lc-avail">Oct 18 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/reel/Dep5MRkz64p/embed/" title="Instagram preview: Day 5 — LAN (Local Area Network)" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>Day 5 — LAN (Local Area Network)</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">REEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/reel/Dep5MRkz64p/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff intermediate">CAROUSEL</span>
+              <span class="lc-avail">Oct 16 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/p/Dej9gxNGYdf/embed/" title="Instagram preview: 20 Linux commands. 4 questions. One skill: reading any system." sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>20 Linux commands. 4 questions. One skill: reading any system.</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">CAROUSEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/p/Dej9gxNGYdf/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff beginner">REEL</span>
+              <span class="lc-avail">Oct 16 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/reel/DekvpSCzOe1/embed/" title="Instagram preview: MAC Address Explained!" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>MAC Address Explained!</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">REEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/reel/DekvpSCzOe1/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+<article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff beginner">REEL</span>
+              <span class="lc-avail">Oct 15 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/reel/DegdpiYTprL/embed/" title="Instagram preview: Day 3 — DHCP" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>Day 3 — DHCP: how your phone instantly gets an IP address when you join Wi-Fi</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">REEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/reel/DegdpiYTprL/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff beginner">REEL</span>
+              <span class="lc-avail">Oct 9 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/reel/DeSv17cTq08/embed/" title="Instagram preview: Day 2 — DNS" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>Day 2 — DNS (Domain Name System): the internet&#x27;s phonebook</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">REEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/reel/DeSv17cTq08/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff beginner">REEL</span>
+              <span class="lc-avail">Oct 6 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/reel/DeLBdPJzkg8/embed/" title="Instagram preview: What is an IP Address" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>What is an IP Address — and how does it actually work?</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">REEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/reel/DeLBdPJzkg8/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff beginner">REEL</span>
+              <span class="lc-avail">Oct 2 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/reel/DeAuR54TSgP/embed/" title="Instagram preview: Common ports" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>COMMON PORTS YOU SHOULD KNOW! (80/443, 22, 53, 3389, 3306)</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">REEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/reel/DeAuR54TSgP/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff intermediate">CAROUSEL</span>
+              <span class="lc-avail">Sep 25 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/p/DduB3KXGSMv/embed/" title="Instagram preview: HTTPS and the TLS handshake" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>How does HTTPS actually keep your data safe? (TLS handshake)</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">CAROUSEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/p/DduB3KXGSMv/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff intermediate">CAROUSEL</span>
+              <span class="lc-avail">Sep 15 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.instagram.com/p/DdUNBh6Gf41/embed/" title="Instagram preview: Cookies vs Sessions vs Tokens" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>Cookies vs Sessions vs Tokens — most developers get this wrong in interviews</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">CAROUSEL</span>
+              <a class="lc-btn" href="https://www.instagram.com/hack_withk/p/DdUNBh6Gf41/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
           </div>
         </div>
 
@@ -2698,18 +2913,57 @@ html, body { overflow-x: hidden; }
             <a href="https://www.youtube.com/@hack_withk" target="_blank" rel="noopener">Visit Hack With K ↗</a>
           </div>
           <div class="post-grid">
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.youtube.com/embed/03LVEN2uEsU" title="YouTube Short: 10 Secrets Hackers Use to Stay Untraceable" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">SHORT · 1,248 VIEWS</span><time datetime="2025-11-14">Nov 14 2025</time></div><h3>10 Secrets Hackers Use to Stay Untraceable</h3><a class="post-link" href="https://www.youtube.com/shorts/03LVEN2uEsU" target="_blank" rel="noopener">Watch on YouTube ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.youtube.com/embed/qXjjWt-gBLE" title="YouTube Short: 10 signs You're Becoming a Hacker" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">SHORT · 1,137 VIEWS</span><time datetime="2025-11-06">Nov 6 2025</time></div><h3>10 signs You're Becoming a Hacker</h3><a class="post-link" href="https://www.youtube.com/shorts/qXjjWt-gBLE" target="_blank" rel="noopener">Watch on YouTube ↗</a></div>
-            </article>
-            <article class="post-card reveal">
-              <div class="post-media"><iframe src="https://www.youtube.com/embed/cnNfSn4D4xY" title="YouTube Short: Why 90% of Cybersecurity Beginners Quit" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-              <div class="post-body"><div class="post-meta"><span class="post-type">SHORT · 117 VIEWS</span><time datetime="2026-06-23">Jun 23 2026</time></div><h3>Why 90% of Cybersecurity Beginners Quit</h3><a class="post-link" href="https://www.youtube.com/shorts/cnNfSn4D4xY" target="_blank" rel="noopener">Watch on YouTube ↗</a></div>
-            </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff beginner">SHORT</span>
+              <span class="lc-avail">Nov 14 2025</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.youtube.com/embed/03LVEN2uEsU" title="YouTube Short: 10 Secrets Hackers Use to Stay Untraceable" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>10 Secrets Hackers Use to Stay Untraceable</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">SHORT · 1,248 VIEWS</span>
+              <a class="lc-btn" href="https://www.youtube.com/shorts/03LVEN2uEsU" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff beginner">SHORT</span>
+              <span class="lc-avail">Nov 6 2025</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.youtube.com/embed/qXjjWt-gBLE" title="YouTube Short: 10 signs You&#x27;re Becoming a Hacker" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>10 signs You&#x27;re Becoming a Hacker</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">SHORT · 1,137 VIEWS</span>
+              <a class="lc-btn" href="https://www.youtube.com/shorts/qXjjWt-gBLE" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
+            <article class="lesson-card post-card-new">
+            <div class="lc-pills">
+              <span class="lc-cat">Latest Post</span>
+              <span class="lc-diff beginner">SHORT</span>
+              <span class="lc-avail">Jun 23 2026</span>
+            </div>
+            <div class="lc-media">
+              <iframe src="https://www.youtube.com/embed/cnNfSn4D4xY" title="YouTube Short: Why 90% of Cybersecurity Beginners Quit" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy" scrolling="no"></iframe>
+            </div>
+            <div class="lc-head">
+              <h3>Why 90% of Cybersecurity Beginners Quit</h3>
+            </div>
+            <div class="lc-foot">
+              <span class="lc-time">SHORT · 117 VIEWS</span>
+              <a class="lc-btn" href="https://www.youtube.com/shorts/cnNfSn4D4xY" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Post</a>
+            </div>
+          </article>
           </div>
         </div>
 
@@ -2731,53 +2985,133 @@ html, body { overflow-x: hidden; }
           <p>Short, honest breakdowns of the attacks everyone is talking about — what happened, how the attackers got in, and the one lesson worth stealing for your own security. Figures are as reported by the source linked in each story.</p>
         </div>
         <div class="news-grid">
-                    <article class="news-card featured reveal">
-            <div class="card-top"><span class="sev sev-critical">CRITICAL · ACTIVE EXPLOITATION</span><time class="news-date" datetime="2026-10-28">28 Oct 2026</time></div>
-            <h3>PolyShell: the flaw that turned online stores into card skimmers</h3>
-            <p>Hundreds of Adobe Commerce and Magento stores breached in an active attack wave — CISA confirmed exploitation in the wild and added the flaws to its KEV catalog.</p>
-            <button class="read-link" type="button" data-news="polyshell">Read the breakdown <span>→</span></button>
+                    <article class="lesson-card news-card-new" data-severity="critical">
+            <div class="lc-pills">
+              <span class="lc-cat">Breach News</span>
+              <span class="lc-diff critical">CRITICAL</span>
+              <span class="lc-avail">28 Oct 2026</span>
+            </div>
+            <div class="lc-head">
+              <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <h3>PolyShell: the flaw that turned online stores into card skimmers</h3>
+            </div>
+            <p class="lc-desc">Hundreds of Adobe Commerce and Magento stores breached in an active attack wave — CISA confirmed exploitation in the wild and added the flaws to its KEV catalog.</p>
+            <div class="lc-foot">
+              <span class="lc-time">CRITICAL · ACTIVE EXPLOITATION</span>
+              <button class="lc-btn" type="button" data-news="polyshell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Breakdown</button>
+            </div>
           </article>
-          <article class="news-card reveal">
-            <div class="card-top"><span class="sev sev-high">HIGH · DATA THEFT</span><time class="news-date" datetime="2026-10-27">27 Oct 2026</time></div>
-            <h3>Sony breach: 2.58 million internet accounts exposed — but not PlayStation</h3>
-            <p>Sony confirmed 2.58 million So-net and plala records exposed — and passwords for 54,401 email accounts leaked. PlayStation accounts were not affected.</p>
-            <button class="read-link" type="button" data-news="sony">Read the breakdown <span>→</span></button>
+          <article class="lesson-card news-card-new" data-severity="high">
+            <div class="lc-pills">
+              <span class="lc-cat">Breach News</span>
+              <span class="lc-diff high">HIGH</span>
+              <span class="lc-avail">27 Oct 2026</span>
+            </div>
+            <div class="lc-head">
+              <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <h3>Sony breach: 2.58 million internet accounts exposed — but not PlayStation</h3>
+            </div>
+            <p class="lc-desc">Sony confirmed 2.58 million So-net and plala records exposed — and passwords for 54,401 email accounts leaked. PlayStation accounts were not affected.</p>
+            <div class="lc-foot">
+              <span class="lc-time">HIGH · DATA THEFT</span>
+              <button class="lc-btn" type="button" data-news="sony"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Breakdown</button>
+            </div>
           </article>
-          <article class="news-card reveal">
-            <div class="card-top"><span class="sev sev-high">HIGH · EXTORTION</span><time class="news-date" datetime="2026-10-23">23 Oct 2026</time></div>
-            <h3>PwC extortion claim: 590 GB of learning data, and a five-day countdown</h3>
-            <p>The Everest group claims 590 GB stolen from a vendor hosting PwC employee learning records — with a five-day countdown to release.</p>
-            <button class="read-link" type="button" data-news="pwc">Read the breakdown <span>→</span></button>
+          <article class="lesson-card news-card-new" data-severity="high">
+            <div class="lc-pills">
+              <span class="lc-cat">Breach News</span>
+              <span class="lc-diff high">HIGH</span>
+              <span class="lc-avail">23 Oct 2026</span>
+            </div>
+            <div class="lc-head">
+              <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <h3>PwC extortion claim: 590 GB of learning data, and a five-day countdown</h3>
+            </div>
+            <p class="lc-desc">The Everest group claims 590 GB stolen from a vendor hosting PwC employee learning records — with a five-day countdown to release.</p>
+            <div class="lc-foot">
+              <span class="lc-time">HIGH · EXTORTION</span>
+              <button class="lc-btn" type="button" data-news="pwc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Breakdown</button>
+            </div>
           </article>
-          <article class="news-card reveal">
-            <div class="card-top"><span class="sev sev-high">HIGH · DATA EXPOSURE</span><time class="news-date" datetime="2026-10-22">22 Oct 2026</time></div>
-            <h3>SBI dark-web find: 3,897 customer records among 375,000 leaked files</h3>
-            <p>SBI found 3,897 customer records with personal details among 375,000 files on the dark web — and warned the real danger is the phishing wave that follows.</p>
-            <button class="read-link" type="button" data-news="sbi">Read the breakdown <span>→</span></button>
+          <article class="lesson-card news-card-new" data-severity="high">
+            <div class="lc-pills">
+              <span class="lc-cat">Breach News</span>
+              <span class="lc-diff high">HIGH</span>
+              <span class="lc-avail">22 Oct 2026</span>
+            </div>
+            <div class="lc-head">
+              <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <h3>SBI dark-web find: 3,897 customer records among 375,000 leaked files</h3>
+            </div>
+            <p class="lc-desc">SBI found 3,897 customer records with personal details among 375,000 files on the dark web — and warned the real danger is the phishing wave that follows.</p>
+            <div class="lc-foot">
+              <span class="lc-time">HIGH · DATA EXPOSURE</span>
+              <button class="lc-btn" type="button" data-news="sbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Breakdown</button>
+            </div>
           </article>
-<article class="news-card reveal">
-            <div class="card-top"><span class="sev sev-critical">CRITICAL · CVSS 9.2</span><time class="news-date" datetime="2026-10-21">21 Oct 2026</time></div>
-            <h3>PHP2Shell: one request could take over most of the web</h3>
-            <p>Two critical flaws in PHP itself — the language behind WordPress and much of the web — let anyone run code on a web server with a single request, no login needed. Japan took major websites offline rather than risk it.</p>
-            <button class="read-link" type="button" data-news="php2shell">Read the breakdown <span>→</span></button>
+<article class="lesson-card news-card-new" data-severity="critical">
+            <div class="lc-pills">
+              <span class="lc-cat">Breach News</span>
+              <span class="lc-diff critical">CRITICAL</span>
+              <span class="lc-avail">21 Oct 2026</span>
+            </div>
+            <div class="lc-head">
+              <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <h3>PHP2Shell: one request could take over most of the web</h3>
+            </div>
+            <p class="lc-desc">Two critical flaws in PHP itself — the language behind WordPress and much of the web — let anyone run code on a web server with a single request, no login needed. Japan took major websites offline rather than risk it.</p>
+            <div class="lc-foot">
+              <span class="lc-time">CRITICAL · CVSS 9.2</span>
+              <button class="lc-btn" type="button" data-news="php2shell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Breakdown</button>
+            </div>
           </article>
-          <article class="news-card reveal">
-            <div class="card-top"><span class="sev sev-critical">CRITICAL · CVSS 9.5</span><time class="news-date" datetime="2026-09-27">27 Sep 2026</time></div>
-            <h3>NetScaler zero-days: root at the front door, weeks before the fix</h3>
-            <p>Attackers had root access on Citrix NetScaler gateways — the boxes guarding company networks — weeks before anyone knew the flaws existed. And a patch alone will not throw them out.</p>
-            <button class="read-link" type="button" data-news="netscaler">Read the breakdown <span>→</span></button>
+          <article class="lesson-card news-card-new" data-severity="critical">
+            <div class="lc-pills">
+              <span class="lc-cat">Breach News</span>
+              <span class="lc-diff critical">CRITICAL</span>
+              <span class="lc-avail">27 Sep 2026</span>
+            </div>
+            <div class="lc-head">
+              <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <h3>NetScaler zero-days: root at the front door, weeks before the fix</h3>
+            </div>
+            <p class="lc-desc">Attackers had root access on Citrix NetScaler gateways — the boxes guarding company networks — weeks before anyone knew the flaws existed. And a patch alone will not throw them out.</p>
+            <div class="lc-foot">
+              <span class="lc-time">CRITICAL · CVSS 9.5</span>
+              <button class="lc-btn" type="button" data-news="netscaler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Breakdown</button>
+            </div>
           </article>
-          <article class="news-card reveal">
-            <div class="card-top"><span class="sev sev-high">HIGH · DATA THEFT</span><time class="news-date" datetime="2026-05-07">May 2026</time></div>
-            <h3>Canvas breach: a school platform held to ransom in finals season</h3>
-            <p>One flaw in a free-teacher feature put data tied to a claimed 275 million learners at risk — then the ransom note appeared on hundreds of school login pages.</p>
-            <button class="read-link" type="button" data-news="canvas">Read the breakdown <span>→</span></button>
+          <article class="lesson-card news-card-new" data-severity="high">
+            <div class="lc-pills">
+              <span class="lc-cat">Breach News</span>
+              <span class="lc-diff high">HIGH</span>
+              <span class="lc-avail">May 2026</span>
+            </div>
+            <div class="lc-head">
+              <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <h3>Canvas breach: a school platform held to ransom in finals season</h3>
+            </div>
+            <p class="lc-desc">One flaw in a free-teacher feature put data tied to a claimed 275 million learners at risk — then the ransom note appeared on hundreds of school login pages.</p>
+            <div class="lc-foot">
+              <span class="lc-time">HIGH · DATA THEFT</span>
+              <button class="lc-btn" type="button" data-news="canvas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Breakdown</button>
+            </div>
           </article>
-          <article class="news-card reveal">
-            <div class="card-top"><span class="sev sev-critical">CRITICAL · DESTRUCTIVE</span><time class="news-date" datetime="2026-03-11">11 Mar 2026</time></div>
-            <h3>Stryker: the company wiped by its own device manager</h3>
-            <p>No malware. No ransom demand. Attackers logged in as admins and used the company’s own management tool to factory-reset its device fleet across 79 countries.</p>
-            <button class="read-link" type="button" data-news="stryker">Read the breakdown <span>→</span></button>
+          <article class="lesson-card news-card-new" data-severity="critical">
+            <div class="lc-pills">
+              <span class="lc-cat">Breach News</span>
+              <span class="lc-diff critical">CRITICAL</span>
+              <span class="lc-avail">11 Mar 2026</span>
+            </div>
+            <div class="lc-head">
+              <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <h3>Stryker: the company wiped by its own device manager</h3>
+            </div>
+            <p class="lc-desc">No malware. No ransom demand. Attackers logged in as admins and used the company’s own management tool to factory-reset its device fleet across 79 countries.</p>
+            <div class="lc-foot">
+              <span class="lc-time">CRITICAL · DESTRUCTIVE</span>
+              <button class="lc-btn" type="button" data-news="stryker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Breakdown</button>
+            </div>
           </article>
         </div>
       </div>
@@ -3401,15 +3735,22 @@ html, body { overflow-x: hidden; }
       function renderTutorials(category) {
         tutorialGrid.innerHTML = '';
         tutorialData.filter(function (item) { var inCategory=category === 'All' || item.category === category; var haystack=(item.title+' '+item.category+' '+item.body.replace(/<[^>]+>/g,' ')).toLowerCase(); return inCategory && (!tutorialSearchTerm || haystack.indexOf(tutorialSearchTerm)!==-1); }).forEach(function (item) {
-          var card = document.createElement('article'); card.className = 'tutorial-card';
-          var index = document.createElement('span'); index.className = 'tutorial-index'; index.textContent = String(item.id).padStart(2, '0');
-          var content = document.createElement('div');
-          var meta = document.createElement('div'); meta.className = 'tutorial-meta';
-          [item.category, item.level, item.time].forEach(function (value) { var span=document.createElement('span'); span.textContent=value; meta.appendChild(span); });
-          var title=document.createElement('h3'); title.textContent=item.title;
-          var summary=document.createElement('p'); summary.textContent=tutorialSummary(item.body);
-          var open=document.createElement('button'); open.className='tutorial-open'; open.type='button'; open.textContent='Open tutorial →'; open.setAttribute('data-tutorial-id', item.id);
-          content.append(meta,title,summary,open); card.append(index,content); tutorialGrid.appendChild(card);
+          var card = document.createElement('article'); card.className = 'lesson-card'; card.setAttribute('data-category', item.category.toLowerCase());
+          var pills = document.createElement('div'); pills.className = 'lc-pills';
+          var cat = document.createElement('span'); cat.className = 'lc-cat'; cat.textContent = item.category;
+          var diff = document.createElement('span'); var lvl = item.level.toLowerCase(); diff.className = 'lc-diff ' + (lvl.indexOf('beginner') !== -1 ? 'beginner' : 'intermediate'); diff.textContent = item.level.toUpperCase();
+          var avail = document.createElement('span'); avail.className = 'lc-avail'; avail.textContent = 'Tutorial';
+          pills.append(cat, diff, avail);
+          var head = document.createElement('div'); head.className = 'lc-head';
+          var icon = document.createElement('span'); icon.className = 'lc-icon'; icon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
+          var title = document.createElement('h3'); title.textContent = item.title;
+          head.append(icon, title);
+          var desc = document.createElement('p'); desc.className = 'lc-desc'; desc.textContent = tutorialSummary(item.body);
+          var foot = document.createElement('div'); foot.className = 'lc-foot';
+          var time = document.createElement('span'); time.className = 'lc-time'; time.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' + item.time;
+          var open = document.createElement('button'); open.className = 'lc-btn'; open.type = 'button'; open.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Open Tutorial'; open.setAttribute('data-tutorial-id', item.id);
+          foot.append(time, open);
+          card.append(pills, head, desc, foot); tutorialGrid.appendChild(card);
         });
       }
       tutorialCategories.forEach(function (category, index) {
@@ -3454,11 +3795,23 @@ html, body { overflow-x: hidden; }
         quizSetCount.textContent=visible.length+' quiz set'+(visible.length===1?'':'s')+' shown';
         if (!visible.length) { var empty=document.createElement('p'); empty.className='empty-library'; empty.textContent='No quiz sets match that search.'; quizSetGrid.appendChild(empty); return; }
         visible.forEach(function(set){
-          var card=document.createElement('button'); card.type='button'; card.className='quiz-set-card';
-          var kicker=document.createElement('span'); kicker.className='quiz-set-kicker'; kicker.textContent='Set '+String(set.id).padStart(3,'0')+' · '+set.category;
+          var card=document.createElement('article'); card.className='lesson-card'; card.setAttribute('data-category', set.category.toLowerCase());
+          var pills=document.createElement('div'); pills.className='lc-pills';
+          var cat=document.createElement('span'); cat.className='lc-cat'; cat.textContent=set.category;
+          var diff=document.createElement('span'); diff.className='lc-diff beginner'; diff.textContent='QUIZ';
+          var avail=document.createElement('span'); avail.className='lc-avail'; avail.textContent='Set '+String(set.id).padStart(3,'0');
+          pills.append(cat,diff,avail);
+          var head=document.createElement('div'); head.className='lc-head';
+          var icon=document.createElement('span'); icon.className='lc-icon'; icon.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
           var title=document.createElement('h3'); title.textContent=set.title;
-          var meta=document.createElement('span'); meta.className='quiz-set-meta'; meta.textContent='10 questions · 70% to earn certificate';
-          card.append(kicker,title,meta); card.addEventListener('click',function(){startQuiz(set);}); quizSetGrid.appendChild(card);
+          head.append(icon,title);
+          var desc=document.createElement('p'); desc.className='lc-desc'; desc.textContent='10 questions · 70% to earn certificate';
+          var foot=document.createElement('div'); foot.className='lc-foot';
+          var meta=document.createElement('span'); meta.className='lc-time'; meta.textContent='10 questions';
+          var btn=document.createElement('button'); btn.className='lc-btn'; btn.type='button'; btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>Start Quiz';
+          btn.addEventListener('click',function(){startQuiz(set);});
+          foot.append(meta,btn);
+          card.append(pills,head,desc,foot); quizSetGrid.appendChild(card);
         });
       }
       quizCategoryList.forEach(function(category,index){
