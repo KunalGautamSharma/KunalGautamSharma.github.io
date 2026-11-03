@@ -3212,7 +3212,7 @@ html, body { overflow-x: hidden; }
         button.addEventListener('click', function () {
           var filter = button.getAttribute('data-filter');
           document.querySelectorAll('.filter').forEach(function (b) { b.setAttribute('aria-pressed', String(b === button)); });
-          document.querySelectorAll('.article-card').forEach(function (card) {
+          document.querySelectorAll('.lesson-card, .article-card').forEach(function (card) {
             var show = filter === 'all' || card.getAttribute('data-category').indexOf(filter) !== -1;
             card.style.display = show ? 'flex' : 'none';
           });
@@ -3629,7 +3629,7 @@ var activeCertEls = null;
 
       function makeBadge(text) { var badge = document.createElement('span'); badge.className = 'done-badge'; badge.textContent = text; return badge; }
       function applyGuideBadges() {
-        document.querySelectorAll('.article-card').forEach(function (card) {
+        document.querySelectorAll('.lesson-card, .article-card').forEach(function (card) {
           var button = card.querySelector('[data-article]');
           if (!button) return;
           var done = guideDone(button.getAttribute('data-article'));
