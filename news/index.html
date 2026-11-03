@@ -186,6 +186,9 @@
 
 /* ===== Lesson Cards (new design) ===== */
 .lesson-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+/* Ensure lesson-grid overrides article-grid when both present */
+.article-grid.lesson-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.article-grid.lesson-grid .lesson-card { grid-column: auto; }
 .lesson-card {
   background: var(--surface);
   border: 1px solid var(--line);
