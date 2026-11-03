@@ -183,6 +183,103 @@
     }
     .article-card.featured { grid-column: span 8; background: var(--surface-2); }
     .article-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: var(--shadow); }
+
+/* ===== Lesson Cards (new design) ===== */
+.lesson-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.lesson-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+  font-family: "Manrope", sans-serif;
+}
+.lesson-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .25);
+}
+.lc-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.lc-cat {
+  font-size: .68rem; font-weight: 600; letter-spacing: .02em;
+  padding: 4px 10px; border-radius: 6px;
+  background: var(--surface-2); color: var(--muted);
+  border: 1px solid var(--line);
+  font-family: "Manrope", sans-serif;
+}
+.lc-diff {
+  font-size: .65rem; font-weight: 700; letter-spacing: .06em;
+  padding: 4px 10px; border-radius: 6px;
+  font-family: "JetBrains Mono", monospace;
+}
+.lc-diff.beginner {
+  background: rgba(64, 224, 189, .12); color: #40e0bd;
+  border: 1px solid rgba(64, 224, 189, .3);
+}
+.lc-diff.intermediate {
+  background: rgba(255, 180, 84, .12); color: #ffb454;
+  border: 1px solid rgba(255, 180, 84, .3);
+}
+.lc-avail {
+  font-size: .65rem; font-weight: 600; letter-spacing: .02em;
+  padding: 4px 10px; border-radius: 6px;
+  background: rgba(64, 224, 189, .08); color: var(--accent);
+  border: 1px solid var(--line);
+  font-family: "Manrope", sans-serif;
+  margin-left: auto;
+}
+.lc-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+.lc-icon {
+  flex-shrink: 0; width: 36px; height: 36px;
+  display: grid; place-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 10px; color: var(--accent);
+}
+.lc-icon svg { width: 20px; height: 20px; }
+.lc-head h3 {
+  margin: 0; font-size: 1.02rem; font-weight: 700;
+  color: var(--ink); line-height: 1.35; letter-spacing: -.01em;
+  font-family: "Manrope", sans-serif;
+}
+.lc-desc {
+  margin: 0 0 18px; font-size: .86rem; line-height: 1.6;
+  color: var(--muted); flex-grow: 1;
+  font-family: "Manrope", sans-serif;
+}
+.lc-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.lc-time {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .78rem; color: var(--muted); font-weight: 500;
+  font-family: "Manrope", sans-serif;
+}
+.lc-time svg { width: 14px; height: 14px; }
+.lc-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 14px; border-radius: 8px;
+  background: transparent; color: var(--accent);
+  border: 1px solid var(--accent);
+  font-size: .8rem; font-weight: 600; cursor: pointer;
+  font-family: "Manrope", sans-serif;
+  transition: background .2s, color .2s;
+}
+.lc-btn:hover { background: var(--accent); color: #04100d; }
+.lc-btn svg { width: 14px; height: 14px; }
+
+/* Responsive: lesson cards */
+@media (max-width: 1024px) {
+  .lesson-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .lesson-grid { grid-template-columns: 1fr; }
+  .lesson-card { padding: 18px; }
+}
     .card-top { display: flex; justify-content: space-between; align-items: start; gap: 14px; }
     .topic-tag { font-family: "JetBrains Mono", monospace; font-size: .72rem; color: var(--accent-strong); }
     .card-number { color: var(--line); font-size: 2.2rem; font-weight: 800; line-height: 1; }
@@ -1296,342 +1393,958 @@ html, body { overflow-x: hidden; }
           <div class="progress-track small" role="progressbar" aria-label="Guides completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="learnProgressTrack"><i id="learnProgressFill"></i></div>
           <a href="/path" data-route-link="path">See full progress →</a>
         </div>
-        <div class="article-grid">
-          <article class="article-card featured reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING / FOUNDATION</span><span class="card-number">01</span></div>
-            <h3>IP addresses: how devices find each other</h3>
-            <p>Public vs private addresses, IPv4 basics and the role an IP plays every time you connect.</p>
-            <button class="read-link" type="button" data-article="ip">Read the quick guide <span>→</span></button>
+        <div class="article-grid lesson-grid">
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>IP addresses: how devices find each other</h3>
+      </div>
+      <p class="lc-desc">Public vs private addresses, IPv4 basics and the role an IP plays every time you connect.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="ip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">02</span></div>
-            <h3>DNS without the confusion</h3>
-            <p>See how a domain name becomes an address your browser can reach.</p>
-            <button class="read-link" type="button" data-article="dns">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>DNS without the confusion</h3>
+      </div>
+      <p class="lc-desc">See how a domain name becomes an address your browser can reach.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="dns"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">03</span></div>
-            <h3>Common ports you should know</h3>
-            <p>A practical map of the doors services use—from web traffic to secure shells.</p>
-            <button class="read-link" type="button" data-article="ports">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>Common ports you should know</h3>
+      </div>
+      <p class="lc-desc">A practical map of the doors services use—from web traffic to secure shells.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="ports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY</span><span class="card-number">04</span></div>
-            <h3>HTTPS and TLS: what the lock means</h3>
-            <p>Understand encryption in transit and what HTTPS protects—and what it does not.</p>
-            <button class="read-link" type="button" data-article="tls">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>HTTPS and TLS: what the lock means</h3>
+      </div>
+      <p class="lc-desc">Understand encryption in transit and what HTTPS protects—and what it does not.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
+        <button class="lc-btn" type="button" data-article="tls"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY</span><span class="card-number">05</span></div>
-            <h3>Cookies, sessions and tokens</h3>
-            <p>How websites remember you, keep you signed in and decide what your browser is allowed to do.</p>
-            <button class="read-link" type="button" data-article="sessions">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>Cookies, sessions and tokens</h3>
+      </div>
+      <p class="lc-desc">How websites remember you, keep you signed in and decide what your browser is allowed to do.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="sessions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">CYBER SAFETY</span><span class="card-number">06</span></div>
-            <h3>Is your phone compromised?</h3>
-            <p>Separate real warning signs from normal glitches, then respond methodically.</p>
-            <button class="read-link" type="button" data-article="phone">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Is your phone compromised?</h3>
+      </div>
+      <p class="lc-desc">Separate real warning signs from normal glitches, then respond methodically.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">07</span></div>
-            <h3>TCP vs UDP: which one carries your data?</h3>
-            <p>Two transport styles—guaranteed delivery or raw speed—and when each one wins.</p>
-            <button class="read-link" type="button" data-article="tcpudp">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>TCP vs UDP: which one carries your data?</h3>
+      </div>
+      <p class="lc-desc">Two transport styles—guaranteed delivery or raw speed—and when each one wins.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="tcpudp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING / FOUNDATION</span><span class="card-number">08</span></div>
-            <h3>The OSI model in plain English</h3>
-            <p>Seven layers that turn 'the internet is broken' into a problem you can locate.</p>
-            <button class="read-link" type="button" data-article="osi">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>The OSI model in plain English</h3>
+      </div>
+      <p class="lc-desc">Seven layers that turn 'the internet is broken' into a problem you can locate.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
+        <button class="lc-btn" type="button" data-article="osi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">09</span></div>
-            <h3>Subnetting and CIDR, simplified</h3>
-            <p>How networks get sliced into smaller, safer neighbourhoods—and what /24 really means.</p>
-            <button class="read-link" type="button" data-article="subnetting">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>Subnetting and CIDR, simplified</h3>
+      </div>
+      <p class="lc-desc">How networks get sliced into smaller, safer neighbourhoods—and what /24 really means.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="subnetting"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">10</span></div>
-            <h3>DHCP: the automatic address giver</h3>
-            <p>The four-step handshake that hands your device an IP the moment you join a network.</p>
-            <button class="read-link" type="button" data-article="dhcp">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>DHCP: the automatic address giver</h3>
+      </div>
+      <p class="lc-desc">The four-step handshake that hands your device an IP the moment you join a network.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="dhcp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">11</span></div>
-            <h3>NAT: one public IP for a whole home</h3>
-            <p>How your router lets dozens of private devices share a single public address.</p>
-            <button class="read-link" type="button" data-article="nat">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>NAT: one public IP for a whole home</h3>
+      </div>
+      <p class="lc-desc">How your router lets dozens of private devices share a single public address.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING / FOUNDATION</span><span class="card-number">12</span></div>
-            <h3>MAC addresses: your device's hardware name</h3>
-            <p>The physical address burned into every network interface—and how it differs from an IP.</p>
-            <button class="read-link" type="button" data-article="mac">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>MAC addresses: your device's hardware name</h3>
+      </div>
+      <p class="lc-desc">The physical address burned into every network interface—and how it differs from an IP.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="mac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">13</span></div>
-            <h3>Routers, switches and access points</h3>
-            <p>Three boxes, three different jobs: moving traffic inside, between and onto the air.</p>
-            <button class="read-link" type="button" data-article="routerswitch">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>Routers, switches and access points</h3>
+      </div>
+      <p class="lc-desc">Three boxes, three different jobs: moving traffic inside, between and onto the air.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="routerswitch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING / PRIVACY</span><span class="card-number">14</span></div>
-            <h3>VPNs: what they hide—and what they don't</h3>
-            <p>An encrypted tunnel for your traffic, with honest limits on the privacy it provides.</p>
-            <button class="read-link" type="button" data-article="vpn">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>VPNs: what they hide—and what they don't</h3>
+      </div>
+      <p class="lc-desc">An encrypted tunnel for your traffic, with honest limits on the privacy it provides.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="vpn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING / DEFENSE</span><span class="card-number">15</span></div>
-            <h3>Firewalls: the network gatekeeper</h3>
-            <p>Rules that decide which traffic gets in, which gets out and which gets dropped.</p>
-            <button class="read-link" type="button" data-article="firewall">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>Firewalls: the network gatekeeper</h3>
+      </div>
+      <p class="lc-desc">Rules that decide which traffic gets in, which gets out and which gets dropped.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="firewall"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING / WIRELESS</span><span class="card-number">16</span></div>
-            <h3>Wi-Fi security: WEP to WPA3</h3>
-            <p>Why old wireless encryption fell apart and what modern WPA3 does differently.</p>
-            <button class="read-link" type="button" data-article="wifi">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>Wi-Fi security: WEP to WPA3</h3>
+      </div>
+      <p class="lc-desc">Why old wireless encryption fell apart and what modern WPA3 does differently.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="wifi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">17</span></div>
-            <h3>IPv6: the internet's bigger address book</h3>
-            <p>Why the world ran out of IPv4 room and what 128-bit addresses change.</p>
-            <button class="read-link" type="button" data-article="ipv6">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>IPv6: the internet's bigger address book</h3>
+      </div>
+      <p class="lc-desc">Why the world ran out of IPv4 room and what 128-bit addresses change.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="ipv6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">18</span></div>
-            <h3>Latency, bandwidth and throughput</h3>
-            <p>Three words people mix up that decide whether your connection feels fast or sluggish.</p>
-            <button class="read-link" type="button" data-article="latency">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>Latency, bandwidth and throughput</h3>
+      </div>
+      <p class="lc-desc">Three words people mix up that decide whether your connection feels fast or sluggish.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="latency"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">19</span></div>
-            <h3>Proxy servers: the middleman explained</h3>
-            <p>How a proxy fetches the web on your behalf—and the traces that leaves behind.</p>
-            <button class="read-link" type="button" data-article="proxy">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>Proxy servers: the middleman explained</h3>
+      </div>
+      <p class="lc-desc">How a proxy fetches the web on your behalf—and the traces that leaves behind.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="proxy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">20</span></div>
-            <h3>CDNs: why big websites load instantly</h3>
-            <p>Copies of content parked near you, so pages travel metres instead of oceans.</p>
-            <button class="read-link" type="button" data-article="cdn">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>CDNs: why big websites load instantly</h3>
+      </div>
+      <p class="lc-desc">Copies of content parked near you, so pages travel metres instead of oceans.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="cdn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING / TOOLS</span><span class="card-number">21</span></div>
-            <h3>Ping and traceroute: feeling the network's pulse</h3>
-            <p>Two tiny tools that reveal whether a host is alive and the path your packets take.</p>
-            <button class="read-link" type="button" data-article="ping">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>Ping and traceroute: feeling the network's pulse</h3>
+      </div>
+      <p class="lc-desc">Two tiny tools that reveal whether a host is alive and the path your packets take.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
+        <button class="lc-btn" type="button" data-article="ping"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING / FOUNDATION</span><span class="card-number">22</span></div>
-            <h3>What is a protocol, really?</h3>
-            <p>Shared rules that let strangers' computers cooperate—from handshakes to error checks.</p>
-            <button class="read-link" type="button" data-article="protocols">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>What is a protocol, really?</h3>
+      </div>
+      <p class="lc-desc">Shared rules that let strangers' computers cooperate—from handshakes to error checks.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="protocols"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="networking">
-            <div class="card-top"><span class="topic-tag">NETWORKING</span><span class="card-number">23</span></div>
-            <h3>LAN, WAN and the internet itself</h3>
-            <p>Networks sorted by size, and where your home setup ends and the wider world begins.</p>
-            <button class="read-link" type="button" data-article="lanwan">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="networking">
+      <div class="lc-pills">
+        <span class="lc-cat">Networking</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <h3>LAN, WAN and the internet itself</h3>
+      </div>
+      <p class="lc-desc">Networks sorted by size, and where your home setup ends and the wider world begins.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="lanwan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">CYBER SAFETY</span><span class="card-number">24</span></div>
-            <h3>Passwords and passphrases that hold up</h3>
-            <p>Length beats clever tricks: how modern password cracking actually works.</p>
-            <button class="read-link" type="button" data-article="passwords">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Passwords and passphrases that hold up</h3>
+      </div>
+      <p class="lc-desc">Length beats clever tricks: how modern password cracking actually works.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="passwords"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">CYBER SAFETY</span><span class="card-number">25</span></div>
-            <h3>Two-factor authentication, decoded</h3>
-            <p>Something you know plus something you have—why the second step stops most account takeovers.</p>
-            <button class="read-link" type="button" data-article="twofa">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Two-factor authentication, decoded</h3>
+      </div>
+      <p class="lc-desc">Something you know plus something you have—why the second step stops most account takeovers.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="twofa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">CYBER SAFETY / TOOLS</span><span class="card-number">26</span></div>
-            <h3>Password managers: one vault for everything</h3>
-            <p>Stop reusing passwords by letting encrypted software remember them all for you.</p>
-            <button class="read-link" type="button" data-article="passmanager">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Password managers: one vault for everything</h3>
+      </div>
+      <p class="lc-desc">Stop reusing passwords by letting encrypted software remember them all for you.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="passmanager"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">SECURITY / SOCIAL</span><span class="card-number">27</span></div>
-            <h3>Phishing: spot the hook before you bite</h3>
-            <p>The psychology and the tells behind fake emails, texts and login pages.</p>
-            <button class="read-link" type="button" data-article="phishing">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Phishing: spot the hook before you bite</h3>
+      </div>
+      <p class="lc-desc">The psychology and the tells behind fake emails, texts and login pages.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="phishing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">SECURITY / THREATS</span><span class="card-number">28</span></div>
-            <h3>Malware families: virus, worm, trojan, ransomware</h3>
-            <p>A field guide to the main species of malicious software and how each one spreads.</p>
-            <button class="read-link" type="button" data-article="malware">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Malware families: virus, worm, trojan, ransomware</h3>
+      </div>
+      <p class="lc-desc">A field guide to the main species of malicious software and how each one spreads.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="malware"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">SECURITY / THREATS</span><span class="card-number">29</span></div>
-            <h3>Ransomware: how it locks you out</h3>
-            <p>From a single click to encrypted files—the chain of events, and the defenses that break it.</p>
-            <button class="read-link" type="button" data-article="ransomware">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Ransomware: how it locks you out</h3>
+      </div>
+      <p class="lc-desc">From a single click to encrypted files—the chain of events, and the defenses that break it.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="ransomware"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">SECURITY / SOCIAL</span><span class="card-number">30</span></div>
-            <h3>Social engineering: hacking people, not machines</h3>
-            <p>Pretexting, baiting and urgency—the human exploits behind most real breaches.</p>
-            <button class="read-link" type="button" data-article="socialeng">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Social engineering: hacking people, not machines</h3>
+      </div>
+      <p class="lc-desc">Pretexting, baiting and urgency—the human exploits behind most real breaches.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="socialeng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">CRYPTOGRAPHY</span><span class="card-number">31</span></div>
-            <h3>Encryption: symmetric vs asymmetric</h3>
-            <p>One shared key or a public-private pair: the two engines behind almost all secrecy online.</p>
-            <button class="read-link" type="button" data-article="encryption">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Encryption: symmetric vs asymmetric</h3>
+      </div>
+      <p class="lc-desc">One shared key or a public-private pair: the two engines behind almost all secrecy online.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
+        <button class="lc-btn" type="button" data-article="encryption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">CRYPTOGRAPHY</span><span class="card-number">32</span></div>
-            <h3>Hashing: fingerprints for data</h3>
-            <p>One-way functions that prove a file hasn't changed and store passwords without storing them.</p>
-            <button class="read-link" type="button" data-article="hashing">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Hashing: fingerprints for data</h3>
+      </div>
+      <p class="lc-desc">One-way functions that prove a file hasn't changed and store passwords without storing them.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="hashing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">CRYPTOGRAPHY / WEB</span><span class="card-number">33</span></div>
-            <h3>Digital certificates: ID cards for websites</h3>
-            <p>How a chain of trust lets your browser believe a site is really who it claims to be.</p>
-            <button class="read-link" type="button" data-article="certs">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Digital certificates: ID cards for websites</h3>
+      </div>
+      <p class="lc-desc">How a chain of trust lets your browser believe a site is really who it claims to be.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="certs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">SECURITY / DEFENSE</span><span class="card-number">34</span></div>
-            <h3>Zero trust: never trust, always verify</h3>
-            <p>The mindset that assumes the network is already hostile and checks every request.</p>
-            <button class="read-link" type="button" data-article="zerotrust">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Zero trust: never trust, always verify</h3>
+      </div>
+      <p class="lc-desc">The mindset that assumes the network is already hostile and checks every request.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="zerotrust"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">SECURITY / DEFENSE</span><span class="card-number">35</span></div>
-            <h3>How antivirus and EDR actually work</h3>
-            <p>Signatures, behaviour watching and the modern tools that hunt threats on your device.</p>
-            <button class="read-link" type="button" data-article="antivirus">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>How antivirus and EDR actually work</h3>
+      </div>
+      <p class="lc-desc">Signatures, behaviour watching and the modern tools that hunt threats on your device.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="antivirus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">CYBER SAFETY / DEFENSE</span><span class="card-number">36</span></div>
-            <h3>Backups and the 3-2-1 rule</h3>
-            <p>Three copies, two media, one off-site: the habit that turns disasters into inconveniences.</p>
-            <button class="read-link" type="button" data-article="backups">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Backups and the 3-2-1 rule</h3>
+      </div>
+      <p class="lc-desc">Three copies, two media, one off-site: the habit that turns disasters into inconveniences.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
+        <button class="lc-btn" type="button" data-article="backups"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">SECURITY / DEFENSE</span><span class="card-number">37</span></div>
-            <h3>Patching: why updates are a security control</h3>
-            <p>Most breaches exploit bugs that were already fixed—here's the race attackers win when you delay.</p>
-            <button class="read-link" type="button" data-article="patching">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Patching: why updates are a security control</h3>
+      </div>
+      <p class="lc-desc">Most breaches exploit bugs that were already fixed—here's the race attackers win when you delay.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="patching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">CYBER SAFETY</span><span class="card-number">38</span></div>
-            <h3>Public Wi-Fi without the paranoia</h3>
-            <p>What is genuinely risky on café Wi-Fi, what isn't, and the habits that cover you.</p>
-            <button class="read-link" type="button" data-article="publicwifi">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Public Wi-Fi without the paranoia</h3>
+      </div>
+      <p class="lc-desc">What is genuinely risky on café Wi-Fi, what isn't, and the habits that cover you.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="publicwifi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">SECURITY / FOUNDATION</span><span class="card-number">39</span></div>
-            <h3>Least privilege: only the access you need</h3>
-            <p>Why admin rights everywhere is an open invitation, at home and at work.</p>
-            <button class="read-link" type="button" data-article="privilege">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Least privilege: only the access you need</h3>
+      </div>
+      <p class="lc-desc">Why admin rights everywhere is an open invitation, at home and at work.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="privilege"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="security">
-            <div class="card-top"><span class="topic-tag">CYBER SAFETY / RESPONSE</span><span class="card-number">40</span></div>
-            <h3>Breached? Your first hour, step by step</h3>
-            <p>Contain, change, check and document: a calm checklist for when an account or device is compromised.</p>
-            <button class="read-link" type="button" data-article="breach">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="security">
+      <div class="lc-pills">
+        <span class="lc-cat">Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Breached? Your first hour, step by step</h3>
+      </div>
+      <p class="lc-desc">Contain, change, check and document: a calm checklist for when an account or device is compromised.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="breach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / FOUNDATION</span><span class="card-number">41</span></div>
-            <h3>HTTP methods and status codes</h3>
-            <p>GET, POST and friends, plus the 404s and 500s that tell you what went wrong.</p>
-            <button class="read-link" type="button" data-article="http">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>HTTP methods and status codes</h3>
+      </div>
+      <p class="lc-desc">GET, POST and friends, plus the 404s and 500s that tell you what went wrong.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="http"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / ATTACKS</span><span class="card-number">42</span></div>
-            <h3>SQL injection: talking to the database</h3>
-            <p>How unfiltered input turns a login form into a conversation with the site's database.</p>
-            <button class="read-link" type="button" data-article="sqli">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>SQL injection: talking to the database</h3>
+      </div>
+      <p class="lc-desc">How unfiltered input turns a login form into a conversation with the site's database.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="sqli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / ATTACKS</span><span class="card-number">43</span></div>
-            <h3>Cross-site scripting (XSS)</h3>
-            <p>When a website serves an attacker's script to its own visitors—and how sites stop it.</p>
-            <button class="read-link" type="button" data-article="xss">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>Cross-site scripting (XSS)</h3>
+      </div>
+      <p class="lc-desc">When a website serves an attacker's script to its own visitors—and how sites stop it.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="xss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / ATTACKS</span><span class="card-number">44</span></div>
-            <h3>CSRF: the confused deputy of the web</h3>
-            <p>Tricking your logged-in browser into making requests you never intended.</p>
-            <button class="read-link" type="button" data-article="csrf">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>CSRF: the confused deputy of the web</h3>
+      </div>
+      <p class="lc-desc">Tricking your logged-in browser into making requests you never intended.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="csrf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / FOUNDATION</span><span class="card-number">45</span></div>
-            <h3>APIs: how apps talk to each other</h3>
-            <p>The request-and-response contracts behind every app on your phone.</p>
-            <button class="read-link" type="button" data-article="api">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>APIs: how apps talk to each other</h3>
+      </div>
+      <p class="lc-desc">The request-and-response contracts behind every app on your phone.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
+        <button class="lc-btn" type="button" data-article="api"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY</span><span class="card-number">46</span></div>
-            <h3>REST APIs in plain English</h3>
-            <p>Resources, verbs and JSON: the design style that runs most of the modern web.</p>
-            <button class="read-link" type="button" data-article="rest">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>REST APIs in plain English</h3>
+      </div>
+      <p class="lc-desc">Resources, verbs and JSON: the design style that runs most of the modern web.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="rest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / BROWSER</span><span class="card-number">47</span></div>
-            <h3>The same-origin policy</h3>
-            <p>The browser rule that stops one site's scripts from reading another site's data.</p>
-            <button class="read-link" type="button" data-article="sameorigin">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>The same-origin policy</h3>
+      </div>
+      <p class="lc-desc">The browser rule that stops one site's scripts from reading another site's data.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="sameorigin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / BROWSER</span><span class="card-number">48</span></div>
-            <h3>CORS without the headache</h3>
-            <p>Why your browser blocks some cross-site requests and how servers grant permission safely.</p>
-            <button class="read-link" type="button" data-article="cors">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>CORS without the headache</h3>
+      </div>
+      <p class="lc-desc">Why your browser blocks some cross-site requests and how servers grant permission safely.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="cors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / AUTH</span><span class="card-number">49</span></div>
-            <h3>JWTs: tokens that carry their own claims</h3>
-            <p>Signed, self-contained login tokens—and the mistakes that make them forgeable.</p>
-            <button class="read-link" type="button" data-article="jwt">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>JWTs: tokens that carry their own claims</h3>
+      </div>
+      <p class="lc-desc">Signed, self-contained login tokens—and the mistakes that make them forgeable.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
+        <button class="lc-btn" type="button" data-article="jwt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / DEFENSE</span><span class="card-number">50</span></div>
-            <h3>Never trust user input</h3>
-            <p>Validation, encoding and parameterized queries: the unglamorous habits that block most web attacks.</p>
-            <button class="read-link" type="button" data-article="inputval">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>Never trust user input</h3>
+      </div>
+      <p class="lc-desc">Validation, encoding and parameterized queries: the unglamorous habits that block most web attacks.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="inputval"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY</span><span class="card-number">51</span></div>
-            <h3>The OWASP Top 10, toured</h3>
-            <p>The industry's shortlist of the web risks that matter most, in plain language.</p>
-            <button class="read-link" type="button" data-article="owasp">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>The OWASP Top 10, toured</h3>
+      </div>
+      <p class="lc-desc">The industry's shortlist of the web risks that matter most, in plain language.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
+        <button class="lc-btn" type="button" data-article="owasp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / DEFENSE</span><span class="card-number">52</span></div>
-            <h3>Security headers: your site's seatbelts</h3>
-            <p>Small response headers that block framing, sniffing and script tricks.</p>
-            <button class="read-link" type="button" data-article="headers">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>Security headers: your site's seatbelts</h3>
+      </div>
+      <p class="lc-desc">Small response headers that block framing, sniffing and script tricks.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
+        <button class="lc-btn" type="button" data-article="headers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / ATTACKS</span><span class="card-number">53</span></div>
-            <h3>Clickjacking: the invisible layer trick</h3>
-            <p>How attackers hide a real page under a fake one and steal your clicks.</p>
-            <button class="read-link" type="button" data-article="clickjacking">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>Clickjacking: the invisible layer trick</h3>
+      </div>
+      <p class="lc-desc">How attackers hide a real page under a fake one and steal your clicks.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
+        <button class="lc-btn" type="button" data-article="clickjacking"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / DEFENSE</span><span class="card-number">54</span></div>
-            <h3>WAFs: bouncers for web applications</h3>
-            <p>What a web application firewall filters, what it misses and why it's only one layer.</p>
-            <button class="read-link" type="button" data-article="waf">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>WAFs: bouncers for web applications</h3>
+      </div>
+      <p class="lc-desc">What a web application firewall filters, what it misses and why it's only one layer.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span>
+        <button class="lc-btn" type="button" data-article="waf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card featured reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / CAREER</span><span class="card-number">55</span></div>
-            <h3>Bug bounties: legal hacking that pays</h3>
-            <p>How researchers report real flaws for rewards—and the rules that keep it legal.</p>
-            <button class="read-link" type="button" data-article="bugbounty">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>Bug bounties: legal hacking that pays</h3>
+      </div>
+      <p class="lc-desc">How researchers report real flaws for rewards—and the rules that keep it legal.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>8 min read</span>
+        <button class="lc-btn" type="button" data-article="bugbounty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
-          <article class="article-card reveal" data-category="web security">
-            <div class="card-top"><span class="topic-tag">WEB SECURITY / PRACTICE</span><span class="card-number">56</span></div>
-            <h3>CTF competitions: hacking as a sport</h3>
-            <p>Capture-the-flag events are the safest gym for offensive security skills.</p>
-            <button class="read-link" type="button" data-article="ctf">Read the quick guide <span>→</span></button>
+          <article class="lesson-card" data-category="web security">
+      <div class="lc-pills">
+        <span class="lc-cat">Web Security</span>
+        <span class="lc-diff beginner">BEGINNER</span>
+        <span class="lc-avail">Available</span>
+      </div>
+      <div class="lc-head">
+        <span class="lc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3>CTF competitions: hacking as a sport</h3>
+      </div>
+      <p class="lc-desc">Capture-the-flag events are the safest gym for offensive security skills.</p>
+      <div class="lc-foot">
+        <span class="lc-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>6 min read</span>
+        <button class="lc-btn" type="button" data-article="ctf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Read Lesson</button>
+      </div>
+    </article>Read the quick guide <span>→</span></button>
           </article>
         </div>
       </div>
