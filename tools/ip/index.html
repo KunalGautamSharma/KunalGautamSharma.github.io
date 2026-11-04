@@ -465,7 +465,12 @@
       .reveal { opacity: 1; transform: none; }
       .data-packet { display: none; }
     }
-    @media (max-width: 900px) {
+    
+.contact-info-card { text-decoration: none; transition: border-color .2s, transform .2s; }
+.contact-info-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.contact-card-arrow { margin-left: auto; color: var(--muted); font-size: 1.1rem; }
+.contact-info-card:hover .contact-card-arrow { color: var(--accent); }
+@media (max-width: 900px) {
       .hero-grid, .path-grid, .principles, .contact-layout { grid-template-columns: 1fr; }
       .hero { padding-top: 46px; }
       .hero-art, .data-flow { min-height: 430px; }
@@ -3337,22 +3342,30 @@ html, body { overflow-x: hidden; }
     <section class="route-view" data-route-view="contact" hidden>
       <div class="shell contact-redesign">
         <div class="contact-left reveal">
-          <span class="contact-pill">// CONNECT WITH HACK_WITH_K</span>
-          <h1 class="contact-title">Let's Build Something<br><span class="gradient-text">Meaningful.</span></h1>
-          <p class="contact-desc">Have a question about a technical concept, want to collaborate on educational content, or invite Hack_with_K for a workshop? Send us a message!</p>
+          <span class="contact-pill">// CONTACT ME</span>
+          <h1 class="contact-title">Let&rsquo;s talk<br><span class="gradient-text">cybersecurity.</span></h1>
+          <p class="contact-desc">Have a learning question, tutorial request, correction or collaboration idea? Reach KUNAL GAUTAM through any of the official Hack With K channels.</p>
           
-          <div class="contact-info-card">
+          <a class="contact-info-card" href="https://www.instagram.com/hack_withk/" target="_blank" rel="noopener">
             <span class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
-            <span class="contact-info-text"><small>Instagram Handle</small><strong>@hack_with_k</strong></span>
-          </div>
+            <span class="contact-info-text"><small>Questions &amp; collaborations</small><strong>Message @hack_withk on Instagram</strong></span>
+            <span class="contact-card-arrow" aria-hidden="true">&nearr;</span>
+          </a>
           
-          <div class="contact-info-card">
-            <span class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
-            <span class="contact-info-text"><small>Direct Inquiries</small><strong>[Contact email provided upon request]</strong></span>
-          </div>
+          <a class="contact-info-card" href="https://t.me/hack_withk" target="_blank" rel="noopener">
+            <span class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 4-3.2 15.1c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9-8.1c.4-.4-.1-.6-.6-.2L5.4 12.8.6 11.3c-1-.3-1-1 .2-1.5L19.5 2.6C20.4 2.3 21.2 2.8 21 4Z" stroke-linejoin="round"/></svg></span>
+            <span class="contact-info-text"><small>Community &amp; updates</small><strong>Join the Telegram channel</strong></span>
+            <span class="contact-card-arrow" aria-hidden="true">&nearr;</span>
+          </a>
+          
+          <a class="contact-info-card" href="https://www.youtube.com/@hack_withk" target="_blank" rel="noopener">
+            <span class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg></span>
+            <span class="contact-info-text"><small>Video lessons</small><strong>Visit Hack With K on YouTube</strong></span>
+            <span class="contact-card-arrow" aria-hidden="true">&nearr;</span>
+          </a>
           
           <div class="contact-notice">
-            <strong>Notice:</strong> Hack_with_K is strictly an educational brand. We do NOT perform illegal hacking, password cracking, or commercial penetration testing.
+            Please do not send passwords, one-time codes or other sensitive information.
           </div>
         </div>
         
@@ -3377,16 +3390,16 @@ html, body { overflow-x: hidden; }
               <div class="form-group">
                 <label for="cf-category">Category</label>
                 <select id="cf-category" name="category">
-                  <option>Educational Inquiry</option>
-                  <option>Collaboration</option>
-                  <option>Workshop Invite</option>
+                  <option>Learning Question</option>
+                  <option>Tutorial Request</option>
                   <option>Correction / Feedback</option>
+                  <option>Collaboration</option>
                   <option>Other</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="cf-message">Message <span class="req">*</span></label>
-                <textarea id="cf-message" name="message" rows="4" placeholder="How can Hack_with_K assist your learning or technical project?" required></textarea>
+                <textarea id="cf-message" name="message" rows="4" placeholder="What's your question or idea?" required></textarea>
               </div>
               <button type="submit" class="contact-submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message</button>
               <p class="form-status" id="contactFormStatus" aria-live="polite"></p>
