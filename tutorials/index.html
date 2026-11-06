@@ -5581,22 +5581,36 @@ var activeCertEls = null;
       message: message,
       _subject: 'New contact message from ' + name + ' via hackwithk.me'
     };
+    function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+    var mailto = 'mailto:kunalsharmaopus@gmail.com?subject=' + encodeURIComponent(data.subject + ' - ' + data.category) + '&body=' + encodeURIComponent(data.message + '\n\n- ' + data.name + ' (' + data.email + ')');
+    var controller = new AbortController();
+    var timer = setTimeout(function() { controller.abort(); }, 15000);
     fetch('https://formsubmit.co/ajax/kunalsharmaopus@gmail.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      signal: controller.signal
     }).then(function(res) { return res.json(); })
-    .then(function() {
-      status.textContent = 'Message sent! KUNAL will get back to you soon.';
-      status.className = 'form-status success';
-      form.reset();
-      document.getElementById('cf-subject').value = 'General Inquiry';
-    }).catch(function() {
-      status.textContent = 'Something went wrong. Please try again or reach out on Instagram @hack_with_k.';
+    .then(function(resp) {
+      clearTimeout(timer);
+      if (resp && (resp.success === 'true' || resp.success === true)) {
+        status.textContent = 'Message sent! KUNAL will get back to you soon.';
+        status.className = 'form-status success';
+        form.reset();
+        document.getElementById('cf-subject').value = 'General Inquiry';
+      } else {
+        var msg = (resp && resp.message) ? resp.message : 'The message service did not accept this message.';
+        status.innerHTML = 'Could not send: ' + esc(msg) + ' <a href="' + mailto + '">Send it by email instead</a> or reach out on <a href="https://www.instagram.com/hack_withk/" target="_blank" rel="noopener">Instagram @hack_withk</a>.';
+        status.className = 'form-status error';
+      }
+    }).catch(function(err) {
+      clearTimeout(timer);
+      var timedOut = err && err.name === 'AbortError';
+      status.innerHTML = (timedOut ? 'The message service timed out - it looks down right now. ' : 'Something went wrong while sending. ') + 'Your message was not delivered. <a href="' + mailto + '">Send it by email instead</a> or reach out on <a href="https://www.instagram.com/hack_withk/" target="_blank" rel="noopener">Instagram @hack_withk</a>.';
       status.className = 'form-status error';
     }).finally(function() {
       btn.disabled = false;
-      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message';
+      btn.innerHTML = '<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><line x1=\"22\" y1=\"2\" x2=\"11\" y2=\"13\"/><polygon points=\"22 2 15 22 11 13 2 9 22 2\"/></svg> Send Message';
     });
   });
 })();
