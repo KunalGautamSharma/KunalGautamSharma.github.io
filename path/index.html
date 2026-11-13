@@ -116,7 +116,7 @@
     .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: "JetBrains Mono", monospace; font-size: .78rem; font-weight: 600; color: var(--accent-strong); }
     .eyebrow::before { content: ""; width: 24px; height: 2px; background: var(--accent); }
     h1 { margin: 16px auto 18px; font-size: clamp(2.2rem, 4.5vw, 3.6rem); line-height: 1.05; letter-spacing: -.03em; max-width: 1050px; }
-    .hero-copy > p { margin: 0 0 30px; max-width: 600px; color: var(--muted); font-size: clamp(1.06rem, 2vw, 1.25rem); }
+    .hero-copy > p { margin: 0 0 30px; max-width: 600px; color: var(--muted); font-size: clamp(1.1rem, 2.1vw, 1.35rem); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
     .hero-note { margin-top: 32px; display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: .9rem; }
     .pulse { width: 10px; height: 10px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 0 6px color-mix(in srgb, var(--signal) 18%, transparent); }
@@ -1221,10 +1221,12 @@
 /* How Data Travels widget on homepage — expert UX structure */
 .route-view[data-route-view="home"] .hero { padding: 54px 0 48px; }
 .route-view[data-route-view="home"] .hero-grid { grid-template-columns: 1fr; max-width: 1080px; gap: 0; }
-.route-view[data-route-view="home"] .hero-copy { text-align: center; margin: 0 auto; max-width: 760px; }
-.route-view[data-route-view="home"] .hero-copy .eyebrow { display: inline-block; margin-bottom: 6px; }
+.route-view[data-route-view="home"] .hero-copy { text-align: center; margin: 0 auto; max-width: 880px; }
+.route-view[data-route-view="home"] .hero-copy h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
+.route-view[data-route-view="home"] .hero-copy .eyebrow { display: inline-block; margin-bottom: 6px; font-size: .84rem; }
 .route-view[data-route-view="home"] .hero-copy > p { margin: 0 auto 28px; max-width: 620px; }
 .route-view[data-route-view="home"] .hero-actions { justify-content: center; margin-bottom: 20px; }
+.route-view[data-route-view="home"] .hero-actions .button { min-height: 50px; padding: 0 22px; font-size: 1.02rem; }
 .route-view[data-route-view="home"] .hero-note { justify-content: center; }
 .hero-widget { margin-top: 80px; padding-top: 44px; border-top: 1px solid var(--line); position: relative; }
 .hero-widget::before { content: "INTERACTIVE DEMO"; display: block; text-align: center; font-size: .68rem; letter-spacing: .3em; color: var(--muted); font-weight: 700; margin-bottom: 22px; font-family: "JetBrains Mono", monospace; }
