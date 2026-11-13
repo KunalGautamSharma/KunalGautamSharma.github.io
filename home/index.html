@@ -1185,7 +1185,7 @@
   .flow .fl-tag{position:absolute;display:flex;align-items:center;gap:8px;font:400 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal-d)}
   .flow .fl-tag i{width:7px;height:7px;border-radius:50%;background:#2fe0b8;box-shadow:0 0 8px #2fe0b8}
   .flow .fl-tag.tl{left:18px;top:16px}
-  .flow .fl-tag.br{right:18px;bottom:14px}
+  .flow .fl-tag.br{right:18px;top:16px}
 
   .flow .edge{fill:none;stroke:rgba(79,209,181,.5);stroke-width:1.4;stroke-dasharray:2 7;stroke-linecap:round;transition:stroke .5s}
   .flow .edge.sec{stroke:rgba(226,255,46,.38);stroke-dasharray:none;stroke-width:1.2}
@@ -1257,6 +1257,7 @@
   .hero-widget { margin-top: 36px; padding-top: 28px; }
   /* Widget: compact mode for phones */
   .flow { border-radius: 16px; }
+  .flow .fl-canvas { min-width: 720px; }
   .flow .fl-top { flex-direction: column; align-items: stretch; }
   .flow .fl-steps { justify-content: center; }
   .flow .fl-right { justify-content: center; }
@@ -1385,7 +1386,7 @@ html, body { overflow-x: hidden; }
 
   <div class="fl-stage">
     <div class="fl-canvas">
-      <svg viewBox="0 0 960 470" role="img" aria-label="Diagram: your device, router, ISP, DNS, backbone routers, load balancer, web server and database, with packets moving between them"></svg>
+      <svg viewBox="0 0 1200 340" role="img" aria-label="Diagram: your device, router, ISP, DNS, backbone routers, load balancer, web server and database, with packets moving between them"></svg>
       <span class="fl-tag tl"><i></i>Client packets</span>
       <span class="fl-tag br"><i></i>Secure destination</span>
     </div>
@@ -5196,15 +5197,15 @@ var activeCertEls = null;
 
   /* ---------- map data ---------- */
   var NODES = {
-    dev: { x: 85,  y: 270, icon: 'laptop', name: 'Your device',   sub: 'Browser',            short: 'Your device' },
-    rtr: { x: 230, y: 270, icon: 'router', name: 'Wi-Fi router', sub: '192.168.1.1',        short: 'Router',          hop: 1 },
-    isp: { x: 375, y: 270, icon: 'cloud',  name: 'ISP',           sub: 'Your provider',      short: 'ISP',             hop: 1 },
-    dns: { x: 375, y: 95,  icon: 'globe',  name: 'DNS resolver',  sub: 'Name to IP',         short: 'DNS resolver',    pos: 'right' },
-    b1:  { x: 520, y: 175, icon: 'hop',    name: 'Backbone',      sub: 'Internet routers',   short: 'Backbone router', hop: 1, pos: 'above' },
-    b2:  { x: 520, y: 365, icon: 'hop',    name: 'Backbone',      sub: 'Internet routers',   short: 'Backbone router', hop: 1 },
-    lb:  { x: 665, y: 270, icon: 'shield', name: 'Load balancer', sub: 'Firewall, ends TLS', short: 'Load balancer',   hop: 1, dest: 1 },
-    web: { x: 835, y: 175, icon: 'server', name: 'Web server',    sub: 'Runs the site',      short: 'Web server',      dest: 1, pos: 'above' },
-    db:  { x: 835, y: 365, icon: 'db',     name: 'Database',      sub: 'Stores lessons',     short: 'Database',        dest: 1 }
+    dev: { x: 90,  y: 190, icon: 'laptop', name: 'Your device',   sub: 'Browser',            short: 'Your device' },
+    rtr: { x: 270, y: 190, icon: 'router', name: 'Wi-Fi router', sub: '192.168.1.1',        short: 'Router',          hop: 1 },
+    isp: { x: 450, y: 190, icon: 'cloud',  name: 'ISP',           sub: 'Your provider',      short: 'ISP',             hop: 1 },
+    dns: { x: 450, y: 75,  icon: 'globe',  name: 'DNS resolver',  sub: 'Name to IP',         short: 'DNS resolver',    pos: 'right' },
+    b1:  { x: 630, y: 120, icon: 'hop',    name: 'Backbone',      sub: 'Internet routers',   short: 'Backbone router', hop: 1, pos: 'above' },
+    b2:  { x: 630, y: 260, icon: 'hop',    name: 'Backbone',      sub: 'Internet routers',   short: 'Backbone router', hop: 1 },
+    lb:  { x: 810, y: 190, icon: 'shield', name: 'Load balancer', sub: 'Firewall, ends TLS', short: 'Load balancer',   hop: 1, dest: 1 },
+    web: { x: 990, y: 120, icon: 'server', name: 'Web server',    sub: 'Runs the site',      short: 'Web server',      dest: 1, pos: 'above' },
+    db:  { x: 990, y: 260, icon: 'db',     name: 'Database',      sub: 'Stores lessons',     short: 'Database',        dest: 1 }
   };
   var EDGES = [
     ['dev','rtr',0], ['rtr','isp',0], ['isp','dns',0],
@@ -5262,8 +5263,8 @@ var activeCertEls = null;
     '<filter id="fl-glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
     '<pattern id="fl-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="rgba(94,234,200,.07)" stroke-width="1"/></pattern>' +
     '<radialGradient id="fl-vig" cx="50%" cy="50%" r="72%"><stop offset="55%" stop-color="#081c17" stop-opacity="0"/><stop offset="100%" stop-color="#081c17" stop-opacity=".9"/></radialGradient>';
-  S('rect', { width: 960, height: 470, fill: 'url(#fl-grid)' }, svg);
-  S('rect', { width: 960, height: 470, fill: 'url(#fl-vig)' }, svg);
+  S('rect', { width: 1200, height: 340, fill: 'url(#fl-grid)' }, svg);
+  S('rect', { width: 1200, height: 340, fill: 'url(#fl-vig)' }, svg);
 
   /* glow behind the load balancer (the hub) */
   S('circle', { cx: NODES.lb.x, cy: NODES.lb.y, r: 70, fill: 'rgba(226,255,46,.10)', filter: 'url(#fl-glow)' }, svg);
