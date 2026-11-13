@@ -1226,15 +1226,18 @@
 .route-view[data-route-view="home"] .hero-copy > p { margin: 0 auto 28px; max-width: 620px; }
 .route-view[data-route-view="home"] .hero-actions { justify-content: center; margin-bottom: 20px; }
 .route-view[data-route-view="home"] .hero-note { justify-content: center; }
-.hero-widget { margin-top: 60px; position: relative; }
+.hero-widget { margin-top: 80px; padding-top: 44px; border-top: 1px solid var(--line); position: relative; }
 .hero-widget::before { content: "INTERACTIVE DEMO"; display: block; text-align: center; font-size: .68rem; letter-spacing: .3em; color: var(--muted); font-weight: 700; margin-bottom: 22px; font-family: "JetBrains Mono", monospace; }
 .hero-widget .flow { margin: 0 auto; }
+/* First screen = hero copy only: the demo widget starts cleanly below the fold */
+.route-view[data-route-view="home"] .hero-copy { min-height: calc(100vh - 180px); min-height: calc(100svh - 180px); display: flex; flex-direction: column; justify-content: center; }
 
 /* ===== RESPONSIVE: All devices ===== */
 /* Tablet (768px and below) */
 @media (max-width: 820px) {
   .route-view[data-route-view="home"] .hero { padding: 40px 0 36px; }
-  .hero-widget { margin-top: 44px; }
+  .route-view[data-route-view="home"] .hero-copy { min-height: calc(100vh - 154px); min-height: calc(100svh - 154px); }
+  .hero-widget { margin-top: 44px; padding-top: 36px; }
   .hero-widget::before { font-size: .62rem; margin-bottom: 16px; }
   /* Widget: stack chips vertically on small tablets */
   .flow .fl-top { padding: 12px 14px; gap: 10px; }
@@ -1245,10 +1248,11 @@
 /* Mobile (Android phones, 640px and below) */
 @media (max-width: 640px) {
   .route-view[data-route-view="home"] .hero { padding: 32px 0 28px; }
+  .route-view[data-route-view="home"] .hero-copy { min-height: calc(100vh - 126px); min-height: calc(100svh - 126px); }
   .route-view[data-route-view="home"] .hero-copy > p { font-size: .92rem; }
   .route-view[data-route-view="home"] .hero-actions { flex-direction: column; gap: 10px; }
   .route-view[data-route-view="home"] .hero-actions .button { width: 100%; text-align: center; }
-  .hero-widget { margin-top: 36px; }
+  .hero-widget { margin-top: 36px; padding-top: 28px; }
   /* Widget: compact mode for phones */
   .flow { border-radius: 16px; }
   .flow .fl-top { flex-direction: column; align-items: stretch; }
